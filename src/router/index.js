@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Index from '../views/index/Index'
 import NotFound from '../views/404.vue'
+import PersonalHomepage from "../components/personalHomepage/PersonalHomepage";
 
 Vue.use(Router);
 
@@ -22,6 +23,13 @@ const router = new Router({
             hidden: true,
             redirect: { path: '/404' }
         },
+        {
+            path:'/personalHomepage',
+            component: PersonalHomepage,
+            children: [
+
+            ]
+        }
     ]
 });
 //导出路由对象
