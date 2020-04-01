@@ -11,27 +11,27 @@ BY朱翔鹏-->
                         @close="handleClose">
                     <el-menu-item index="1">
                         <i class="el-icon-s-management"></i>
-                        <span slot="title">课程</span>
+                        <span slot="title" @click="openSelfCourse">课程</span>
                     </el-menu-item>
                     <el-menu-item index="2">
                         <i class="el-icon-date"></i>
-                        <span slot="title">课表</span>
+                        <span slot="title" @click="openSelfSchedule">课表</span>
                     </el-menu-item>
                     <el-menu-item index="3">
                         <i class="el-icon-edit"></i>
-                        <span slot="title">作业</span>
+                        <span slot="title" @click="openSelfHomework">作业</span>
                     </el-menu-item>
-                    <el-menu-item index="1">
+                    <el-menu-item index="4">
                         <i class="el-icon-s-opportunity"></i>
-                        <span slot="title">讨论</span>
+                        <span slot="title" @click="openSelfDiscussion">讨论</span>
                     </el-menu-item>
-                    <el-menu-item index="1">
+                    <el-menu-item index="5">
                         <i class="el-icon-s-custom"></i>
-                        <span slot="title">授课</span>
+                        <span slot="title" @click="openSelfTeachCourse">授课</span>
                     </el-menu-item>
-                    <el-menu-item index="1">
+                    <el-menu-item index="6">
                         <i class="el-icon-s-help"></i>
-                        <span slot="title">助课</span>
+                        <span slot="title" @click="openSelfAssistCourse">助课</span>
                     </el-menu-item>
                 </el-menu>
             </el-col>
@@ -46,19 +46,22 @@ BY朱翔鹏-->
     export default {
         name: "menu",
         methods : {
-            book() {
+            openSelfCourse() {
                 this.$router.push("/")
             },
-            orders() {
+            openSelfSchedule() {
                 this.$router.push("/")
             },
-            formula() {
+            openSelfHomework() {
                 this.$router.push("/")
             },
-            maintain() {
+            openSelfDiscussion() {
                 this.$router.push("/")
             },
-            logout() {
+            openSelfTeachCourse() {
+                this.$router.push("/")
+            },
+            openSelfAssistCourse(){
                 this.$router.push("/")
             }
         }

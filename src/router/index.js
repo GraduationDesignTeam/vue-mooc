@@ -3,6 +3,8 @@ import Router from 'vue-router'
 import Index from '../views/index/Index'
 import NotFound from '../views/404.vue'
 import PersonalHomepage from "../components/personalHomepage/PersonalHomepage";
+import PersonalInfo from "../components/personalInfo/PersonalInfo";
+import PersonalPortal from "../components/personalPortal/PersonalPortal";
 
 Vue.use(Router);
 
@@ -27,7 +29,14 @@ const router = new Router({
             path:'/personalHomepage',
             component: PersonalHomepage,
             children: [
-
+                {
+                    path: '/',
+                    component: PersonalPortal
+                },
+                {
+                    path: 'personalInfo',
+                    component: PersonalInfo
+                }
             ]
         }
     ]

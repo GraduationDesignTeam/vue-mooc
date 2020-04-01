@@ -1,0 +1,13 @@
+userId:'',          //用户ID
+                    userName: '',     //用户名
+                    userPassword: '',      //密码
+                    userStatus:'',      //慕课身份
+                    picture:'',    //头像
+                    sex:0,   //性别
+                    school:'',   //学校
+                    phone:'',    //电话
+                    grade:'',   //学历
+                    major:'',   //专业
+                    name:'',    //真实姓名
+                    teacherState:'',  //教师身份认证状态
+                    prohibitState:'',  //封禁状态

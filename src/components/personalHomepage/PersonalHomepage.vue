@@ -14,10 +14,13 @@ BY朱翔鹏-->
             <el-col :span="3" style="margin-top: 14px">
                 <span style="color: aliceblue">
                     <p>
-                        <strong>小明  </strong>
-                        <i class="el-icon-s-custom" style="color: chartreuse">已认证教师</i>
+                        <strong>{{user.userName}}  </strong>
+                        <i class="el-icon-s-custom" style="color: chartreuse">
+                            <span v-if="teacherState">已认证教师</span>
+                            <span v-else>未认证教师</span>
+                        </i>
                     </p>
-                    <p>女 | 南京大学</p>
+                    <p>{{sex}} | {{user.school}}</p>
                 </span>
             </el-col>
             <el-col :span="8"><div></div></el-col>
@@ -26,15 +29,7 @@ BY朱翔鹏-->
                     <li>
                         <span style="color: aliceblue">
                             <p>
-                                <strong>88 天</strong>
-                            </p>
-                            <p>慕龄</p>
-                        </span>
-                    </li>
-                    <li>
-                        <span style="color: aliceblue">
-                            <p>
-                                <strong>3</strong>
+                                <strong>0</strong>
                             </p>
                             <p>课程</p>
                         </span>
@@ -42,7 +37,7 @@ BY朱翔鹏-->
                     <li>
                         <span style="color: aliceblue">
                             <p>
-                                <strong>5</strong>
+                                <strong>{{userDiscussionNum}}</strong>
                             </p>
                             <p>讨论</p>
                         </span>
@@ -54,7 +49,7 @@ BY朱翔鹏-->
                         <el-button type="info" icon="el-icon-shopping-cart-2" circle></el-button>
                     </li>
                     <li style="margin-top: 22px">
-                        <el-button type="info" round class="el-icon-setting"> 个人设置</el-button>
+                        <el-button type="info" round class="el-icon-setting" @click="openSelfInfo"> 个人设置</el-button>
                     </li>
                 </ul>
             </el-col>
@@ -67,6 +62,9 @@ BY朱翔鹏-->
 <script>
     import Top from '../personalTop/Top.vue'
     import Menu from '../personalMenu/Menu.vue'
+    import {getUser} from "../../common/js/cache";
+    import {HOST} from "../../common/js/config";
+
     export default {
         name: "PersonalHomepage",
         components:{
@@ -74,7 +72,39 @@ BY朱翔鹏-->
             Menu
         },
         data () {
+            return{
+                user:{},
+                teacherState:false,//是否已认证教师
+                sex:'男',
+                userDiscussionNum:0,//用户参加的讨论数量（身份可以是教师、助教、学生中任意一个）
 
+            }
+        },
+        mounted() {
+            //console.log(this.user)
+            this.user=getUser()
+            if(this.user.teacherState===1){
+                this.teacherState=true
+            }
+            if(this.user.sex===1){
+                this.sex='女'
+            }
+            //console.log(this.user)
+            this.getUserDiscussionNum()
+        },
+        methods:{
+            //取用户参加的讨论数量
+            getUserDiscussionNum(){
+                let url=`${HOST}/user/getUserDiscussionNum/${this.user.userId}`
+                this.$ajax.get(url).then((res)=>{
+                    let result = res.data
+                    this.userDiscussionNum=result
+                })
+            },
+            openSelfInfo(){
+                this.$router.push(`/personalHomepage/personalInfo`)
+                this.user=getUser()
+            }
         }
     }
 </script>
