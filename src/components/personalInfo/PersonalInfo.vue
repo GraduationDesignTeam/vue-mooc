@@ -95,6 +95,9 @@
                 </el-form-item>
                 <el-form-item>
                     <el-button type="primary" @click="submitForm('form')">确认修改</el-button>
+                    <template>
+                        <el-button type="danger" @click="deleteUser">注销账户</el-button>
+                    </template>
                 </el-form-item>
             </el-form>
         </div>
@@ -206,6 +209,34 @@
                 this.imageUrl = res;
                 this.form.picture = res
                 //console.log(this.imageUrl)
+            },
+            deleteUser(){
+                this.$confirm('此操作将永久注销该账号, 是否继续?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    let url=`${HOST}/user/delete/${this.user.userId}`
+                    this.$ajax.get(url).then((res)=>{
+                        if(res.data.code===0){
+                            this.$message({
+                                message: '注销成功,你可以注册新的账号',
+                                type: 'success'
+                            });
+                            saveUser(null)
+                            this.$router.push("/")
+                        }
+                    })
+                    this.$message({
+                        type: 'success',
+                        message: '注销成功,你可以注册新的账号!'
+                    });
+                }).catch(() => {
+                    this.$message({
+                        type: 'info',
+                        message: '已取消'
+                    });
+                });
             }
         }
     }

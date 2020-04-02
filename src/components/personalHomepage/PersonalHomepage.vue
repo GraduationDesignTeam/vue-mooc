@@ -7,7 +7,7 @@ BY朱翔鹏-->
             <el-col :span="3">
                 <div class="demo-basic--circle">
                     <div class="block">
-                        <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png" :size="99"></el-avatar>
+                        <el-avatar :src="`${path}/${user.picture}`" :size="99"></el-avatar>
                     </div>
                 </div>
             </el-col>
@@ -74,6 +74,7 @@ BY朱翔鹏-->
         data () {
             return{
                 user:{},
+                path:'',
                 teacherState:false,//是否已认证教师
                 sex:'男',
                 userDiscussionNum:0,//用户参加的讨论数量（身份可以是教师、助教、学生中任意一个）
@@ -81,6 +82,7 @@ BY朱翔鹏-->
             }
         },
         mounted() {
+            this.path=HOST
             //console.log(this.user)
             this.user=getUser()
             if(this.user.teacherState===1){
