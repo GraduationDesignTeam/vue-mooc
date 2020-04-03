@@ -19,6 +19,8 @@ BY朱翔鹏-->
 </template>
 
 <script>
+    import {saveUser} from "../../common/js/cache";
+
     export default {
         name: "Top",
         methods:{
@@ -34,6 +36,11 @@ BY朱翔鹏-->
                         break;
                     case  '3':
                         //跳转到讨论页
+                        this.$router.push("/")
+                        break;
+                    case  '4':
+                        //跳转到首页，未登录状态
+                        saveUser(null)
                         this.$router.push("/")
                         break;
                 }

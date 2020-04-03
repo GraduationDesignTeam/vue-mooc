@@ -41,6 +41,9 @@
             personHomepage(){
                 this.$router.push("/personalHomepage")
             },
+            administrator(){
+                this.$router.push("/administrator")
+            },
             onSubmit(){
                 let url=`${HOST}/user/timelyLogin`
                 this.$ajax.post(url,this.form).then((res)=>{
@@ -48,7 +51,11 @@
                     if(result.code===0){//登录成功
                         this.user=result.object
                         saveUser(this.user)
-                        this.personHomepage()
+                        if(this.user.userStatus==="000"){
+                            this.administrator()
+                        }else{
+                            this.personHomepage()
+                        }
                     } else{//失败
                         this.$message(result.msg)
                     }

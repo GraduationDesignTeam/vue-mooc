@@ -3,8 +3,12 @@ import Router from 'vue-router'
 import Index from '../views/index/Index'
 import NotFound from '../views/404.vue'
 import PersonalHomepage from "../components/personalHomepage/PersonalHomepage";
+import Administrator from "../components/administrator/Administrator";
 import PersonalInfo from "../components/personalInfo/PersonalInfo";
 import PersonalPortal from "../components/personalPortal/PersonalPortal";
+import AdministratorPortal from "../components/administratorPortal/AdministratorPortal";
+import AdministratorInfo from "../components/administratorInfo/AdministratorInfo";
+import ManageUserProhibit from "../components/manegeUserProhibit/ManageUserProhibit";
 
 Vue.use(Router);
 
@@ -24,6 +28,24 @@ const router = new Router({
             path: '*',
             hidden: true,
             redirect: { path: '/404' }
+        },
+        {
+            path: '/administrator',
+            component: Administrator,
+            children: [
+                {
+                    path: '/',
+                    component: AdministratorPortal
+                },
+                {
+                    path: 'administratorInfo',
+                    component: AdministratorInfo
+                },
+                {
+                    path: 'manageUserProhibit',
+                    component: ManageUserProhibit
+                }
+            ]
         },
         {
             path:'/personalHomepage',

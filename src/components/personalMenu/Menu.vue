@@ -3,7 +3,7 @@ BY朱翔鹏-->
 <template>
     <div>
         <el-row class="tac">
-            <el-col :span="3">
+            <el-col :span="4">
                 <el-menu
                         default-active="2"
                         class="el-menu-vertical-demo"

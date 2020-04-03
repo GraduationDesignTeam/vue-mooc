@@ -24,7 +24,6 @@
                             <el-option label="学生" value="001"></el-option>
                             <el-option label="教师" value="010"></el-option>
                             <el-option label="助教" value="100"></el-option>
-                            <el-option label="管理员" value="000"></el-option>
                             <el-option label="学生兼教师" value="011"></el-option>
                             <el-option label="学生兼助教" value="101"></el-option>
                             <el-option label="教师兼助教" value="110"></el-option>
