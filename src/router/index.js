@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Index from '../views/index/Index'
+// import Index from '../views/index/Index'
 import NotFound from '../views/404.vue'
 import PersonalHomepage from "../components/personalHomepage/PersonalHomepage";
 import Administrator from "../components/administrator/Administrator";
@@ -9,6 +9,13 @@ import PersonalPortal from "../components/personalPortal/PersonalPortal";
 import AdministratorPortal from "../components/administratorPortal/AdministratorPortal";
 import AdministratorInfo from "../components/administratorInfo/AdministratorInfo";
 import ManageUserProhibit from "../components/manegeUserProhibit/ManageUserProhibit";
+import test from "../views/index/test";
+
+//避免因重复路由引起的报错
+const originalPush = Router.prototype.push;
+Router.prototype.push = function push(location) {
+    return originalPush.call(this, location).catch(err => err)
+};
 
 Vue.use(Router);
 
@@ -17,7 +24,7 @@ const router = new Router({
     routes: [
         {
             path: '/',
-            component: Index
+            component: test
         },
         {
             path: '/404',
