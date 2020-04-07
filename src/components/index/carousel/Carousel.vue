@@ -4,7 +4,7 @@
             <div class="left-panel">
                 <el-carousel :interval="5000" indicator-position="none" @change="carouselChange" height="360px" ref="carousel">
                     <el-carousel-item v-for="(item,index) in carouselList" :key="index">
-                        <img v-bind:src="item.imgUrl">
+                        <img style="cursor: pointer" @click="courseDetailHandle(item.id)" v-bind:src="item.imgUrl">
                     </el-carousel-item>
                 </el-carousel>
             </div>
@@ -25,20 +25,20 @@
 <script>
     export default {
         name: "Carousel",
+        props: ['carouselList'],
         data(){
             return{
                 activeIndex:0,
-                carouselList:[
-                    {imgUrl: require("@/assets/index/temp1.png"), title: '2021考研数学一/三全程班'},
-                    {imgUrl: require("@/assets/index/temp2.png"), title: '2021考研政治弟子班'},
-                    {imgUrl: require("@/assets/index/temp3.png"), title: '词汇速记营: 从0暴涨到20000+'}
-                ]
             }
         },
         methods: {
             carouselChange(index){
                 this.activeIndex = index;
                 this.$refs.carousel.setActiveItem(index)
+            },
+            courseDetailHandle(id){
+                //跳转到课程详情页面
+                this.$router.push('/course/'+id)
             }
         }
     }
