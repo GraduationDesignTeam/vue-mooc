@@ -1,6 +1,5 @@
 <template>
     <div>
-        首页
         <!--开发时用于打开个人主页-->
         <p><el-button @click="personHomepage">个人主页</el-button></p>
         <!--开发时临时用于登录-->

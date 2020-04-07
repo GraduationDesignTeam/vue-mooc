@@ -19,11 +19,11 @@ BY朱翔鹏-->
                     <el-input v-model="searchform.major" placeholder="专业"></el-input>
                 </el-form-item>
 
-
+                <p></p>
                 <el-form-item label="学历">
-                    <el-col :span="12">
+                    <el-col :span="16">
                         <el-select v-model="searchform.grade">
-                            <el-option label="无学历" value="无学历"></el-option>
+                            <el-option label="-空-" value=""></el-option>
                             <el-option label="小学" value="小学"></el-option>
                             <el-option label="初中" value="初中"></el-option>
                             <el-option label="高中" value="高中"></el-option>
@@ -35,8 +35,9 @@ BY朱翔鹏-->
                     </el-col>
                 </el-form-item>
                 <el-form-item label="慕课身份">
-                    <el-col :span="12">
+                    <el-col :span="16">
                         <el-select v-model="searchform.userStatus">
+                            <el-option label="-空-" value=""></el-option>
                             <el-option label="学生" value="001"></el-option>
                             <el-option label="教师" value="010"></el-option>
                             <el-option label="助教" value="100"></el-option>
@@ -127,8 +128,8 @@ BY朱翔鹏-->
                         label="是否已认证教师"
                         width="140">
                     <template scope="scope">
-                        <span v-if="scope.row.teacherState===0">未认证</span>
-                        <span v-else-if="scope.row.teacherState===1">已认证</span>
+                        <span v-if="scope.row.teacherState===0" style="color: red">未认证</span>
+                        <span v-else-if="scope.row.teacherState===1" style="color: green;">已认证</span>
                     </template>
                 </el-table-column>
                 <el-table-column

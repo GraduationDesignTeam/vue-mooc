@@ -9,7 +9,9 @@ import PersonalPortal from "../components/personalPortal/PersonalPortal";
 import AdministratorPortal from "../components/administratorPortal/AdministratorPortal";
 import AdministratorInfo from "../components/administratorInfo/AdministratorInfo";
 import ManageUserProhibit from "../components/manegeUserProhibit/ManageUserProhibit";
+import ManageTeacherState from "../components/manageTeacherState/ManageTeacherState";
 import test from "../views/index/test";
+import Index from "../views/index/Index";
 
 //避免因重复路由引起的报错
 const originalPush = Router.prototype.push;
@@ -25,6 +27,10 @@ const router = new Router({
         {
             path: '/',
             component: test
+        },
+        {
+            path: '/tempIndex',
+            component: Index
         },
         {
             path: '/404',
@@ -51,6 +57,10 @@ const router = new Router({
                 {
                     path: 'manageUserProhibit',
                     component: ManageUserProhibit
+                },
+                {
+                    path: 'manageTeacherState',
+                    component: ManageTeacherState
                 }
             ]
         },
