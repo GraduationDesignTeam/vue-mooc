@@ -10,6 +10,7 @@ import AdministratorPortal from "../components/administratorPortal/Administrator
 import AdministratorInfo from "../components/administratorInfo/AdministratorInfo";
 import ManageUserProhibit from "../components/manegeUserProhibit/ManageUserProhibit";
 import ManageTeacherState from "../components/manageTeacherState/ManageTeacherState";
+import ManageCourseProhibit from "../components/manageCourseprohibit/ManageCourseProhibit";
 import test from "../views/index/test";
 import Index from "../views/index/Index";
 
@@ -61,6 +62,10 @@ const router = new Router({
                 {
                     path: 'manageTeacherState',
                     component: ManageTeacherState
+                },
+                {
+                    path: 'manageCourseProhibit',
+                    component: ManageCourseProhibit
                 }
             ]
         },

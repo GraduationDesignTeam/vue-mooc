@@ -67,7 +67,7 @@ BY朱翔鹏-->
                 this.$router.push("/")
             },
             manageCourseProhibit() {
-                this.$router.push("/")
+                this.$router.push("/administrator/manageCourseProhibit")
             },
             manageCourseCheckState() {
                 this.$router.push("/")
