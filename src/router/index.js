@@ -13,6 +13,7 @@ import ManageTeacherState from "../components/manageTeacherState/ManageTeacherSt
 import ManageCourseProhibit from "../components/manageCourseprohibit/ManageCourseProhibit";
 import test from "../views/index/test";
 import Index from "../views/index/Index";
+import Login from "../components/login/Login";
 
 //避免因重复路由引起的报错
 const originalPush = Router.prototype.push;
@@ -42,6 +43,10 @@ const router = new Router({
             path: '*',
             hidden: true,
             redirect: { path: '/404' }
+        },
+        {
+            path: '/login',
+            component: Login
         },
         {
             path: '/administrator',

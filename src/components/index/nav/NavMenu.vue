@@ -1,12 +1,15 @@
 <template>
     <div class="nav">
-        <Nav v-if="isLogin" :menu-index="menuIndex" :left-menu-item-list="leftMenuItemList" :right-menu-item-list="rightMenuItemList1"/>
-        <Nav v-else :menu-index="menuIndex" :left-menu-item-list="leftMenuItemList" :right-menu-item-list="rightMenuItemList2"/>
+        <Nav v-if="isLogin==0" :menu-index="menuIndex" :left-menu-item-list="leftMenuItemList" :right-menu-item-list="rightMenuItemList1"/>
+        <Nav v-else-if="isLogin==1" :menu-index="menuIndex" :left-menu-item-list="leftMenuItemList" :right-menu-item-list="rightMenuItemList2"/>
+        <Nav v-else-if="isLogin==2" :menu-index="menuIndex" :left-menu-item-list="leftMenuItemList" :right-menu-item-list="rightMenuItemList3"/>
     </div>
 </template>
 
 <script>
     import Nav from "../nav/Nav"
+    import {getUser} from "../../../common/js/cache";
+
     export default {
         name: "NavMenu",
         props: ['menuIndex'],
@@ -15,7 +18,8 @@
         },
         data(){
             return{
-                isLogin: false,
+                isLogin: 0,//0表示未登录；1表示普通用户登录；2表示管理员登录
+                user:{},
                 leftMenuItemList: [
                     {
                         optionName: '首页',
@@ -31,6 +35,16 @@
                     },
                 ],
                 rightMenuItemList1:[
+                {
+                    optionName: '登录',
+                    url: '/login'
+                },
+                {
+                    optionName: '注册',
+                    url: '/register'
+                }
+                ],
+                rightMenuItemList2:[
                     {
                         optionName: '个人中心',
                         url: '/personalHomepage'
@@ -40,16 +54,26 @@
                         url: '/info'
                     }
                 ],
-                rightMenuItemList2:[
+                rightMenuItemList3:[
                     {
-                        optionName: '登录',
-                        url: '/login'
+                        optionName: '管理中心',
+                        url: '/administrator'
                     },
                     {
-                        optionName: '注册',
-                        url: '/register'
+                        optionName: '消息',
+                        url: '/info'
                     }
-                ]
+                ],
+            }
+        },
+        created() {
+            this.user=getUser()
+            if(this.user!=null){
+                if(this.user.userStatus==="000"){
+                    this.isLogin=2
+                }else{
+                    this.isLogin=1
+                }
             }
         },
         methods: {
