@@ -11,6 +11,7 @@ import AdministratorInfo from "../components/administratorInfo/AdministratorInfo
 import ManageUserProhibit from "../components/manegeUserProhibit/ManageUserProhibit";
 import ManageTeacherState from "../components/manageTeacherState/ManageTeacherState";
 import ManageCourseProhibit from "../components/manageCourseprohibit/ManageCourseProhibit";
+import ManageCourseOpen from "../components/manageCourseOpen/ManageCourseOpen";
 import test from "../views/index/test";
 import Index from "../views/index/Index";
 import Login from "../components/login/Login";
@@ -76,6 +77,10 @@ const router = new Router({
                 {
                     path: 'manageCourseProhibit',
                     component: ManageCourseProhibit
+                },
+                {
+                    path: 'manageCourseOpen',
+                    component: ManageCourseOpen
                 }
             ]
         },

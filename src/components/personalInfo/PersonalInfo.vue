@@ -1,9 +1,9 @@
 <template>
     <div>
         <div class="bread">
-            <el-breadcrumb separator="/">
+            <el-breadcrumb separator-class="el-icon-arrow-right">
                 <el-breadcrumb-item :to="{ path: '/personalHomepage' }">个人主页</el-breadcrumb-item>
-                <el-breadcrumb-item>个人设置</el-breadcrumb-item>
+                <el-breadcrumb-item><span style="color: #2d8cf0">个人设置</span></el-breadcrumb-item>
             </el-breadcrumb>
         </div>
         <div class="user_form">

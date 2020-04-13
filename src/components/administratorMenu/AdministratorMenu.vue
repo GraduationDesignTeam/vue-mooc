@@ -29,7 +29,7 @@ BY朱翔鹏-->
                         <el-menu-item-group>
                             <!--<template slot="title">分组一</template>-->
                             <el-menu-item index="2-1" @click="manageCourseProhibit">封禁管理</el-menu-item>
-                            <el-menu-item index="2-2" @click="manageCourseCheckState">开课审核</el-menu-item>
+                            <el-menu-item index="2-2" @click="manageCourseOpen">开课审核</el-menu-item>
                             <el-menu-item index="2-3" @click="manageCourseStatistic">数据统计</el-menu-item>
                         </el-menu-item-group>
                     </el-submenu>
@@ -69,8 +69,8 @@ BY朱翔鹏-->
             manageCourseProhibit() {
                 this.$router.push("/administrator/manageCourseProhibit")
             },
-            manageCourseCheckState() {
-                this.$router.push("/")
+            manageCourseOpen() {
+                this.$router.push("/administrator/manageCourseOpen")
             },
             manageCourseStatistic(){
                 this.$router.push("/")
