@@ -4,10 +4,10 @@ BY朱翔鹏-->
 <template>
     <div class="wrap">
         <div class="bread">
-            <el-breadcrumb separator="/">
+            <el-breadcrumb separator-class="el-icon-arrow-right">
                 <el-breadcrumb-item :to="{ path: '/administrator' }">管理员主页</el-breadcrumb-item>
                 <el-breadcrumb-item>用户管理</el-breadcrumb-item>
-                <el-breadcrumb-item>封禁管理</el-breadcrumb-item>
+                <el-breadcrumb-item><span style="color: #2d8cf0">封禁管理</span></el-breadcrumb-item>
             </el-breadcrumb>
         </div>
         <div class="user_table">
