@@ -14,6 +14,7 @@ import ManageCourseProhibit from "../components/manageCourseprohibit/ManageCours
 import test from "../views/index/test";
 import Index from "../views/index/Index";
 import Login from "../components/login/Login";
+import MessageCentre from "../components/messageCentre/MessageCentre";
 
 //避免因重复路由引起的报错
 const originalPush = Router.prototype.push;
@@ -47,6 +48,10 @@ const router = new Router({
         {
             path: '/login',
             component: Login
+        },
+        {
+            path: '/MessageCentre',
+            component: MessageCentre
         },
         {
             path: '/administrator',

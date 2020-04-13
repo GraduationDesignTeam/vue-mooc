@@ -42,6 +42,14 @@ BY朱翔鹏-->
                             <p>讨论</p>
                         </span>
                     </li>
+                    <li>
+                        <span style="color: aliceblue">
+                            <p>
+                                <strong>{{userDiscussionNum}}</strong>
+                            </p>
+                            <p>消息中心</p>
+                        </span>
+                    </li>
                     <li style="margin-top: 22px">
                         <el-button type="info" icon="el-icon-message" circle></el-button>
                     </li>
@@ -63,8 +71,8 @@ BY朱翔鹏-->
     import Top from '../personalTop/Top.vue'
     import Menu from '../personalMenu/Menu.vue'
     import {getUser} from "../../common/js/cache";
+    import {WS_HOST} from "../../common/js/config";
     import {HOST} from "../../common/js/config";
-
     export default {
         name: "PersonalHomepage",
         components:{
@@ -82,7 +90,7 @@ BY朱翔鹏-->
             }
         },
         mounted() {
-            this.path=HOST
+            this.path=HOST;
             //console.log(this.user)
             this.user=getUser()
             if(this.user.teacherState===1){
@@ -106,6 +114,41 @@ BY朱翔鹏-->
             openSelfInfo(){
                 this.$router.push(`/personalHomepage/personalInfo`)
                 this.user=getUser()
+            },
+            //初始化WebSocket
+            initWebSocket(){
+                let url = `${WS_HOST}/server/${this.user.username}`
+                //创建WebSocket对象
+                this.webSocket = new WebSocket(url)
+                //指定连接建立成功的回调函数
+                this.webSocket.onopen = this.webSocketOpen
+                //指定接收消息的回调函数
+                this.webSocket.onmessage = this.webSocketMessage
+            },
+            //处理连接创建成功
+            webSocketOpen(){
+                console.log('main连接成功')
+            },
+            //处理接收消息
+            webSocketMessage(e){
+                //把接收到的消息字符串转换json格式的对象
+                let msg = JSON.parse(e.data)
+                console.log("main",msg)
+                switch (msg.code){
+                    case 'online': //在线人数的消息
+                        this.num = msg.onlineNum
+                        break;
+                    default: //其它的消息
+                        console.log(msg)
+                        this.message = msg
+                        this.$notify({
+                            title: '通知',
+                            message: '您有新短消息',
+                            type: 'success'
+                        });
+                        break;
+                }
+
             }
         }
     }

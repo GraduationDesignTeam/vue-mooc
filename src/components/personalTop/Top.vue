@@ -13,7 +13,8 @@ BY朱翔鹏-->
             <el-menu-item index="1">首页</el-menu-item>
             <el-menu-item index="2">课程</el-menu-item>
             <el-menu-item index="3">讨论</el-menu-item>
-            <el-menu-item index="4" style="margin-left: 920px">退出登录</el-menu-item>
+            <el-menu-item index="4">消息中心</el-menu-item>
+            <el-menu-item index="5" style="margin-left: 920px">退出登录</el-menu-item>
         </el-menu>
         </div>
 </template>
@@ -39,6 +40,10 @@ BY朱翔鹏-->
                         this.$router.push("/")
                         break;
                     case  '4':
+                        //跳转到消息中心
+                        this.$router.push("/MessageCentre")
+                        break;
+                    case  '5':
                         //跳转到首页，未登录状态
                         saveUser(null)
                         this.$router.push("/")
