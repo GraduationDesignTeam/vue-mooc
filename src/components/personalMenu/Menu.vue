@@ -5,33 +5,31 @@ BY朱翔鹏-->
         <el-row class="tac">
             <el-col :span="4">
                 <el-menu
-                        default-active="2"
-                        class="el-menu-vertical-demo"
-                        @open="handleOpen"
-                        @close="handleClose">
-                    <el-menu-item index="1">
+                        default-active="1"
+                        class="el-menu-vertical-demo">
+                    <el-menu-item index="1" @click="openSelfCourse">
                         <i class="el-icon-s-management"></i>
-                        <span slot="title" @click="openSelfCourse">课程</span>
+                        <span slot="title">课程</span>
                     </el-menu-item>
-                    <el-menu-item index="2">
+                    <el-menu-item index="2" @click="openSelfSchedule">
                         <i class="el-icon-date"></i>
-                        <span slot="title" @click="openSelfSchedule">课表</span>
+                        <span slot="title">课表</span>
                     </el-menu-item>
-                    <el-menu-item index="3">
+                    <el-menu-item index="3" @click="openSelfHomework">
                         <i class="el-icon-edit"></i>
-                        <span slot="title" @click="openSelfHomework">作业</span>
+                        <span slot="title">作业</span>
                     </el-menu-item>
-                    <el-menu-item index="4">
+                    <el-menu-item index="4" @click="openSelfDiscussion">
                         <i class="el-icon-s-opportunity"></i>
-                        <span slot="title" @click="openSelfDiscussion">讨论</span>
+                        <span slot="title">讨论</span>
                     </el-menu-item>
-                    <el-menu-item index="5">
+                    <el-menu-item index="5" @click="openSelfTeachCourse">
                         <i class="el-icon-s-custom"></i>
-                        <span slot="title" @click="openSelfTeachCourse">授课</span>
+                        <span slot="title">授课</span>
                     </el-menu-item>
-                    <el-menu-item index="6">
+                    <el-menu-item index="6" @click="openSelfAssistCourse">
                         <i class="el-icon-s-help"></i>
-                        <span slot="title" @click="openSelfAssistCourse">助课</span>
+                        <span slot="title">助课</span>
                     </el-menu-item>
                 </el-menu>
             </el-col>
@@ -59,7 +57,7 @@ BY朱翔鹏-->
                 this.$router.push("/")
             },
             openSelfTeachCourse() {
-                this.$router.push("/")
+                this.$router.push("/personalHomepage/teacherCourse")
             },
             openSelfAssistCourse(){
                 this.$router.push("/")
