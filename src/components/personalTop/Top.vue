@@ -14,7 +14,7 @@ BY朱翔鹏-->
             <el-menu-item index="2">课程</el-menu-item>
             <el-menu-item index="3">讨论</el-menu-item>
             <el-menu-item index="4">消息中心</el-menu-item>
-            <el-menu-item index="5" style="margin-left: 920px">退出登录</el-menu-item>
+            <el-menu-item index="5" style="float: right">退出登录</el-menu-item>
         </el-menu>
         </div>
 </template>

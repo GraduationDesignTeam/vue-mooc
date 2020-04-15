@@ -76,7 +76,7 @@ BY朱翔鹏-->
                 this.$router.push("/")
             },
             manageDiscussionState(){
-
+                this.$router.push("/administrator/manageDiscussionProhibit")
             },
             manageDiscussionStatistic(){
 
