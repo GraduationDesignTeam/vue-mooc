@@ -13,7 +13,7 @@
                     <ul>
                         <li v-for="(item,index) in carouselList" :key="index"
                             @click="carouselChange(index)" :class="{selected:index===activeIndex}">
-                            {{item.title}}
+                            {{item.name}}
                         </li>
                     </ul>
                 </div>
