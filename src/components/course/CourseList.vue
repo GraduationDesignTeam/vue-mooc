@@ -35,10 +35,10 @@
             handleCourse(id){
                 switch (this.mode) {
                     case 0:
-                        this.$route.push('/course/'+id);
+                        this.$router.push('/course/'+id);
                         break;
                     case 1:
-                        this.$route.push('/teacher/manage_course/'+id);
+                        this.$router.push('/teacher/manage_course/'+id);
                         break;
                 }
             }

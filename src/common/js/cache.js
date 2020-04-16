@@ -2,8 +2,9 @@ import storage from 'good-storage'
 
 //定义存取用户信息的KEY
 const USER_KEY = '__user'
-//这义存取用户选取的购物车商品的KEY
-const CART_KEY = '_cart'
+//定义存取课程信息的KEY（用于新建课程时保存草稿）
+const COURSE_KEY = '__course'
+
 
 /**
  * 存储用户信息
@@ -28,23 +29,23 @@ export function clearUser(){
 }
 
 /**
- * 存储选中的购物车商品
+ * 存储课程信息
  * @param obj
  */
-export function saveCart(obj){
-    storage.set(CART_KEY,obj)
+export function saveCourse(obj){
+    storage.set(COURSE_KEY,obj)
 }
 
 /**
- * 取选中的购物车商品
+ * 取课程信息
  */
-export function getCart(){
-    return storage.get(CART_KEY,[])
+export function getCourse(){
+    return storage.get(COURSE_KEY,{})
 }
 
 /**
- * 清除选中的购物车商品
+ * 清除课程信息
  */
-export function clearCart(){
-    storage.set(CART_KEY,[])
+export function clearCourse(){
+    storage.set(COURSE_KEY,{})
 }

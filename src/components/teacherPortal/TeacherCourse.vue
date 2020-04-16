@@ -1,5 +1,7 @@
 <template>
     <div style="margin: 0 30px">
+        <el-button type="primary" plain icon="el-icon-plus" @click="handleCourseAdd">开设课程</el-button>
+        <br><br>
         <CourseList :courseList="courseList" :mode="1"></CourseList>
     </div>
 </template>
@@ -28,6 +30,9 @@
         methods:{
             loadData(){
 
+            },
+            handleCourseAdd(){
+                this.$router.push('/personalHomepage/courseAdd')
             }
         }
     }

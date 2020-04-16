@@ -18,6 +18,7 @@ import Index from "../views/index/Index";
 import Login from "../components/login/Login";
 import MessageCentre from "../components/messageCentre/MessageCentre";
 import TeacherCourse from "../components/teacherPortal/TeacherCourse";
+import CourseAdd from "../components/course/CourseAdd";
 
 //避免因重复路由引起的报错
 const originalPush = Router.prototype.push;
@@ -105,6 +106,10 @@ const router = new Router({
                 {
                     path: 'teacherCourse',
                     component: TeacherCourse
+                },
+                {
+                    path: 'courseAdd',
+                    component: CourseAdd
                 }
             ]
         }
