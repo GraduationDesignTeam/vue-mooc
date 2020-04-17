@@ -38,7 +38,7 @@
                         this.$router.push('/course/'+id);
                         break;
                     case 1:
-                        this.$router.push('/teacher/manage_course/'+id);
+                        this.$router.push('/courseManage/'+id);
                         break;
                 }
             }
