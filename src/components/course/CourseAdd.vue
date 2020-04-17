@@ -87,7 +87,7 @@
     </div>
 </template>
 <script>
-    import {saveCourse, clearCourse, getCourse, getUser} from "../../common/js/cache";
+    import {getUser, getCourseDraft, clearCourseDraft, saveCourseDraft} from "../../common/js/cache";
     import {HOST} from "../../common/js/config";
 
     export default {
@@ -99,8 +99,8 @@
                 formData: {
                     name: '',
                     type: undefined,
-                    openTime: '2020/06/01',
-                    closeTime: '2020/12/01',
+                    openTime: '2020-06-01',
+                    closeTime: '2020-12-01',
                     photo: '',
                     intro: '',
                     detail: '',
@@ -143,7 +143,7 @@
         methods: {
             loadData() {
                 this.path=HOST;
-                let course = getCourse();
+                let course = getCourseDraft();
                 if(course.name!==undefined)
                     this.formData = course;
             },
@@ -152,10 +152,7 @@
              * @param res
              */
             handleAvatarSuccess(res) {
-                console.log(res);
-                this.imageUrl = res;
                 this.formData.photo = res;
-                console.log(this.formData);
             },
             submitForm() {
                 let user = getUser();
@@ -189,10 +186,14 @@
             resetForm() {
                 //重置表单 并清空缓存
                 this.$refs['elForm'].resetFields();
-                clearCourse();
+                clearCourseDraft();
             },
             saveDraft(){
-                saveCourse(this.formData);
+                saveCourseDraft(this.formData);
+                this.$message({
+                    message:'已成功保存草稿',
+                    type: 'success'
+                });
             },
             goBack(){
                 this.$router.push('/personalHomepage/teacherCourse');
