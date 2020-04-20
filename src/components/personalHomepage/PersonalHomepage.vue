@@ -56,7 +56,7 @@ BY朱翔鹏-->
                     <li style="margin-top: 22px">
                         <el-button type="info" icon="el-icon-shopping-cart-2" circle></el-button>
                     </li>
-                    <li style="margin-top: 22px">
+                    <li style="margin-top: 5px">
                         <el-button type="info" round class="el-icon-setting" @click="openSelfInfo"> 个人设置</el-button>
                     </li>
                 </ul>

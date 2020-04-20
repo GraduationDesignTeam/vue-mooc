@@ -45,7 +45,7 @@ BY朱翔鹏-->
         name: "menu",
         methods : {
             openSelfCourse() {
-                this.$router.push("/")
+                this.$router.push("/personalHomepage/openSelfCourse")
             },
             openSelfSchedule() {
                 this.$router.push("/")

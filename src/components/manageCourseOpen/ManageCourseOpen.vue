@@ -55,7 +55,7 @@ By朱翔鹏
                             {{item.teacherId}}
                         </div></el-col>
                         <el-col :span="8"><div class="grid-content bg-purple">
-                            <span style="font-size: 80%;color: darkcyan;margin-right: 3px">开课教师编号: </span>
+                            <span style="font-size: 80%;color: darkcyan;margin-right: 3px">开课教师姓名: </span>
                             {{item.teacherName}}
                         </div></el-col>
                         <el-col :span="8"><div class="grid-content bg-purple">
