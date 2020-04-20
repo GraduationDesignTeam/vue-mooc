@@ -97,11 +97,13 @@
             return {
                 path: '',
                 formData: {
+                    id:null,
                     name: '',
                     type: undefined,
                     openTime: '2020-06-01',
                     closeTime: '2020-12-01',
                     photo: '',
+                    school: '',
                     intro: '',
                     detail: '',
                     target: '',
@@ -146,6 +148,9 @@
                 let course = getCourseDraft();
                 if(course.name!==undefined)
                     this.formData = course;
+                let user = getUser();
+                if(user.school !== undefined)
+                    this.formData.school = user.school;
             },
             /**
              * 上传图片成功回调方法
@@ -187,6 +192,7 @@
                 //重置表单 并清空缓存
                 this.$refs['elForm'].resetFields();
                 clearCourseDraft();
+                this.formData.photo = '';
             },
             saveDraft(){
                 saveCourseDraft(this.formData);

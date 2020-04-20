@@ -5,12 +5,14 @@
                 <CourseTop></CourseTop>
             </el-header>
         </el-container>
-        <el-aside style="width: 220px">
-            <CourseMenu></CourseMenu>
-        </el-aside>
-        <el-main style="margin-left: 220px">
-            <router-view></router-view>
-        </el-main>
+        <el-container>
+            <el-aside style="width: 220px">
+                <CourseMenu></CourseMenu>
+            </el-aside>
+            <el-main>
+                <router-view></router-view>
+            </el-main>
+        </el-container>
     </div>
 </template>
 
@@ -30,11 +32,11 @@
     .el-header{
         padding: 0 0;
     }
-    .el-aside{
-        display: block;
-        position: absolute;
-        top: 60px;
-        bottom: 0;
-        overflow-y: unset;
-    }
+    /*.el-aside{*/
+    /*    display: block;*/
+    /*    position: absolute;*/
+    /*    top: 60px;*/
+    /*    bottom: 0;*/
+    /*    overflow-y: unset;*/
+    /*}*/
 </style>

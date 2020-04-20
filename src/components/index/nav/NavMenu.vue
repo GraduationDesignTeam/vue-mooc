@@ -68,7 +68,7 @@
         },
         created() {
             this.user=getUser()
-            if(this.user!=null){
+            if(this.user!=null && this.user.userId!==undefined){
                 if(this.user.userStatus==="000"){
                     this.isLogin=2
                 }else{

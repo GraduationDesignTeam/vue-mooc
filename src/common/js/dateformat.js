@@ -37,8 +37,24 @@ function makeSimpleDate(date) {
     }
 }
 
+//将后台传来的Date字符串的格式转化为 yyyy年mm月dd日
+function convertDate(date) {
+    try {
+        let newDate = new Date(date);
+        //在小于10的月份前补0
+        let month = eval(newDate.getMonth() + 1) < 10 ? '0'+eval(newDate.getMonth() + 1) : eval(newDate.getMonth() + 1);
+        //在小于10的日期前补0
+        let day = newDate.getDate() < 10 ? '0' + newDate.getDate() : newDate.getDate();
+        //拼接时间
+        return newDate.getFullYear() + '年' + month + '月' + day + '日';
+    }catch(e){
+        return "0000-00-00";
+    }
+}
+
 export{
     //dateDiff,
     makeDate,
-    makeSimpleDate
+    makeSimpleDate,
+    convertDate
 }

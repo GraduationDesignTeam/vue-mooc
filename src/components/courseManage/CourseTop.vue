@@ -8,7 +8,7 @@
                 background-color="#222"
                 text-color="#f5f5f5"
                 active-text-color="#ffd04b">
-            <el-menu-item index="1" style="width: 200px; text-align: center">
+            <el-menu-item index="1" style="width: 220px; text-align: center">
                 <img class="img" v-bind:src="logoUrl" alt="MOOC"/>
             </el-menu-item>
             <el-menu-item index="2">
@@ -25,7 +25,7 @@
 </template>
 
 <script>
-    import {clearUser} from "../../common/js/cache";
+    import {clearCourseDraft, clearUser} from "../../common/js/cache";
 
     export default {
         name: "CourseTop",
@@ -50,12 +50,13 @@
                         this.$router.push("/")
                         break;
                     case  '4':
-                        //跳转到消息中心
-                        this.$router.push("/MessageCentre")
+                        //跳转到个人主页
+                        this.$router.push("/personalHomepage")
                         break;
                     case  '5':
                         //跳转到首页，未登录状态
                         clearUser();
+                        clearCourseDraft();
                         this.$router.push("/");
                         break;
                 }

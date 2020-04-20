@@ -3,9 +3,10 @@
         <el-card v-for="item in courseList" :key="item.id"
                  :body-style="{ padding: '10px' }" shadow="hover" class="card">
             <div @click="handleCourse(item.id)" style="height: 160px">
-                <div v-if="item.imgUrl" style="float: left; position: relative">
+                <div style="float: left; position: relative">
                     <div>
-                        <img class="card-image" :src="item.imgUrl">
+                        <img v-if="item.photo" class="card-image" :src="`${path}/${item.photo}`">
+                        <img v-else style="height: 150px;" :src="no_img">
                     </div>
                 </div>
                 <div style="margin-left: 280px">
@@ -19,7 +20,9 @@
                         </span>
                     </p>
                     <p class="card-intro">{{item.intro}}</p>
-                    <p class="card-info" v-if="item.openTime&&item.closeTime">{{item.openTime}}&nbsp;-&nbsp;{{item.closeTime}}</p>
+                    <p class="card-info" v-if="item.openTime&&item.closeTime">
+                        {{convertDate(item.openTime)}}&nbsp;~&nbsp;{{convertDate(item.closeTime)}}
+                    </p>
                 </div>
             </div>
         </el-card>
@@ -27,10 +30,19 @@
 </template>
 
 <script>
+    import {HOST} from "../../common/js/config";
+    import {convertDate} from "../../common/js/dateformat";
+
     export default {
         name: "CourseList",
         // 传入参数 courseList-课程列表 mode-指定该组件内点击课程后跳转的页面
         props:["courseList", "mode"],
+        data(){
+            return{
+                path: HOST,
+                no_img: require("@/assets/no.png")
+            }
+        },
         methods:{
             handleCourse(id){
                 switch (this.mode) {
@@ -38,9 +50,12 @@
                         this.$router.push('/course/'+id);
                         break;
                     case 1:
-                        this.$router.push('/courseManage/'+id);
+                        this.$router.push('/courseManage/courseInfo/'+id);
                         break;
                 }
+            },
+            convertDate(date){
+                return convertDate(date);
             }
         }
     }

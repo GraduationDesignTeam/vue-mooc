@@ -30,28 +30,6 @@ export function clearUser(){
 }
 
 /**
- * 存储课程信息
- * @param obj
- */
-export function saveCourse(obj){
-    storage.set(COURSE_KEY,obj)
-}
-
-/**
- * 取课程信息
- */
-export function getCourse(){
-    return storage.get(COURSE_KEY,{})
-}
-
-/**
- * 清除课程信息
- */
-export function clearCourse(){
-    storage.set(COURSE_KEY,{})
-}
-
-/**
  * 存储课程草稿
  * @param obj
  */

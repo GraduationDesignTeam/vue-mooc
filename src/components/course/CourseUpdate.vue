@@ -72,14 +72,8 @@
                 </el-col>
                 <el-col :span="12">
                     <el-form-item size="large">
-                        <el-button type="primary" plain @click="submitForm">申请开课</el-button>
+                        <el-button type="primary" plain @click="submitForm">保存更改</el-button>
                         <el-button @click="goBack">返回</el-button>
-                    </el-form-item>
-                </el-col>
-                <el-col :span="12">
-                    <el-form-item size="large">
-                        <el-button type="primary" plain @click="saveDraft">保存为草稿</el-button>
-                        <el-button @click="resetForm">重置</el-button>
                     </el-form-item>
                 </el-col>
             </el-form>
@@ -87,7 +81,7 @@
     </div>
 </template>
 <script>
-    import {saveCourse, clearCourse, getCourse, getUser} from "../../common/js/cache";
+    import {getUser} from "../../common/js/cache";
     import {HOST} from "../../common/js/config";
 
     export default {
@@ -143,9 +137,19 @@
         methods: {
             loadData() {
                 this.path=HOST;
-                let course = getCourse();
-                if(course.name!==undefined)
-                    this.formData = course;
+                if(getUser()===null || getUser().userId===undefined){
+                    const _this = this;
+                    this.$message.error("用户登录信息已过期，请重新登录！");
+                    setTimeout(() =>{_this.$router.push('/login')}, 3000);
+                    return;
+                }
+                let courseId = this.$route.params.id;
+                let url = `${HOST}/course/sel/${courseId}`;
+                let param = new URLSearchParams();
+                param.append('userId', getUser().userId);
+                this.$ajax.post(url, param).then((res)=> {
+                    this.formData = res.data;
+                })
             },
             /**
              * 上传图片成功回调方法
@@ -158,20 +162,20 @@
                 let user = getUser();
                 if(user.userId===undefined){
                     this.$message("用户登录信息已过期,请重新登录！");
-                }else if(user.teacherState!==1){
-                    this.$message("您未通过教师身份认证，无法开设课程！");
+                    this.$router.push('/login');
+                }else if(this.formData.role !== 1){
+                    this.$message("您没有权限更改当前课程信息！");
+                    this.$router.push('/personalHomepage');
                 }else{
-                    this.formData.teacherId = user.userId;
-                    this.formData.teacherName = user.name;
                     this.$refs['elForm'].validate(valid => {
                         if(valid){
                             //发送信息
-                            let url=`${HOST}/course/add`;
+                            let url=`${HOST}/course/update`;
                             this.$ajax.post(url,this.formData).then((res)=>{
                                 let result = res.data;
-                                if(result.code===0){//课程添加成功
+                                if(result.code===0){//课程更新成功
                                     this.$message({
-                                        message:'已提交开课申请！',
+                                        message:'课程信息更新成功！',
                                         type: 'success'
                                     });
                                 }else {
@@ -181,18 +185,9 @@
                         }
                     })
                 }
-
-            },
-            resetForm() {
-                //重置表单 并清空缓存
-                this.$refs['elForm'].resetFields();
-                clearCourse();
-            },
-            saveDraft(){
-                saveCourse(this.formData);
             },
             goBack(){
-                this.$router.push('/personalHomepage/teacherCourse');
+                this.$router.push(`/courseManage/courseInfo/${this.formData.id}`);
             }
         }
     }

@@ -22,6 +22,7 @@ import CourseAdd from "../components/course/CourseAdd";
 import CourseHomePage from "../components/courseManage/CourseHomePage";
 import CoursePortal from "../components/courseManage/CoursePortal";
 import OpenSelfCourse from "../components/openSelfCourse/OpenSelfCourse";
+import CourseUpdate from "../components/course/CourseUpdate";
 
 //避免因重复路由引起的报错
 const originalPush = Router.prototype.push;
@@ -121,12 +122,16 @@ const router = new Router({
             ]
         },
         {
-            path:'/courseManage/:id',
+            path:'/courseManage',
             component: CourseHomePage,
             children: [
                 {
-                    path: '/',
+                    path: 'courseInfo/:id',
                     component: CoursePortal
+                },
+                {
+                    path: 'courseUpdate/:id',
+                    component: CourseUpdate
                 }
             ]
         }
