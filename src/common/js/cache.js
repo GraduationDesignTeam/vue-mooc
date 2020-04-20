@@ -2,8 +2,6 @@ import storage from 'good-storage'
 
 //定义存取用户信息的KEY
 const USER_KEY = '__user';
-//定义存取课程信息的KEY（用于管理课程时）
-const COURSE_KEY = '__course';
 //定义存取课程草稿的KEY（用于新建课程时保存草稿）
 const COURSE_DRAFT_KEY = '__course_draft';
 
