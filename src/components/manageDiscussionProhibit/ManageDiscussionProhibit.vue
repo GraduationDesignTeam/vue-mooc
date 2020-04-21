@@ -181,7 +181,7 @@
                 let url=`${HOST}/discussion/search/${this.currPage}`
                 this.$ajax.post(url,this.searchform).then((res)=>{
                     this.pageInfo=res.data
-                    console.log(this.pageInfo)
+                    //console.log(this.pageInfo)
                     this.loading=false
                 })
             },

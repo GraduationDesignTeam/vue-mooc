@@ -11,23 +11,23 @@ BY朱翔鹏-->
                         <i class="el-icon-s-management"></i>
                         <span slot="title">课程</span>
                     </el-menu-item>
-                    <el-menu-item index="2" @click="openSelfSchedule">
+                    <!--<el-menu-item index="2" @click="openSelfSchedule">
                         <i class="el-icon-date"></i>
                         <span slot="title">课表</span>
-                    </el-menu-item>
-                    <el-menu-item index="3" @click="openSelfHomework">
+                    </el-menu-item>-->
+                    <el-menu-item index="2" @click="openSelfHomework">
                         <i class="el-icon-edit"></i>
                         <span slot="title">作业</span>
                     </el-menu-item>
-                    <el-menu-item index="4" @click="openSelfDiscussion">
+                    <el-menu-item index="3" @click="openSelfDiscussion">
                         <i class="el-icon-s-opportunity"></i>
                         <span slot="title">讨论</span>
                     </el-menu-item>
-                    <el-menu-item index="5" @click="openSelfTeachCourse">
+                    <el-menu-item index="4" @click="openSelfTeachCourse">
                         <i class="el-icon-s-custom"></i>
                         <span slot="title">授课</span>
                     </el-menu-item>
-                    <el-menu-item index="6" @click="openSelfAssistCourse">
+                    <el-menu-item index="5" @click="openSelfAssistCourse">
                         <i class="el-icon-s-help"></i>
                         <span slot="title">助课</span>
                     </el-menu-item>
@@ -46,9 +46,6 @@ BY朱翔鹏-->
         methods : {
             openSelfCourse() {
                 this.$router.push("/personalHomepage/openSelfCourse")
-            },
-            openSelfSchedule() {
-                this.$router.push("/")
             },
             openSelfHomework() {
                 this.$router.push("/")

@@ -36,7 +36,7 @@ BY朱翔鹏-->
                         break;
                     case  '3':
                         //跳转到讨论页
-                        this.$router.push("/")
+                        this.$router.push("/discussionHomePage")
                         break;
                     case  '4':
                         //跳转到消息中心
