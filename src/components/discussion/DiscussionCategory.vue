@@ -12,13 +12,13 @@
                 </el-col>
                 <el-col :span="8" style="float: right">
                     <div>
-                        <el-input  size="small" placeholder="搜索感兴趣的话题" v-model="input3" class="input-with-select">
-                            <el-select v-model="select" slot="prepend" placeholder="请选择">
+                        <el-input placeholder="搜索感兴趣的话题" v-model="input3" class="input-with-select">
+                            <el-select v-model="select" slot="prepend" placeholder="请选择" style="width: 90px">
                                 <el-option label="讨论名" value="1"></el-option>
                                 <el-option label="课程名" value="2"></el-option>
-                                <el-option label="教师名" value="3"></el-option>
+                                <!--<el-option label="教师名" value="3"></el-option>-->
                             </el-select>
-                            <el-button slot="append" icon="el-icon-search"></el-button>
+                            <el-button slot="append" icon="el-icon-search" @click="handleSearch"></el-button>
                         </el-input>
                     </div>
                 </el-col>
@@ -85,10 +85,32 @@
         data() {
             return {
                 input3: '',
-                select: '',
+                select: 0,
                 searchform:{
-                    major:'',
-                    school:''
+                    discussionName:'',
+                    courseInfo:{
+                        name:''
+                    }
+                }
+            }
+        },
+        methods:{
+            handleSearch(){
+                if(this.input3!==''&&this.input3!=null){
+                    if(this.select===0||this.select===1){
+                        //按讨论名检索
+                        this.searchform.discussionName=this.input3
+
+
+
+                        this.searchform.discussionName=''
+                    }else{
+                        //按课程名检索
+                        this.searchform.courseInfo.name=this.input3
+
+
+                        this.searchform.courseInfo.name=''
+                    }
                 }
             }
         }
