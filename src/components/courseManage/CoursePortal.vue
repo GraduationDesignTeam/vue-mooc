@@ -23,16 +23,48 @@
                         <span v-else-if="course.courseState===1" style="color:#339933">正在进行</span>
                         <span v-else style="color:#666666">已结课</span>
                     </div>
+                    <div class="course-info">
+                        审核状态：
+                        <span v-if="course.checkState===0" style="color:#ff7a3e">尚未通过审核</span>
+                        <span v-else-if="course.checkState===1" style="color:#56B929">通过审核</span>
+                    </div>
                 </div>
                 <div class="course-button">
                     <el-button type="warning" :disabled="course.courseState===2" @click="editCourseInfo">编辑课程</el-button>
                 </div>
             </div>
         </div>
-        <div class="detail">
+        <div class="content">
             <h2>课程详情</h2>
             <el-divider></el-divider>
-            <span>{{course.intro}}</span>
+            <div class="course-intro-box" v-if="course.intro.trim().length!==0">
+                <div class="intro">{{course.intro}}</div>
+                <div class="team">—— 课程团队</div>
+            </div>
+            <div class="category-title">
+                <i class="el-icon-menu"></i>
+                <span class="title">课程概述</span>
+            </div>
+            <div class="detail">
+                {{course.detail}}
+                <span v-if="course.detail.trim().length===0">无</span>
+            </div>
+            <div class="category-title">
+                <i class="el-icon-star-on"></i>
+                <span class="title">课程目标</span>
+            </div>
+            <div class="detail">
+                {{course.target}}
+                <span v-if="course.target.trim().length===0">无</span>
+            </div>
+            <div class="category-title">
+                <i class="el-icon-reading"></i>
+                <span class="title">参考资料</span>
+            </div>
+            <div class="detail detail_no_pre">
+                {{course.reference}}
+                <span v-if="course.reference.trim().length===0">无</span>
+            </div>
         </div>
     </div>
 </template>
@@ -60,6 +92,7 @@
                     target: '',
                     reference: '',
                     courseState: 1,
+                    checkState: 1,
                     courseAuthority: 0,
                 },
             }
@@ -70,12 +103,6 @@
         methods: {
             loadData() {
                 this.path=HOST;
-                if(getUser()===null || getUser().userId===undefined){
-                    const _this = this;
-                    this.$message.error("用户登录信息已过期，请重新登录！");
-                    setTimeout(() =>{_this.$router.push('/login')}, 3000);
-                    return;
-                }
                 let courseId = this.$route.params.id;
                 let url = `${HOST}/course/sel/${courseId}`;
                 let param = new URLSearchParams();
@@ -101,7 +128,6 @@
 </script>
 
 <style scoped>
-
     .flex-box{
         display: flex;
         display: -webkit-flex;
@@ -148,5 +174,55 @@
 
     .course-button{
         bottom: 0;
+    }
+
+    .content{
+        margin: 0 50px;
+    }
+
+    .content h2{
+        font-weight: 500;
+    }
+
+    .course-intro-box{
+        background-color: #F5F8F4;
+        padding: 30px 30px 20px;
+        color: #333333;
+    }
+
+    .course-intro-box .intro{
+        line-height: 20px;
+    }
+
+    .course-intro-box .team{
+        font-size: 18px;
+        text-align: right;
+    }
+
+    .category-title{
+        padding: 30px 0 20px;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .category-title i{
+        color: #56B929;
+    }
+
+    .category-title .title{
+        margin-left: 20px;
+    }
+
+    .detail{
+        /*保留空白符，正常换行*/
+        white-space: pre-wrap;
+        font-size: 18px;
+        font-family: '等线';
+        line-height: 22px;
+    }
+
+    .detail_no_pre{
+        /*仅显示换行，合并空白符*/
+        white-space: pre-line !important;
     }
 </style>

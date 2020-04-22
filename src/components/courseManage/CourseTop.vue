@@ -25,17 +25,41 @@
 </template>
 
 <script>
-    import {clearCourseDraft, clearUser} from "../../common/js/cache";
+    import {clearCourseDraft, clearUser, getUser} from "../../common/js/cache";
+    import {HOST} from "../../common/js/config";
 
     export default {
         name: "CourseTop",
         data(){
             return{
                 logoUrl: require("@/assets/logo_white.png"),
-                courseName:'会计学原理'
+                courseName:'课程名称'
             }
         },
+        created() {
+            this.loadData();
+        },
         methods:{
+            loadData() {
+                if(getUser()===null || getUser().userId===undefined){
+                    const _this = this;
+                    this.$message.error("用户登录信息已过期，请重新登录！");
+                    setTimeout(() =>{_this.$router.push('/login')}, 3000);
+                    return;
+                }
+                let courseId = this.$route.params.id;
+                let url = `${HOST}/course/sel/${courseId}`;
+                let param = new URLSearchParams();
+                param.append('userId', getUser().userId);
+                this.$ajax.post(url, param).then((res)=> {
+                    if(res.data.role!==1 && res.data.role!==2){
+                        this.$message.error("您没有访问当前页面的权限!");
+                        this.$router.push('/');
+                    }else{
+                        this.courseName = res.data.name;
+                    }
+                })
+            },
             handleSelect(key) {
                 switch(key){
                     case  '1':
