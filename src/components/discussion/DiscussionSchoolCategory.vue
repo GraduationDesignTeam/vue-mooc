@@ -1,4 +1,3 @@
-<!--讨论区首页，显示当前系统内所有讨论，用户可以检索、进入讨论-->
 <template>
     <div>
         <Top class="top-head"></Top>
@@ -48,7 +47,7 @@
                         <strong style="font-size: 14px;margin-left: 20px">专业 ：</strong>
                     </el-col>
                     <el-col :span="22">
-                        <span style="font-size: 13px;color: darkcyan"><a style="color: red">全部</a></span>
+                        <span style="font-size: 13px;color: darkcyan"><a @click="handleAll">全部</a></span>
                         <span style="font-size: 13px;color: darkcyan;margin-left: 30px"><a @click="handleMajor('文学')">文学</a></span>
                         <span style="font-size: 13px;color: darkcyan;margin-left: 30px"><a @click="handleMajor('计算机')">计算机</a></span>
                         <span style="font-size: 13px;color: darkcyan;margin-left: 30px"><a @click="handleMajor('历史')">历史</a></span>
@@ -67,7 +66,7 @@
                         <strong style="font-size: 14px;margin-left: 20px">院校 ：</strong>
                     </el-col>
                     <el-col :span="22">
-                        <span style="font-size: 13px;color: darkcyan"><a style="color: red">全部</a></span>
+                        <span style="font-size: 13px;color: darkcyan"><a href="">全部</a></span>
                         <span style="font-size: 13px;color: darkcyan;margin-left: 30px"><a @click="handleSchool('清华大学')">清华大学</a></span>
                         <span style="font-size: 13px;color: darkcyan;margin-left: 30px"><a @click="handleSchool('北京大学')">北京大学</a></span>
                         <span style="font-size: 13px;color: darkcyan;margin-left: 30px"><a @click="handleSchool('复旦大学')">复旦大学</a></span>
@@ -131,15 +130,18 @@
     import Top from '../personalTop/Top.vue'
     //import DiscussionCategory from "./DiscussionCategory";
     export default {
-        name: "DiscussionHomePage",
+        name: "DiscussionSchoolCategory",
         data(){
             return{
+                id:'',
                 input3: '',
                 select: '',
                 discussionDetail:{
                     discussionName:'',
                     courseInfo:{
-                        name:''
+                        name:'',
+                        type:'',
+                        school:''
                     }
                 },
                 img: require('./no.png'),
@@ -155,6 +157,8 @@
         },
         created(){
             this.path = HOST
+            this.id=this.$route.params.id
+            this.discussionDetail.courseInfo.school=this.id
             this.getNewData()
         },
         methods:{
@@ -186,7 +190,6 @@
                 let url=`${HOST}/discussion/searchNew/${this.currPage}`
                 this.$ajax.post(url,this.discussionDetail).then(res=>{
                     this.pageInfo = res.data
-                    console.log(res.data)
                     this.discussionDetail.discussionName=''
                     this.discussionDetail.courseInfo.name=''
                     this.loading = false;
@@ -199,7 +202,6 @@
                 let url=`${HOST}/discussion/searchHot/${this.currPage}`
                 this.$ajax.post(url,this.discussionDetail).then(res=>{
                     this.pageInfo = res.data
-                    console.log(res.data)
                     this.discussionDetail.discussionName=''
                     this.discussionDetail.courseInfo.name=''
                     this.loading = false;
@@ -215,9 +217,14 @@
             },
             handleMajor(id){
                 this.$router.push(`/discussionMajorCategory/${id}`)
+                location.reload();
+            },
+            handleAll(){
+                this.$router.push("/discussionHomePage")
             },
             handleSchool(id){
                 this.$router.push(`/discussionSchoolCategory/${id}`)
+                location.reload();
             }
         }
     }
@@ -246,10 +253,10 @@
         color: darkcyan;
         text-decoration: none;
     }
-.choose{
-    margin-left: 20px;
-    margin-top: 20px;
-}
+    .choose{
+        margin-left: 20px;
+        margin-top: 20px;
+    }
     .choose a{
         margin-left: 20px;
         font-size: 14px;
@@ -268,37 +275,37 @@
     .choose3{
         background: #9199a1;
     }
-.content {
-    margin-top: 10px;
-}
+    .content {
+        margin-top: 10px;
+    }
 
-.image {
-    height: 160px;
-    width: 100%;
-    display: block;
-}
+    .image {
+        height: 160px;
+        width: 100%;
+        display: block;
+    }
 
-.remark {
-    padding: 14px;
-}
-.remark .title {
-    font-weight: bold;
-    font-size: 18px;
-    color: #666;
-    white-space: nowrap;/* 不换行*/
-    overflow: hidden;/* 超出不显示*/
-    text-overflow:ellipsis;/* 加省略号显示*/
-}
+    .remark {
+        padding: 14px;
+    }
+    .remark .title {
+        font-weight: bold;
+        font-size: 18px;
+        color: #666;
+        white-space: nowrap;/* 不换行*/
+        overflow: hidden;/* 超出不显示*/
+        text-overflow:ellipsis;/* 加省略号显示*/
+    }
 
-.remark .price {
-    font-size: 14px;
-    color: #9199a1;
-}
+    .remark .price {
+        font-size: 14px;
+        color: #9199a1;
+    }
 
-.pagination {
-    margin: 20px 0;
-    text-align: center;
-}
+    .pagination {
+        margin: 20px 0;
+        text-align: center;
+    }
     .discussionCard{
         border-radius: 8px;
     }

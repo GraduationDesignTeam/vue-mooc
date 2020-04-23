@@ -24,6 +24,8 @@ import CoursePortal from "../components/courseManage/CoursePortal";
 import OpenSelfCourse from "../components/openSelfCourse/OpenSelfCourse";
 import CourseUpdate from "../components/course/CourseUpdate";
 import DiscussionHomePage from "../components/discussion/DiscussionHomePage";
+import DiscussionMajorCategory from "../components/discussion/DiscussionMajorCategory";
+import DiscussionSchoolCategory from "../components/discussion/DiscussionSchoolCategory";
 
 //避免因重复路由引起的报错
 const originalPush = Router.prototype.push;
@@ -139,6 +141,14 @@ const router = new Router({
         {
             path: '/discussionHomePage',
             component: DiscussionHomePage
+        },
+        {
+            path: '/discussionMajorCategory/:id',
+            component: DiscussionMajorCategory
+        },
+        {
+            path: '/discussionSchoolCategory/:id',
+            component: DiscussionSchoolCategory
         }
     ]
 });
