@@ -67,11 +67,7 @@
                         this.$router.push("/")
                         break;
                     case  '2':
-                        this.$router.push("/courseManage/"+this.$route.params.id);
-                        break;
-                    case  '3':
-                        //跳转到讨论页
-                        this.$router.push("/")
+                        this.$router.push("/courseManage/courseInfo/"+this.$route.params.id);
                         break;
                     case  '4':
                         //跳转到个人主页

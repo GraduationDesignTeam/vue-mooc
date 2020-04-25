@@ -26,6 +26,7 @@ import CourseUpdate from "../components/course/CourseUpdate";
 import DiscussionHomePage from "../components/discussion/DiscussionHomePage";
 import DiscussionMajorCategory from "../components/discussion/DiscussionMajorCategory";
 import DiscussionSchoolCategory from "../components/discussion/DiscussionSchoolCategory";
+import ChapterManage from "../components/chapter/ChapterManage";
 
 //避免因重复路由引起的报错
 const originalPush = Router.prototype.push;
@@ -135,6 +136,10 @@ const router = new Router({
                 {
                     path: 'courseUpdate/:id',
                     component: CourseUpdate
+                },
+                {
+                    path: 'chapterManage/:id',
+                    component: ChapterManage
                 }
             ]
         },
