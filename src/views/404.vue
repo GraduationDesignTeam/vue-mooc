@@ -26,7 +26,7 @@
         methods: {
             timeGo(){
                 this.count--;
-                if(this.count === 0)
+                if(this.count === 0 && this.$route.path === '/404')
                     this.$router.push("/");
             }
         }
