@@ -116,6 +116,12 @@
                         break;
                 }
             }
+        },
+        watch:{
+            // 监听路由变化，相应地改变侧边栏选中的项目
+            '$route.path':function pathChange() {
+                    this.loadData();
+            }
         }
     }
 </script>

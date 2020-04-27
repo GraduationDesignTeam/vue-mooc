@@ -4,6 +4,8 @@ import storage from 'good-storage'
 const USER_KEY = '__user';
 //定义存取课程草稿的KEY（用于新建课程时保存草稿）
 const COURSE_DRAFT_KEY = '__course_draft';
+//定义存取课程草稿的KEY（用于新建课程时保存草稿）
+const COURSE_KEY = '__course';
 
 /**
  * 存储用户信息
@@ -47,4 +49,26 @@ export function getCourseDraft(){
  */
 export function clearCourseDraft(){
     storage.set(COURSE_DRAFT_KEY,{})
+}
+
+/**
+ * 存储课程
+ * @param obj
+ */
+export function saveCourse(obj){
+    storage.set(COURSE_KEY,obj)
+}
+
+/**
+ * 取课程
+ */
+export function getCourse(){
+    return storage.get(COURSE_KEY,{})
+}
+
+/**
+ * 清除课程
+ */
+export function clearCourse(){
+    storage.set(COURSE_KEY,{})
 }

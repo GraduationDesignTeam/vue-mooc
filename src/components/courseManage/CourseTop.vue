@@ -25,7 +25,7 @@
 </template>
 
 <script>
-    import {clearCourseDraft, clearUser, getUser} from "../../common/js/cache";
+    import {clearCourse, clearCourseDraft, clearUser, getUser, saveCourse} from "../../common/js/cache";
     import {HOST} from "../../common/js/config";
 
     export default {
@@ -57,6 +57,7 @@
                         this.$router.push('/');
                     }else{
                         this.courseName = res.data.name;
+                        saveCourse(res.data);
                     }
                 })
             },
@@ -77,6 +78,7 @@
                         //跳转到首页，未登录状态
                         clearUser();
                         clearCourseDraft();
+                        clearCourse();
                         this.$router.push("/");
                         break;
                 }
