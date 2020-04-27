@@ -1,12 +1,20 @@
 <template>
     <div>
-        消息中心
+        <Top class="top-head"></Top>
+        <MessageMenu ></MessageMenu>
     </div>
 </template>
 
 <script>
+    import Top from '../personalTop/Top.vue'
+    import MessageMenu from './MessageMenu'
     export default {
-        name: "MessageCentre"
+        name: "MessageCentre" ,
+        components:{
+            Top,
+            MessageMenu
+
+        },
     }
 </script>
 

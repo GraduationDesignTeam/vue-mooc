@@ -17,6 +17,7 @@ import test from "../views/index/test";
 import Index from "../views/index/Index";
 import Login from "../components/login/Login";
 import MessageCentre from "../components/messageCentre/MessageCentre";
+import MessageMenu from "../components/messageCentre/MessageMenu";
 import TeacherCourse from "../components/teacherPortal/TeacherCourse";
 import CourseAdd from "../components/course/CourseAdd";
 import CourseHomePage from "../components/courseManage/CourseHomePage";
@@ -63,7 +64,14 @@ const router = new Router({
         },
         {
             path: '/MessageCentre',
-            component: MessageCentre
+            component: MessageCentre,
+            children:[
+                {
+                    path: 'messagemenu',
+                    component: MessageMenu
+                }
+            ]
+
         },
         {
             path: '/administrator',
