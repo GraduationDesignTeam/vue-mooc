@@ -28,6 +28,7 @@ import DiscussionHomePage from "../components/discussion/DiscussionHomePage";
 import DiscussionMajorCategory from "../components/discussion/DiscussionMajorCategory";
 import DiscussionSchoolCategory from "../components/discussion/DiscussionSchoolCategory";
 import ChapterManage from "../components/chapter/ChapterManage";
+import DiscussionDetail from "../components/discussion/DiscussionDetail";
 
 //避免因重复路由引起的报错
 const originalPush = Router.prototype.push;
@@ -162,6 +163,10 @@ const router = new Router({
         {
             path: '/discussionSchoolCategory/:id',
             component: DiscussionSchoolCategory
+        },
+        {
+            path: '/discussionDetail/:id',
+            component: DiscussionDetail
         }
     ]
 });

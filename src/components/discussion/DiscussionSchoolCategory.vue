@@ -66,7 +66,7 @@
                         <strong style="font-size: 14px;margin-left: 20px">院校 ：</strong>
                     </el-col>
                     <el-col :span="22">
-                        <span style="font-size: 13px;color: darkcyan"><a href="">全部</a></span>
+                        <span style="font-size: 13px;color: darkcyan"><a @click="handleAll">全部</a></span>
                         <span style="font-size: 13px;color: darkcyan;margin-left: 30px"><a @click="handleSchool('清华大学')">清华大学</a></span>
                         <span style="font-size: 13px;color: darkcyan;margin-left: 30px"><a @click="handleSchool('北京大学')">北京大学</a></span>
                         <span style="font-size: 13px;color: darkcyan;margin-left: 30px"><a @click="handleSchool('复旦大学')">复旦大学</a></span>
@@ -88,13 +88,13 @@
             <el-row style="margin-top: 10px">
                 <el-col :span="4" v-for="(item,index) in pageInfo.list" :key="index" :offset="1" class="content">
                     <el-card :body-style="{ padding: '0px' }" class="discussionCard">
-                        <img v-if="item.picture" :src="`${path}/${item.picture}`" class="image" @click="handleDetail(item.id)">
-                        <img v-else :src="img" class="image" @click="handleDetail(item.id)">
+                        <img v-if="item.courseInfo.photo" :src="`${path}/${item.courseInfo.photo}`" class="image" @click="handleDetail(item.discussionId)">
+                        <img v-else :src="img" class="image" @click="handleDetail(item.discussionId)">
 
                         <div class="remark">
-                            <h2 class="title" @click="handleDetail(item.id)">{{item.discussionName}}</h2>
+                            <h2 class="title" @click="handleDetail(item.discussionId)">{{item.discussionName}}</h2>
                             <div class="">
-                                <strong class="price"  @click="handleDetail(item.id)">{{item.courseInfo.name}}</strong>
+                                <strong class="price"  @click="handleDetail(item.discussionId)">{{item.courseInfo.name}}</strong>
                             </div>
                             <div class="" style="margin-top: 6px">
                                 <el-row :gutter="4">
@@ -213,7 +213,7 @@
                 this.getData()
             },
             handleDetail(id){
-                console.log(id)
+                this.$router.push(`/discussionDetail/${id}`)
             },
             handleMajor(id){
                 this.$router.push(`/discussionMajorCategory/${id}`)
