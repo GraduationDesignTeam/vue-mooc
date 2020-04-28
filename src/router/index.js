@@ -22,6 +22,8 @@ import TeacherCourse from "../components/teacherPortal/TeacherCourse";
 import CourseAdd from "../components/course/CourseAdd";
 import CourseHomePage from "../components/courseManage/CourseHomePage";
 import CoursePortal from "../components/courseManage/CoursePortal";
+import CourseExam from "../components/courseExam/ExamInfo";
+import CourseTask from "../components/courseTask/TaskInfo";
 import OpenSelfCourse from "../components/openSelfCourse/OpenSelfCourse";
 import CourseUpdate from "../components/course/CourseUpdate";
 import DiscussionHomePage from "../components/discussion/DiscussionHomePage";
@@ -151,6 +153,14 @@ const router = new Router({
                     component: ChapterManage
                 }
             ]
+        },
+        {
+            path: '/courseTask/:id',
+            component: CourseTask
+        },
+        {
+            path: '/courseExam/:id',
+            component: CourseExam
         },
         {
             path: '/discussionHomePage',

@@ -103,14 +103,14 @@
                         //跳转到课件管理
                         this.$router.push("/courseManage/courseWare/" + id);
                         break;
-                    // case  '5-1':
-                    //     //跳转到作业
-                    //     this.$router.push("/courseManage/courseTask/" + id);
-                    //     break;
-                    // case  '5-2':
-                    //     //跳转到考试
-                    //     this.$router.push("/courseManage/courseTask/" + id);
-                    //     break;
+                     case  '5-1':
+                        //跳转到作业
+                        this.$router.push("/courseTask/" + id);
+                        break;
+                    case  '5-2':
+                        //跳转到考试
+                        this.$router.push("/courseExam/" + id);
+                        break;
                     case  '6':
                         //跳转到课程讨论区
                         this.$router.push("/courseManage/courseDiscussion/" + id);

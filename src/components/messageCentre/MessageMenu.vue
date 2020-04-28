@@ -56,8 +56,9 @@
         },
         created() {
             this.path=HOST,
-            this.getRecords(),
-            this.user=getUser()
+            this.user=getUser(),
+            this.getRecords()
+
         },
         methods:{
             getRecords(){

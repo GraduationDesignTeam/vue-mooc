@@ -48,7 +48,7 @@ BY朱翔鹏-->
                 this.$router.push("/personalHomepage/openSelfCourse")
             },
             openSelfHomework() {
-                this.$router.push("/")
+                this.$router.push("/personalHomepage/OpenSelfTask")
             },
             openSelfDiscussion() {
                 this.$router.push("/")
