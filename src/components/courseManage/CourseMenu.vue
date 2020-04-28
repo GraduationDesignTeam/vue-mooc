@@ -22,10 +22,11 @@
                 <i class="el-icon-s-help"></i>
                 <span slot="title">课件管理</span>
             </el-menu-item>
-            <el-menu-item index="5">
-                <i class="el-icon-edit"></i>
-                <span slot="title">课程任务</span>
-            </el-menu-item>
+            <el-submenu index="5">
+                <template slot="title"><i class="el-icon-edit"></i>课程任务</template>
+                <el-menu-item index="5-1">作业</el-menu-item>
+                <el-menu-item index="5-2">考试</el-menu-item>
+            </el-submenu>
             <el-menu-item index="6">
                 <i class="el-icon-s-opportunity"></i>
                 <span slot="title">课程讨论区</span>
@@ -68,9 +69,9 @@
                     case 'courseWare':
                         this.activeIndex='4';
                         break;
-                    case 'courseTask':
-                        this.activeIndex='5';
-                        break;
+                    // case 'courseTask':
+                    //     this.activeIndex='5';
+                    //     break;
                     case 'courseDiscussion':
                         this.activeIndex='6';
                         break;
@@ -102,10 +103,14 @@
                         //跳转到课件管理
                         this.$router.push("/courseManage/courseWare/" + id);
                         break;
-                    case  '5':
-                        //跳转到课程任务
-                        this.$router.push("/courseManage/courseTask/" + id);
-                        break;
+                    // case  '5-1':
+                    //     //跳转到作业
+                    //     this.$router.push("/courseManage/courseTask/" + id);
+                    //     break;
+                    // case  '5-2':
+                    //     //跳转到考试
+                    //     this.$router.push("/courseManage/courseTask/" + id);
+                    //     break;
                     case  '6':
                         //跳转到课程讨论区
                         this.$router.push("/courseManage/courseDiscussion/" + id);
