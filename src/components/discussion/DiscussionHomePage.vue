@@ -208,7 +208,7 @@
             //分页跳转
             handleCurrentChange(page){
                 this.currPage = page
-                this.getData()
+                this.getHotData()
             },
             handleDetail(id){
                 this.$router.push(`/discussionDetail/${id}`)
