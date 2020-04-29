@@ -66,7 +66,12 @@
         name: "ChapterManage",
         data(){
             return{
-                chapterList:[],
+                chapterList:[
+                    {id:1, number:1, name:'课程介绍', sectionList:[{id:1, number:1, name:'测试小节1.1'},{id:2, number:2, name:'测试小节1.2'}]},
+                    {id:2, number:2, name:'课程概述', sectionList:[{id:3, number:1, name:'测试小节2.1'},{id:4, number:2, name:'测试小节2.2'}]},
+                    {id:3, number:3, name:'操作实验方法', sectionList:[{id:5, number:1, name:'测试小节3.1'},{id:6, number:2, name:'测试小节3.2'}]},
+                ],
+                // chapterList:[],
                 isVisible:[],
                 isCollapsed: false,
                 isEditable: true,

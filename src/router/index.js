@@ -16,6 +16,7 @@ import ManageDiscussionProhibit from "../components/manageDiscussionProhibit/Man
 import test from "../views/index/test";
 import Index from "../views/index/Index";
 import Login from "../components/login/Login";
+import Course from '../views/course/Course';
 import MessageCentre from "../components/messageCentre/MessageCentre";
 import MessageMenu from "../components/messageCentre/MessageMenu";
 import TeacherCourse from "../components/teacherPortal/TeacherCourse";
@@ -62,6 +63,10 @@ const router = new Router({
         {
             path: '/login',
             component: Login
+        },
+        {
+            path: '/course/:id',
+            component: Course
         },
         {
             path: '/MessageCentre',
