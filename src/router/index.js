@@ -31,6 +31,7 @@ import DiscussionMajorCategory from "../components/discussion/DiscussionMajorCat
 import DiscussionSchoolCategory from "../components/discussion/DiscussionSchoolCategory";
 import ChapterManage from "../components/chapter/ChapterManage";
 import DiscussionDetail from "../components/discussion/DiscussionDetail";
+import OpenSelfDiscussion from "../components/openSelfDiscussion/OpenSelfDiscussion";
 
 //避免因重复路由引起的报错
 const originalPush = Router.prototype.push;
@@ -133,6 +134,10 @@ const router = new Router({
                 {
                     path: 'openSelfCourse',
                     component: OpenSelfCourse
+                },
+                {
+                    path: 'openSelfDiscussion',
+                    component: OpenSelfDiscussion
                 }
             ]
         },

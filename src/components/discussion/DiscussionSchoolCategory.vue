@@ -92,14 +92,14 @@
                         <img v-else :src="img" class="image" @click="handleDetail(item.discussionId)">
 
                         <div class="remark">
-                            <h2 class="title" @click="handleDetail(item.discussionId)">{{item.discussionName}}</h2>
+                            <h2 class="title" @click="handleDetail(item.discussionId)"> <i class="el-icon-s-opportunity" style="color: chartreuse;margin-top: 10px"></i> {{item.discussionName}}</h2>
                             <div class="">
-                                <strong class="price"  @click="handleDetail(item.discussionId)">{{item.courseInfo.name}}</strong>
+                                <span class="price"  @click="handleDetail(item.discussionId)"> <i class="el-icon-s-management" style="color: #ff7a3e;margin-top: 10px"></i> {{item.courseInfo.name}}</span>
                             </div>
                             <div class="" style="margin-top: 6px">
                                 <el-row :gutter="4">
                                     <el-col :span="12"><div class="grid-content bg-purple">
-                                        <span class="price" style="color: #2d8cf0">{{item.courseInfo.school}}</span>
+                                        <span class="price" style="color: #9199a1"> <i class="el-icon-school" style="color: #2d8cf0;margin-top: 10px"></i> {{item.courseInfo.school}}</span>
                                     </div></el-col>
                                     <el-col :span="12"><div class="grid-content bg-purple">
                                         <span class="price" style="color: aquamarine;float: right">{{item.courseInfo.type}}</span>
