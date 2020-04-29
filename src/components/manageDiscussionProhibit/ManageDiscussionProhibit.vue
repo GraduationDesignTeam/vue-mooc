@@ -8,9 +8,19 @@
             </el-breadcrumb>
         </div>
         <div class="user_table">
-            <el-form :inline="true" :model="searchform" class="query">
+            <el-form :inline="true" :model="discussionDetail" class="query">
                 <el-form-item label="讨论标题">
-                    <el-input v-model="searchform.discussionName" placeholder="讨论名"></el-input>
+                    <el-input v-model="discussionDetail.discussionName" placeholder="讨论名"></el-input>
+                </el-form-item>
+                <el-form-item label="所属课程" style="margin-left: 10px">
+                    <el-input v-model="discussionDetail.courseInfo.name" placeholder="课程名"></el-input>
+                </el-form-item>
+                <p></p>
+                <el-form-item label="所属专业">
+                    <el-input v-model="discussionDetail.courseInfo.type" placeholder="专业"></el-input>
+                </el-form-item>
+                <el-form-item label="开设学校" style="margin-left: 10px">
+                    <el-input v-model="discussionDetail.courseInfo.school" placeholder="开设学校"></el-input>
                 </el-form-item>
                <!-- <el-form-item label="所属课程">
                     <el-input v-model="searchform.courseName" placeholder="讨论名"></el-input>
@@ -19,7 +29,7 @@
                     <el-input v-model="searchform.teacherName" placeholder="讨论名"></el-input>
                 </el-form-item>-->
 
-                <el-form-item>
+                <el-form-item style="margin-left: 10px">
                     <el-button type="primary" @click="onSearch">查询</el-button>
                 </el-form-item>
             </el-form>
@@ -41,18 +51,24 @@
                         align="center"
                         prop="discussionName"
                         label="讨论标题"
-                        width="100">
+                        width="150">
                 </el-table-column>
                 <el-table-column
                         align="center"
                         prop="courseInfo.name"
                         label="所属课程"
-                        width="100">
+                        width="150">
                 </el-table-column>
                 <el-table-column
                         align="center"
                         prop="teacher.userName"
                         label="开设教师"
+                        width="100">
+                </el-table-column>
+                <el-table-column
+                        align="center"
+                        prop="courseInfo.school"
+                        label="学校"
                         width="100">
                 </el-table-column>
                 <el-table-column
@@ -85,16 +101,16 @@
                         width="100"
                         :formatter="dateFormatter">
                 </el-table-column>
-                <!--<el-table-column
+                <el-table-column
                         align="center"
                         prop="discussionState"
                         label="讨论状态"
                         width="140">
                     <template scope="scope">
-                        <span v-if="scope.row.discussionState===0" style="color: red">关闭</span>
-                        <span v-else-if="scope.row.courseState===1" style="color: green;">开设</span>
+                        <span v-if="scope.row.discussionState==='1'" style="color: green">开设</span>
+                        <span v-else style="color: red">关闭</span>
                     </template>
-                </el-table-column>-->
+                </el-table-column>
                 <el-table-column
                         align="center"
                         prop="discussionDescription"
@@ -120,8 +136,8 @@
                         <el-switch v-model="scope.row.discussionState"
                                    active-color="#13ce66"
                                    inactive-color="#999"
-                                   active-value=1
-                                   inactive-value=0
+                                   active-value="1"
+                                   inactive-value="0"
                                    @change="handleSwitch(scope.row)"
                         >
                         </el-switch>
@@ -157,10 +173,13 @@
         name: "ManageDiscussionProhibit",
         data() {
             return {
-                searchform:{
+                discussionDetail:{
                     discussionName:'',
-                    /*courseName:'',
-                    teacherName:'',*/
+                    courseInfo:{
+                        name:'',
+                        type:'',
+                        school:''
+                    }
                 },
                 pageInfo:{
 
@@ -178,10 +197,10 @@
             },
             getAllDiscussion(){
                 this.loading=true
-                let url=`${HOST}/discussion/search/${this.currPage}`
-                this.$ajax.post(url,this.searchform).then((res)=>{
+                let url=`${HOST}/discussion/searchNew/${this.currPage}`
+                this.$ajax.post(url,this.discussionDetail).then((res)=>{
                     this.pageInfo=res.data
-                    //console.log(this.pageInfo)
+                    console.log(this.pageInfo)
                     this.loading=false
                 })
             },

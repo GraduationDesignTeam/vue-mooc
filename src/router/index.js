@@ -23,6 +23,8 @@ import TeacherCourse from "../components/teacherPortal/TeacherCourse";
 import CourseAdd from "../components/course/CourseAdd";
 import CourseHomePage from "../components/courseManage/CourseHomePage";
 import CoursePortal from "../components/courseManage/CoursePortal";
+import CourseExam from "../components/courseExam/ExamInfo";
+import CourseTask from "../components/courseTask/TaskInfo";
 import OpenSelfCourse from "../components/openSelfCourse/OpenSelfCourse";
 import CourseUpdate from "../components/course/CourseUpdate";
 import DiscussionHomePage from "../components/discussion/DiscussionHomePage";
@@ -30,6 +32,7 @@ import DiscussionMajorCategory from "../components/discussion/DiscussionMajorCat
 import DiscussionSchoolCategory from "../components/discussion/DiscussionSchoolCategory";
 import ChapterManage from "../components/chapter/ChapterManage";
 import DiscussionDetail from "../components/discussion/DiscussionDetail";
+import OpenSelfDiscussion from "../components/openSelfDiscussion/OpenSelfDiscussion";
 
 //避免因重复路由引起的报错
 const originalPush = Router.prototype.push;
@@ -136,6 +139,10 @@ const router = new Router({
                 {
                     path: 'openSelfCourse',
                     component: OpenSelfCourse
+                },
+                {
+                    path: 'openSelfDiscussion',
+                    component: OpenSelfDiscussion
                 }
             ]
         },
@@ -156,6 +163,14 @@ const router = new Router({
                     component: ChapterManage
                 }
             ]
+        },
+        {
+            path: '/courseTask/:id',
+            component: CourseTask
+        },
+        {
+            path: '/courseExam/:id',
+            component: CourseExam
         },
         {
             path: '/discussionHomePage',
