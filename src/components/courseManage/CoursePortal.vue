@@ -37,7 +37,7 @@
         <div class="content">
             <h2>课程详情</h2>
             <el-divider></el-divider>
-            <div class="course-intro-box" v-if="course.intro.trim().length!==0">
+            <div class="course-intro-box" v-if="course.intro&&course.intro.trim().length!==0">
                 <div class="intro">{{course.intro}}</div>
                 <div class="team">—— 课程团队</div>
             </div>
@@ -47,7 +47,7 @@
             </div>
             <div class="detail">
                 {{course.detail}}
-                <span v-if="course.detail.trim().length===0">无</span>
+                <span v-if="!course.detail||course.detail.trim().length===0">无</span>
             </div>
             <div class="category-title">
                 <i class="el-icon-star-on"></i>
@@ -55,7 +55,7 @@
             </div>
             <div class="detail">
                 {{course.target}}
-                <span v-if="course.target.trim().length===0">无</span>
+                <span v-if="!course.target||course.target.trim().length===0">无</span>
             </div>
             <div class="category-title">
                 <i class="el-icon-reading"></i>
@@ -63,7 +63,7 @@
             </div>
             <div class="detail detail_no_pre">
                 {{course.reference}}
-                <span v-if="course.reference.trim().length===0">无</span>
+                <span v-if="!course.reference||course.reference.trim().length===0">无</span>
             </div>
         </div>
     </div>
@@ -197,6 +197,7 @@
     .course-intro-box .team{
         font-size: 18px;
         text-align: right;
+        line-height: 28px;
     }
 
     .category-title{
