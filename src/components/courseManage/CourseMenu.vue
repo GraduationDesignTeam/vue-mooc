@@ -31,10 +31,12 @@
                 <i class="el-icon-s-opportunity"></i>
                 <span slot="title">课程讨论区</span>
             </el-menu-item>
-            <el-menu-item index="7">
-                <i class="el-icon-s-custom"></i>
-                <span slot="title">师生</span>
-            </el-menu-item>
+            <el-submenu index="7">
+                <template slot="title"><i class="el-icon-s-custom"></i>师生</template>
+                <el-menu-item index="7-1">教师</el-menu-item>
+                <el-menu-item index="7-2">助教</el-menu-item>
+                <!--                <el-menu-item index="7-3">学生</el-menu-item>-->
+            </el-submenu>
         </el-menu>
     </div>
 </template>
@@ -55,31 +57,36 @@
                 let path = this.$route.path;
                 switch (path.substring(14, path.lastIndexOf('/'))) {
                     case 'courseInfo':
-                        console.log('courseInfo');
                         this.activeIndex='1';
                         break;
                     case 'courseUpdate':
-                        console.log('courseUpdate');
                         this.activeIndex='1';
                         break;
+                    case 'courseNotice':
+                        this.activeIndex='2';
+                        break;
                     case 'chapterManage':
-                        console.log('chapterManage');
                         this.activeIndex='3';
                         break;
                     case 'courseWare':
                         this.activeIndex='4';
                         break;
-                    // case 'courseTask':
-                    //     this.activeIndex='5';
-                    //     break;
+                    case 'courseTask':
+                        this.activeIndex='5-1';
+                        break;
+                    case 'courseExam':
+                        this.activeIndex='5-2';
+                        break;
                     case 'courseDiscussion':
                         this.activeIndex='6';
                         break;
                     case 'courseTeacher':
-                        this.activeIndex='7';
+                        this.activeIndex='7-1';
+                        break;
+                    case 'courseAssistant':
+                        this.activeIndex='7-2';
                         break;
                     default:
-                        console.log('default')
                         this.activeIndex='1';
                         break;
                 }
@@ -115,9 +122,13 @@
                         //跳转到课程讨论区
                         this.$router.push("/courseManage/courseDiscussion/" + id);
                         break;
-                    case  '7':
-                        //跳转到设置教师&助教
+                    case  '7-1':
+                        //跳转到设置教师
                         this.$router.push("/courseManage/courseTeacher/" + id);
+                        break;
+                    case  '7-2':
+                        //跳转到设置助教
+                        this.$router.push("/courseManage/courseAssistant/" + id);
                         break;
                 }
             }
