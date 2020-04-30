@@ -33,6 +33,8 @@ import DiscussionSchoolCategory from "../components/discussion/DiscussionSchoolC
 import ChapterManage from "../components/chapter/ChapterManage";
 import DiscussionDetail from "../components/discussion/DiscussionDetail";
 import OpenSelfDiscussion from "../components/openSelfDiscussion/OpenSelfDiscussion";
+import CourseDiscussion from "../components/courseDiscussion/CourseDiscussion";
+import NewDiscussion from "../components/courseDiscussion/NewDiscussion";
 
 //避免因重复路由引起的报错
 const originalPush = Router.prototype.push;
@@ -161,6 +163,14 @@ const router = new Router({
                 {
                     path: 'chapterManage/:id',
                     component: ChapterManage
+                },
+                {
+                    path: 'courseDiscussion/:id',
+                    component: CourseDiscussion
+                },
+                {
+                    path: 'newDiscussion/:id',
+                    component: NewDiscussion
                 }
             ]
         },

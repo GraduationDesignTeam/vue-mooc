@@ -25,9 +25,9 @@
                         <img v-if="discussionDetail.courseInfo.photo" :src="`${path}/${discussionDetail.courseInfo.photo}`" class="image" @click="openCourse">
                         <img v-else :src="img" class="image" @click="openCourse">
                     <el-card class="box-card3" style="height: 190px;width: 160px;margin-left: 32px;background-color: gainsboro">
-                        <span style="margin-left: 30px;font-size: 14px;color: darkcyan">课程首页</span>
+                        <span style="margin-left: 30px;font-size: 14px;color: darkcyan" @click="toCourse">课程首页</span>
                         <el-divider></el-divider>
-                        <span style="margin-left: 30px;font-size: 14px;color: darkcyan">课程讨论</span>
+                        <span style="margin-left: 30px;font-size: 14px;color: darkcyan" @click="toCourseDiscussion">课程讨论</span>
                         <el-divider></el-divider>
                         <span style="margin-left: 30px;font-size: 14px;color: darkcyan">课程作业</span>
                         <el-divider></el-divider>
@@ -130,6 +130,7 @@
                 replyContent:{
                     userId:'',
                     discussionId:'',
+                    discussRecordId:'',
                     replyRecordId:'',
                     userName:'',
                     storeyId:'',
@@ -185,17 +186,19 @@
             },
             replyRecord(){
                 //确认发帖
-                if(this.replyContent.discussRecordId!==null){
+                //console.log(this.replyContent)
+                if(this.replyContent.discussRecordId!==null&&this.replyContent.discussRecordId!==''){
                     //当前用户编辑自己发的某贴
                     let url=`${HOST}/discussRecord/updateRecord`
                     this.$ajax.post(url,this.replyContent).then(res=>{
                         if(res.data.code===0){
+                            this.replyContent={}
+                            this.replyContent.discussRecordId=''
                             this.getData()
                             this.$message({
                                 message: '编辑成功',
                                 type: 'success'
                             })
-                            this.replyContent={}
                         }
                     })
                 }else{
@@ -207,12 +210,13 @@
                     let url=`${HOST}/discussRecord/addRecord`
                     this.$ajax.post(url,this.replyContent).then(res=>{
                         if(res.data.code===0){
+                            this.replyContent={}
+                            this.replyContent.discussRecordId=''
                             this.getData()
                             this.$message({
                                 message: '发帖成功',
                                 type: 'success'
                             })
-                            this.replyContent={}
                         }
                     })
                 }
@@ -249,6 +253,12 @@
             },
             handleDiscussionUpdate(){
                 //开设当前讨论的教师可以修改讨论内容
+            },
+            toCourse(){
+                this.$router.push(`/courseManage/courseInfo/${this.discussionDetail.courseId}`)
+            },
+            toCourseDiscussion(){
+                this.$router.push(`/courseManage/courseDiscussion/${this.discussionDetail.discussionId}`)
             }
         }
     }
