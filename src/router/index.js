@@ -20,6 +20,8 @@ import Course from '../views/course/Course';
 import MessageCentre from "../components/messageCentre/MessageCentre";
 import MessageMenu from "../components/messageCentre/MessageMenu";
 import TeacherCourse from "../components/teacherPortal/TeacherCourse";
+import TaskAdd from "../components/courseTask/TaskAdd";
+import ExamAdd from "../components/courseExam/ExamAdd";
 import CourseAdd from "../components/course/CourseAdd";
 import CourseHomePage from "../components/courseManage/CourseHomePage";
 import CoursePortal from "../components/courseManage/CoursePortal";
@@ -171,6 +173,22 @@ const router = new Router({
                 {
                     path: 'newDiscussion/:id',
                     component: NewDiscussion
+                },
+                {
+                    path: 'courseTask/:id',
+                    component: CourseTask
+                },
+                {
+                    path: 'courseExam/:id',
+                    component: CourseExam
+                },
+                {
+                    path: 'taskAdd/:id',
+                    component: TaskAdd
+                },
+                {
+                    path: 'examAdd/:id',
+                    component: ExamAdd
                 }
             ]
         },
