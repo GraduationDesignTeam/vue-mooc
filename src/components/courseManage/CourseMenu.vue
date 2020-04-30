@@ -105,11 +105,11 @@
                         break;
                      case  '5-1':
                         //跳转到作业
-                        this.$router.push("/courseTask/" + id);
+                        this.$router.push("/courseManage/courseTask/" + id);
                         break;
                     case  '5-2':
                         //跳转到考试
-                        this.$router.push("/courseExam/" + id);
+                        this.$router.push("/courseManage/courseExam/" + id);
                         break;
                     case  '6':
                         //跳转到课程讨论区
