@@ -1,6 +1,6 @@
 .ql-container{
-    /*输入框内默认字体大小改为16px*/
-    font-size: 16px;
+    /*输入框内默认字体大小改为14px*/
+    font-size: 14px !important;
 }
 
 .ql-snow .ql-picker.ql-font .ql-picker-label[data-value=SimSun]::before,
