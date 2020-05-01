@@ -1,6 +1,6 @@
 .ql-container{
-    /*输入框内默认字体大小改为14px*/
-    font-size: 14px !important;
+    /*输入框内默认字体大小改为16px*/
+    font-size: 16px !important;
 }
 
 .ql-snow .ql-picker.ql-font .ql-picker-label[data-value=SimSun]::before,
@@ -70,31 +70,31 @@
 }
 
 /*第一部分*/
-.ql-editor .ql-size-12px {
+.ql-size-12px {
     font-size: 12px;
 }
-.ql-editor .ql-size-14px {
+.ql-size-14px {
     font-size: 14px;
 }
-.ql-editor .ql-size-16px {
+.ql-size-16px {
     font-size: 16px;
 }
-.ql-editor .ql-size-18px {
+.ql-size-18px {
     font-size: 18px;
 }
-.ql-editor .ql-size-22px {
+.ql-size-22px {
     font-size: 22px;
 }
-.ql-editor .ql-size-26px {
+.ql-size-26px {
     font-size: 26px;
 }
-.ql-editor .ql-size-30px {
+.ql-size-30px {
     font-size: 30px;
 }
-.ql-editor .ql-size-36px {
+.ql-size-36px {
     font-size: 36px;
 }
-.ql-editor .ql-size-42px {
+.ql-size-42px {
     font-size: 42px;
 }
 /*第二部分*/
