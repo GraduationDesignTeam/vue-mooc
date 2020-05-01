@@ -14,6 +14,7 @@ import ManageCourseProhibit from "../components/manageCourseprohibit/ManageCours
 import ManageCourseOpen from "../components/manageCourseOpen/ManageCourseOpen";
 import ManageDiscussionProhibit from "../components/manageDiscussionProhibit/ManageDiscussionProhibit";
 import test from "../views/index/test";
+import Multi from "../views/Multi";
 import Index from "../views/index/Index";
 import Login from "../components/login/Login";
 import Course from '../views/course/Course';
@@ -37,6 +38,7 @@ import DiscussionDetail from "../components/discussion/DiscussionDetail";
 import OpenSelfDiscussion from "../components/openSelfDiscussion/OpenSelfDiscussion";
 import CourseDiscussion from "../components/courseDiscussion/CourseDiscussion";
 import NewDiscussion from "../components/courseDiscussion/NewDiscussion";
+import CourseNotice from "../components/courseManage/CourseNotice";
 
 //避免因重复路由引起的报错
 const originalPush = Router.prototype.push;
@@ -52,6 +54,10 @@ const router = new Router({
         {
             path: '/',
             component: test
+        },
+        {
+            path: '/m',
+            component: Multi
         },
         {
             path: '/tempIndex',
@@ -161,6 +167,10 @@ const router = new Router({
                 {
                     path: 'courseUpdate/:id',
                     component: CourseUpdate
+                },
+                {
+                    path: 'courseNotice/:id',
+                    component: CourseNotice
                 },
                 {
                     path: 'chapterManage/:id',
