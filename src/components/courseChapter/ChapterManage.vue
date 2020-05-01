@@ -13,7 +13,7 @@
             <div style="clear: both"></div>
         </div>
         <el-divider></el-divider>
-        <div class="chapter-box" v-for="(chapter,index) in chapterList" :key="index" :class="[isVisible[index]?'chapter-expanded':'chapter-collapsed']">
+        <div class="chapter-box" v-for="(chapter,index) in chapterList" :key="index" :class="[isVisible[index]?'courseChapter-expanded':'courseChapter-collapsed']">
             <div class="chapter-line">
                 <div class="chapter-switch" @click="clickCollapseButton(index)">
                     <i v-if="isVisible[index]===true" class="el-icon-remove-outline"></i>

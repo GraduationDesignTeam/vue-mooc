@@ -32,6 +32,7 @@
                 <div class="course-button">
                     <el-button v-if="course.role===1||course.role===2" type="warning" @click="editCourseInfo">管理课程</el-button>
                     <el-button v-else-if="course.role===0&&course.courseState!==2" type="warning" :disabled="course.checkState===0" @click="joinCourse">参加课程</el-button>
+                    <el-button v-else-if="course.role===3&&course.courseState!==2" type="warning" :disabled="course.checkState===0" @click="handleCourseDetail">继续学习</el-button>
                     <el-button v-else-if="course.checkState===1" type="warning" @click="handleCourseDetail">已结课，查看内容</el-button>
                 </div>
             </div>
@@ -114,38 +115,12 @@
                 path: '',
                 no_img: require("@/assets/no.png"),
                 activeName:'first'
-                // course: {
-                //     courseId: 0,
-                //     name: '',
-                //     type: '',
-                //     openTime: '2020/06/01',
-                //     closeTime: '2020/12/01',
-                //     photo: '',
-                //     intro: '',
-                //     detail: '',
-                //     target: '',
-                //     reference: '',
-                //     courseState: 1,
-                //     checkState: 1,
-                //     courseAuthority: 0,
-                //     role:0
-                // },
             }
         },
         mounted() {
             this.path=HOST;
         },
         methods: {
-            // loadData() {
-            //     this.path=HOST;
-            //     let courseId = this.$route.params.id;
-            //     let url = `${HOST}/course/sel/${courseId}`;
-            //     let param = new URLSearchParams();
-            //     param.append('userId', getUser().userId);
-            //     this.$ajax.post(url, param).then((res)=> {
-            //         this.course = res.data;
-            //     })
-            // },
             editCourseInfo(){
                 this.$router.push(`/courseManage/courseUpdate/${this.course.id}`)
             },

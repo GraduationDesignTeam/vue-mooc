@@ -33,12 +33,12 @@ import CourseUpdate from "../components/course/CourseUpdate";
 import DiscussionHomePage from "../components/discussion/DiscussionHomePage";
 import DiscussionMajorCategory from "../components/discussion/DiscussionMajorCategory";
 import DiscussionSchoolCategory from "../components/discussion/DiscussionSchoolCategory";
-import ChapterManage from "../components/chapter/ChapterManage";
+import ChapterManage from "../components/courseChapter/ChapterManage";
 import DiscussionDetail from "../components/discussion/DiscussionDetail";
 import OpenSelfDiscussion from "../components/openSelfDiscussion/OpenSelfDiscussion";
 import CourseDiscussion from "../components/courseDiscussion/CourseDiscussion";
 import NewDiscussion from "../components/courseDiscussion/NewDiscussion";
-import CourseNotice from "../components/courseManage/CourseNotice";
+import CourseNotice from "../components/courseNotice/CourseNotice";
 
 //避免因重复路由引起的报错
 const originalPush = Router.prototype.push;

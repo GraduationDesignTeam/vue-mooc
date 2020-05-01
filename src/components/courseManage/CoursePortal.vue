@@ -70,7 +70,7 @@
 </template>
 
 <script>
-    import {getUser} from "../../common/js/cache";
+    import {getCourse} from "../../common/js/cache";
     import {HOST} from "../../common/js/config";
     import {convertDate} from "../../common/js/dateformat";
 
@@ -103,18 +103,7 @@
         methods: {
             loadData() {
                 this.path=HOST;
-                let courseId = this.$route.params.id;
-                let url = `${HOST}/course/sel/${courseId}`;
-                let param = new URLSearchParams();
-                param.append('userId', getUser().userId);
-                this.$ajax.post(url, param).then((res)=> {
-                    if(res.data.role!==1 && res.data.role!==2){
-                        this.$message.error("您没有访问当前页面的权限!");
-                        this.$router.push('/');
-                    }else{
-                        this.course = res.data;
-                    }
-                })
+                this.course = getCourse();
             },
             editCourseInfo(){
               this.$router.push(`/courseManage/courseUpdate/${this.course.id}`)
