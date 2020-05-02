@@ -39,6 +39,8 @@ import OpenSelfDiscussion from "../components/openSelfDiscussion/OpenSelfDiscuss
 import CourseDiscussion from "../components/courseDiscussion/CourseDiscussion";
 import NewDiscussion from "../components/courseDiscussion/NewDiscussion";
 import CourseNotice from "../components/courseNotice/CourseNotice";
+import CourseTeacher from "../components/courseManage/CourseTeacher";
+import CourseAssistant from "../components/courseManage/CourseAssistant";
 
 //避免因重复路由引起的报错
 const originalPush = Router.prototype.push;
@@ -199,7 +201,15 @@ const router = new Router({
                 {
                     path: 'examAdd/:id',
                     component: ExamAdd
-                }
+                },
+                {
+                    path: 'courseTeacher/:id',
+                    component: CourseTeacher
+                },
+                {
+                    path: 'courseAssistant/:id',
+                    component: CourseAssistant
+                },
             ]
         },
         {
