@@ -9,6 +9,7 @@ import VueQuillEditor from 'vue-quill-editor'
 import 'quill/dist/quill.snow.css' // 富文本编辑器外部引用样式  三种样式三选一引入即可
 import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.bubble.css'
+import 'default-passive-events'
 /*import * as Quill from 'quill'; // 富文本基于quill*/
 
 Vue.config.productionTip = false
