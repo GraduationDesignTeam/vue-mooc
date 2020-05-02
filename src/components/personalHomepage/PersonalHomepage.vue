@@ -13,9 +13,10 @@ BY朱翔鹏-->
             </el-col>
             <el-col :span="3" style="margin-top: 14px">
                 <span style="color: aliceblue">
-                    <p>
-                        <strong>{{user.userName}}  </strong>
-                        <i class="el-icon-s-custom" style="color: chartreuse">
+                    <p style="margin: 8px 0">
+                        <strong v-if="user.name">{{user.name}}  </strong>
+                        <strong v-else>{{user.userName}}  </strong>
+                        <i class="el-icon-s-custom" style="color: chartreuse; margin-top: 8px">
                             <span v-if="teacherState">已认证教师</span>
                             <span v-else>未认证教师</span>
                         </i>
