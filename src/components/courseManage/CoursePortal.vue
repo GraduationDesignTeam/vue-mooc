@@ -78,7 +78,7 @@
         name:"CoursePortal",
         data() {
             return {
-                path: '',
+                path: HOST,
                 no_img: require("@/assets/no.png"),
                 course: {
                     courseId: 0,
@@ -95,15 +95,19 @@
                     checkState: 1,
                     courseAuthority: 0,
                 },
+                interval:''
             }
         },
         mounted() {
             this.loadData();
+            this.interval = setInterval(this.loadData, 300);
         },
         methods: {
             loadData() {
-                this.path=HOST;
-                this.course = getCourse();
+                if(getCourse().id === Number(this.$route.params.id)){
+                    this.course = getCourse();
+                    clearInterval(this.interval);
+                }
             },
             editCourseInfo(){
               this.$router.push(`/courseManage/courseUpdate/${this.course.id}`)
