@@ -41,6 +41,8 @@ import NewDiscussion from "../components/courseDiscussion/NewDiscussion";
 import CourseNotice from "../components/courseNotice/CourseNotice";
 import CourseTeacher from "../components/courseManage/CourseTeacher";
 import CourseAssistant from "../components/courseManage/CourseAssistant";
+import UpdateDiscussion from "../components/courseDiscussion/UpdateDiscussion";
+import ManageUserStatistic from "../components/manageUserStatistic/ManageUserStatistic";
 
 //避免因重复路由引起的报错
 const originalPush = Router.prototype.push;
@@ -125,6 +127,10 @@ const router = new Router({
                 {
                     path: 'manageDiscussionProhibit',
                     component: ManageDiscussionProhibit
+                },
+                {
+                    path: 'manageUserStatistic',
+                    component: ManageUserStatistic
                 }
             ]
         },
@@ -185,6 +191,10 @@ const router = new Router({
                 {
                     path: 'newDiscussion/:id',
                     component: NewDiscussion
+                },
+                {
+                    path: 'updateDiscussion/:id',
+                    component: UpdateDiscussion
                 },
                 {
                     path: 'courseTask/:id',

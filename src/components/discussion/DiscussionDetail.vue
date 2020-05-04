@@ -31,7 +31,7 @@
                         <el-divider></el-divider>
                         <span style="margin-left: 30px;font-size: 14px;color: darkcyan">课程作业</span>
                         <el-divider></el-divider>
-                        <span style="margin-left: 30px;font-size: 14px;color: darkcyan">课程章节</span>
+                        <span style="margin-left: 30px;font-size: 14px;color: darkcyan" @click="toCourseChapter">课程章节</span>
                     </el-card>
                 </div></el-col>
                 <el-col :span="18"><div>
@@ -49,7 +49,7 @@
                             <span style="color: #313131">  {{discussionDetail.discussionDescription}}</span>
                             <el-divider></el-divider>
                             <span style="float: left;margin-bottom: 6px"><el-button type="success" size="mini" icon="el-icon-s-promotion" plain @click="handleRecord">回帖</el-button></span>
-                            <span v-if="user.userName===discussionDetail.teacher.userName" style="float: right;margin-bottom: 6px"><el-button type="info" size="mini" icon="el-icon-edit" plain @click="handleDiscussionUpdate">编辑</el-button></span>
+                            <span v-if="user.userName===discussionDetail.teacher.userName" style="float: right;margin-bottom: 6px"><el-button type="info" size="mini" icon="el-icon-edit" plain @click="handleDiscussionUpdate(discussionDetail.discussionId)">编辑</el-button></span>
                         </el-card>
                         <div style="margin-top: 20px">
                             <div>
@@ -251,14 +251,21 @@
                     });
                 });
             },
-            handleDiscussionUpdate(){
+            handleDiscussionUpdate(id){
                 //开设当前讨论的教师可以修改讨论内容
+                this.$router.push(`/courseManage/updateDiscussion/${id}`)
             },
             toCourse(){
                 this.$router.push(`/courseManage/courseInfo/${this.discussionDetail.courseId}`)
             },
             toCourseDiscussion(){
                 this.$router.push(`/courseManage/courseDiscussion/${this.discussionDetail.discussionId}`)
+            },
+            toCourseChapter(){
+                this.$router.push(`/courseManage/chapterManage/${this.discussionDetail.discussionId}`)
+            },
+            toCourseTask(){
+                this.$router.push(`/courseManage/courseTask/${this.discussionDetail.discussionId}`)
             }
         }
     }

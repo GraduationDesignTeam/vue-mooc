@@ -31,9 +31,10 @@
                         <!--<img v-if="item.courseInfo.photo" :src="`${path}/${item.courseInfo.photo}`" class="image" @click="handleDetail(item.discussionId)">
                         <img v-else :src="img" class="image" @click="handleDetail(item.discussionId)">-->
                         <div class="remark">
-                            <h2 class="title" @click="handleDetail(item.discussionId)"> <i class="el-icon-s-opportunity" style="color: chartreuse;margin-top: 10px"></i> {{item.discussionName}}
+                            <h2 class="title"> <i class="el-icon-s-opportunity" style="color: chartreuse;margin-top: 10px"></i> <span @click="handleDetail(item.discussionId)">{{item.discussionName}}</span>
                                 <span v-if="item.recordNum>10" style="margin-left: 10px;color: red;font-size: 14px"><i class="el-icon-medal"></i>热门</span>
-                                <span style="font-size: 12px;color: #9199a1;float: right">共{{item.recordNum}}回帖</span>
+                                <span style="font-size: 12px;color: #9199a1;margin-left: 20px">{{item.recordNum}}回帖</span>
+                                <el-button v-if="user.userName===course.teacherName" type="primary" size="small" round style="float: right" @click="updateDiscussion(item.discussionId)">修改讨论</el-button>
                             </h2>
                             <div class="">
                                 <span class="price"  @click="handleDetail(item.discussionId)" style="margin-left: 20px">{{item.discussionDescription}}</span>
@@ -80,7 +81,7 @@
                 discussionDetail:{
                     discussionName:'',
                     courseInfo:{
-                        id:'',
+                        id:0,
                         name:''
                     }
                 },
@@ -91,16 +92,16 @@
                 pageInfo: {},   //查询的数据,
                 loading: false, //正在加载,
                 course: {
-                    id:''
+                    id:0
                 }
             }
         },
         created(){
             this.path = HOST
             this.user=getUser()
-            this.getNewData()
             this.discussionDetail.courseInfo.id=this.$route.params.id
             this.course.id=this.$route.params.id
+            this.getNewData()
             this.getCourse()
         },
         methods:{
@@ -162,6 +163,9 @@
             newDiscussion(){
                 //新建讨论
                 this.$router.push(`/courseManage/newDiscussion/${this.course.id}`)
+            },
+            updateDiscussion(id){
+                this.$router.push(`/courseManage/updateDiscussion/${id}`)
             }
         }
     }

@@ -64,7 +64,7 @@ BY朱翔鹏-->
                 this.$router.push("/administrator/manageTeacherState")
             },
             manageUserStatistic() {
-                this.$router.push("/")
+                this.$router.push("/administrator/manageUserStatistic")
             },
             manageCourseProhibit() {
                 this.$router.push("/administrator/manageCourseProhibit")
