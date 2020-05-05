@@ -5,7 +5,14 @@
                 ref="singleTable"
                 :data="pageInfo.list"
                 highlight-current-row
-                style="width: 100%">
+                style="width: 100%"
+                @current-change="handleCurrentChange2"
+        >
+            <el-table-column
+                    property="id"
+                    label="编号"
+                    width="80">
+            </el-table-column>
             <el-table-column
                     property="name"
                     label="作业名称"
@@ -46,7 +53,7 @@
         name: "TaskInfo",
         data(){
             return{
-
+                id:'',
                 path:'',
                 currPage:1,//当前页
                 loading:false,
@@ -69,7 +76,7 @@
                 this.loading=true
                 this.$ajax.post(url,this.course).then((res)=> {
                     this.pageInfo=res.data
-                    console.log(this.pageInfo)
+                    console.log(this.pageInfo.list)
                     this.loading=false
                 })
             },
@@ -84,6 +91,10 @@
             convertDate(time){
                 return convertDate(time)
             },
+            handleCurrentChange2(val){
+                this.$router.push('/courseManage/taskList/'+val.id)
+            },
+
         }
     }
 </script>
