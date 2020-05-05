@@ -20,6 +20,10 @@ import Login from "../components/login/Login";
 import Course from '../views/course/Course';
 import MessageCentre from "../components/messageCentre/MessageCentre";
 import MessageMenu from "../components/messageCentre/MessageMenu";
+import MessageSelf from "../components/messageCentre/MessageSelf";
+import MessageDiscussion from "../components/messageCentre/MessageDiscussion";
+import MessageSystem from "../components/messageCentre/MessageSystem";
+import MessageSend from "../components/messageCentre/MessageSend";
 import TeacherCourse from "../components/teacherPortal/TeacherCourse";
 import TaskAdd from "../components/courseTask/TaskAdd";
 import ExamAdd from "../components/courseExam/ExamAdd";
@@ -96,7 +100,23 @@ const router = new Router({
                 {
                     path: 'messagemenu',
                     component: MessageMenu
-                }
+                },
+                {
+                    path: 'messageSelf',
+                    component: MessageSelf
+                },
+                {
+                    path: 'messageDiscussion',
+                    component: MessageDiscussion
+                },
+                {
+                    path: 'messageSystem',
+                    component: MessageSystem
+                },
+                {
+                    path: 'messageSend',
+                    component: MessageSend
+                },
             ]
 
         },
