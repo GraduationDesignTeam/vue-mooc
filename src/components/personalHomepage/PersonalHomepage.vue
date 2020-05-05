@@ -46,7 +46,7 @@ BY朱翔鹏-->
                     <li>
                         <span style="color: aliceblue">
                             <p>
-                                <strong>{{userDiscussionNum}}</strong>
+                                <strong>{{userMessageNum}}</strong>
                             </p>
                             <p>消息中心</p>
                         </span>
@@ -87,7 +87,7 @@ BY朱翔鹏-->
                 teacherState:false,//是否已认证教师
                 sex:'男',
                 userDiscussionNum:0,//用户参加的讨论数量（身份可以是教师、助教、学生中任意一个）
-
+                userMessageNum:0,
             }
         },
         mounted() {
@@ -102,6 +102,7 @@ BY朱翔鹏-->
             }
             //console.log(this.user)
             this.getUserDiscussionNum()
+            this.getUserMessageNum()
         },
         methods:{
             //取用户参加的讨论数量
@@ -110,6 +111,13 @@ BY朱翔鹏-->
                 this.$ajax.get(url).then((res)=>{
                     let result = res.data
                     this.userDiscussionNum=result
+                })
+            },
+            getUserMessageNum(){
+                let url=`${HOST}/information/getUserMessageNum/${this.user.userId}`
+                this.$ajax.get(url).then((res)=>{
+                    let result = res.data
+                    this.userMessageNum=result
                 })
             },
             openSelfInfo(){

@@ -15,7 +15,7 @@
             <el-table-column
 
                     label="发送人"
-                    prop="senderId"
+                    prop="senderName"
                     width="100">
             </el-table-column>
             <el-table-column
