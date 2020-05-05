@@ -30,7 +30,7 @@
                     </div>
                 </div>
                 <div class="course-button">
-                    <el-button type="warning" :disabled="course.courseState===2" @click="editCourseInfo">编辑课程</el-button>
+                    <el-button type="warning" :disabled="course.role!==1 || course.courseState===2" @click="editCourseInfo">编辑课程</el-button>
                 </div>
             </div>
         </div>
