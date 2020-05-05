@@ -73,13 +73,13 @@
                         width="500"
                         trigger="click">
                     <el-table :data="choiceData">
-                        <el-table-column width="300" property="date" label="题目"></el-table-column>
-                        <el-table-column width="100" property="date" label="选项A"></el-table-column>
-                        <el-table-column width="100" property="name" label="选项B"></el-table-column>
-                        <el-table-column width="100" property="address" label="选项C"></el-table-column>
-                        <el-table-column width="100" property="address" label="选项D"></el-table-column>
+                        <el-table-column width="300" property="content" label="题目"></el-table-column>
+                        <el-table-column width="100" property="op1" label="选项A"></el-table-column>
+                        <el-table-column width="100" property="op2" label="选项B"></el-table-column>
+                        <el-table-column width="100" property="op3" label="选项C"></el-table-column>
+                        <el-table-column width="100" property="op4" label="选项D"></el-table-column>
                     </el-table>
-                    <el-button slot="reference">查看选择题</el-button>
+                    <el-button slot="reference" @click="listchoice">查看选择题</el-button>
                 </el-popover>
                 </el-col>
                 <el-col :span="20">
@@ -90,8 +90,8 @@
                                 <el-input v-model="formjudge.content" autocomplete="off" clearable ></el-input>
                             </el-form-item>
                             <el-form-item label="答案" :label-width="formLabelWidth">
-                                <el-radio v-model="formjudge.answer" label="1" >对</el-radio>
-                                <el-radio v-model="formjudge.answer" label="2">错</el-radio>
+                                <el-radio v-model="formjudge.answer" label="0" >对</el-radio>
+                                <el-radio v-model="formjudge.answer" label="1">错</el-radio>
                             </el-form-item>
                         </el-form>
                         <div slot="footer" class="dialog-footer">
@@ -120,10 +120,10 @@
                             width="500"
                             trigger="click">
                         <el-table :data="judgeData">
-                            <el-table-column width="300" property="date" label="题目"></el-table-column>
-                            <el-table-column width="100" property="date" label="答案"></el-table-column>
+                            <el-table-column width="300" property="content" label="题目"></el-table-column>
+<!--                            <el-table-column width="100" property="answer" label="答案" :formatter="formatAnswer"></el-table-column>-->
                         </el-table>
-                        <el-button slot="reference">查看判断题</el-button>
+                        <el-button slot="reference" @click="listjudge">查看判断题</el-button>
                     </el-popover>
                 </el-col>
                 <el-col :span="20">
@@ -163,11 +163,10 @@
                             width="500"
                             trigger="click">
                         <el-table :data="subData">
-                            <el-table-column width="300" property="date" label="题目"></el-table-column>
-                            <el-table-column width="100" property="date" label="答案"></el-table-column>
-
+                            <el-table-column width="300" property="content" label="题目"></el-table-column>
+                            <el-table-column width="100" property="answer" label="答案"></el-table-column>
                         </el-table>
-                        <el-button slot="reference">查看主观题</el-button>
+                        <el-button slot="reference" @click="listsubjective">查看主观题</el-button>
                     </el-popover>
                 </el-col>
                 <el-col :span="12">
@@ -232,7 +231,12 @@
                     answer:"",
                 },
                 choiceData:[],
-                judgeData:[],
+                judgeData:{
+                    content:'',
+                    answer:'',
+                    answer2:'',
+                }
+                ,
                 subData:[],
                 formjudge:{
                     content:'',
@@ -268,6 +272,14 @@
                 let user = getUser();
                 if(user.school !== undefined)
                     this.formData.school = user.school;
+                switch (this.judgeData.answer) {
+                    case "0":
+                        this.judgeData.answer='正确';
+                        break;
+                    case "1":
+                        this.judgeData.answer='错误';
+                        break;
+                }
             },
             /**
              * 上传图片成功回调方法
@@ -294,9 +306,10 @@
                                 let result = res.data;
                                 if(result.code===0){//课程添加成功
                                     this.$message({
-                                        message:'已提交开课申请！',
+                                        message:'已创建任务！',
                                         type: 'success'
                                     });
+                                    this.$router.push("/courseManage/courseTask/" + course.id);
                                 }else {
                                     this.$message.error(result.msg);
                                 }
@@ -349,6 +362,33 @@
                     }else {
                         this.$message.error(result.msg);
                     }
+                })
+            },
+            listjudge(){
+                let url=`${HOST}/judge/listdraft`;
+                this.$ajax.post(url,this.formData).then((res)=>{
+                    this.judgeData = res.data;
+
+                })
+            },
+            formatAnswer(row){
+                switch (row.answer) {
+                    case "0":
+                        return '正确';
+                    case "1":
+                        return '错误';
+                }
+            },
+            listchoice(){
+                let url=`${HOST}/choice/listdraft`;
+                this.$ajax.post(url,this.formData).then((res)=>{
+                    this.choiceData = res.data;
+                })
+            },
+            listsubjective(){
+                let url=`${HOST}/subjective/listdraft`;
+                this.$ajax.post(url,this.formData).then((res)=>{
+                    this.subData = res.data;
                 })
             },
             resetForm() {
