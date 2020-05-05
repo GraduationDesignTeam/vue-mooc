@@ -52,6 +52,8 @@ import ManageDiscussionStatistic from "../components/manageDiscussionStatistic/M
 import AssistantCourse from "../components/teacherPortal/AssistantCourse";
 import TaskList from "../components/courseTask/TaskList"
 import ExamList from "../components/courseExam/ExamList"
+import CourseWareAdd from "../components/courseWare/CourseWareAdd";
+import CourseWare from "../components/courseWare/CourseWare";
 //避免因重复路由引起的报错
 const originalPush = Router.prototype.push;
 Router.prototype.push = function push(location) {
@@ -219,6 +221,14 @@ const router = new Router({
                 {
                     path: 'chapterManage/:id',
                     component: ChapterManage
+                },
+                {
+                    path: 'courseWare/:id',
+                    component: CourseWare
+                },
+                {
+                    path: 'courseWareAdd/:id',
+                    component: CourseWareAdd
                 },
                 {
                     path: 'courseDiscussion/:id',
