@@ -1,10 +1,8 @@
 <template>
     <div style="margin: 0 30px">
-        <el-button type="primary" plain icon="el-icon-plus" @click="handleCourseAdd">开设课程</el-button>
-        <br><br>
         <CourseList :courseList="courseList" :mode="1"></CourseList>
         <div v-if="courseList.length===0" style="font-size: 18px;">
-            <p>您还未开设过任何课程</p>
+            <p>您尚未成为任何课程的助教！</p>
         </div>
     </div>
 </template>
@@ -13,8 +11,9 @@
     import CourseList from "../course/CourseList";
     import {HOST} from "../../common/js/config";
     import {getUser} from "../../common/js/cache";
+
     export default {
-        name: "TeacherCourse",
+        name: "AssistantCourse",
         components: {CourseList},
         data(){
             return{
@@ -26,9 +25,9 @@
         },
         methods:{
             loadData(){
-                let url = `${HOST}/course/list_by_teacher_id`;
+                let url = `${HOST}/course/list_by_assistant_id`;
                 let param = new URLSearchParams();
-                param.append('teacherId', getUser().userId);
+                param.append('assistantId', getUser().userId);
                 this.$ajax.post(url, param).then((res)=> {
                     this.courseList = res.data;
                 })

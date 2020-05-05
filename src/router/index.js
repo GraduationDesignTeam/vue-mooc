@@ -43,6 +43,7 @@ import CourseTeacher from "../components/courseManage/CourseTeacher";
 import CourseAssistant from "../components/courseManage/CourseAssistant";
 import UpdateDiscussion from "../components/courseDiscussion/UpdateDiscussion";
 import ManageUserStatistic from "../components/manageUserStatistic/ManageUserStatistic";
+import AssistantCourse from "../components/teacherPortal/AssistantCourse";
 
 //避免因重复路由引起的报错
 const originalPush = Router.prototype.push;
@@ -149,6 +150,10 @@ const router = new Router({
                 {
                     path: 'teacherCourse',
                     component: TeacherCourse
+                },
+                {
+                    path: 'assistantCourse',
+                    component: AssistantCourse
                 },
                 {
                     path: 'courseAdd',

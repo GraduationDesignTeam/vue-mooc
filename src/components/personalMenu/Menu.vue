@@ -57,7 +57,7 @@ BY朱翔鹏-->
                 this.$router.push("/personalHomepage/teacherCourse")
             },
             openSelfAssistCourse(){
-                this.$router.push("/")
+                this.$router.push("/personalHomepage/assistantCourse")
             }
         }
     }
