@@ -25,19 +25,19 @@
                 <el-dialog :span="20" title="添加选择题" :visible.sync="dialogFormVisible">
                     <el-form :model="form">
                         <el-form-item label="题目内容" :label-width="formLabelWidth">
-                            <el-input v-model="form.name" autocomplete="off" clearable ></el-input>
+                            <el-input v-model="form.content" autocomplete="off" clearable ></el-input>
                         </el-form-item>
                         <el-form-item label="选项A" :label-width="formLabelWidth">
-                            <el-input v-model="form.option1" autocomplete="off" clearable ></el-input>
+                            <el-input v-model="form.op1" autocomplete="off" clearable ></el-input>
                         </el-form-item>
                         <el-form-item label="选项B" :label-width="formLabelWidth">
-                            <el-input v-model="form.option2" autocomplete="off" clearable ></el-input>
+                            <el-input v-model="form.op2" autocomplete="off" clearable ></el-input>
                         </el-form-item>
                         <el-form-item label="选项C" :label-width="formLabelWidth">
-                            <el-input v-model="form.option3" autocomplete="off" clearable ></el-input>
+                            <el-input v-model="form.op3" autocomplete="off" clearable ></el-input>
                         </el-form-item>
                         <el-form-item label="选项D" :label-width="formLabelWidth">
-                            <el-input v-model="form.option4" autocomplete="off" clearable ></el-input>
+                            <el-input v-model="form.op4" autocomplete="off" clearable ></el-input>
                         </el-form-item>
                         <el-form-item label="答案" :label-width="formLabelWidth">
                             <el-radio v-model="form.answer" label="1">A</el-radio>
@@ -48,7 +48,7 @@
                     </el-form>
                     <div slot="footer" class="dialog-footer">
                         <el-button @click="dialogFormVisible = false">取 消</el-button>
-                        <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
+                        <el-button type="primary" @click="submitChoice">确 定</el-button>
                     </div>
                 </el-dialog>
                     <el-button type="text" @click="dialogFormVisible4 = true">删除选择题</el-button>
@@ -96,7 +96,7 @@
                         </el-form>
                         <div slot="footer" class="dialog-footer">
                             <el-button @click="dialogFormVisible2 = false">取 消</el-button>
-                            <el-button type="primary" @click="dialogFormVisible2 = false">确 定</el-button>
+                            <el-button type="primary" @click="submitjudge">确 定</el-button>
                         </div>
                     </el-dialog>
 
@@ -140,7 +140,7 @@
                         </el-form>
                         <div slot="footer" class="dialog-footer">
                             <el-button @click="dialogFormVisible3 = false">取 消</el-button>
-                            <el-button type="primary" @click="dialogFormVisible3 = false">确 定</el-button>
+                            <el-button type="primary" @click="submitsubjective">确 定</el-button>
                         </div>
                     </el-dialog>
 
@@ -191,7 +191,7 @@
 
 <script>
     import {HOST} from "../../common/js/config";
-    import {clearCourseDraft, getCourseDraft, getUser, saveCourseDraft} from "../../common/js/cache";
+    import {clearCourseDraft, getCourseDraft, getUser, saveCourseDraft,getCourse} from "../../common/js/cache";
 
     export default {
         components: {},
@@ -201,6 +201,8 @@
                 path: '',
                 formData: {
                     id:null,
+                    userId:'',
+                    courseId:'',
                     name: '',
                     type: 0,
                     startTime: '2020-06-01',
@@ -221,12 +223,12 @@
                 dialogFormVisible6: false,
                 clearable:true,
                 form: {
-                    name: '',
+                    content: '',
                     delivery: false,
-                    option1:'',
-                    option2:'',
-                    option3:'',
-                    option4:'',
+                    op1:'',
+                    op2:'',
+                    op3:'',
+                    op4:'',
                     answer:"",
                 },
                 choiceData:[],
@@ -250,26 +252,7 @@
                         required: true,
                         message: '请输入任务名称',
                         trigger: 'blur'
-                    }],
-                    type: [{
-                        required: true,
-                        message: '请选择课程类型',
-                        trigger: 'change'
-                    }],
-                    openTime: [{
-                        required: true,
-                        message: '请选择开始时间',
-                        trigger: 'change'
-                    }],
-                    closeTime: [{
-                        required: true,
-                        message: '请选择结束时间',
-                        trigger: 'change'
-                    }],
-                    intro: [],
-                    detail: [],
-                    target: [],
-                    reference: [],
+                    }]
                 }
             }
         },
@@ -295,13 +278,14 @@
             },
             submitForm() {
                 let user = getUser();
+                let course=getCourse();
                 if(user.userId===undefined){
                     this.$message("用户登录信息已过期,请重新登录！");
                 }else if(user.teacherState!==1){
                     this.$message("您未通过教师身份认证，无法开设课程！");
                 }else{
-                    this.formData.teacherId = user.userId;
-                    this.formData.teacherName = user.name;
+                    this.formData.userId=user.userId
+                    this.formData.courseId=course.id
                     this.$refs['elForm'].validate(valid => {
                         if(valid){
                             //发送信息
@@ -321,6 +305,51 @@
                     })
                 }
 
+            },
+            submitChoice(){
+                this.dialogFormVisible=false;
+                let url=`${HOST}/choice/add`;
+                this.$ajax.post(url,this.form).then((res)=>{
+                    let result = res.data;
+                    if(result.code===0){//课程添加成功
+                        this.$message({
+                            message:'已添加成功',
+                            type: 'success'
+                        });
+                    }else {
+                        this.$message.error(result.msg);
+                    }
+                })
+            },
+            submitjudge(){
+                this.dialogFormVisible2=false;
+                let url=`${HOST}/judge/add`;
+                this.$ajax.post(url,this.formjudge).then((res)=>{
+                    let result = res.data;
+                    if(result.code===0){//课程添加成功
+                        this.$message({
+                            message:'已添加成功',
+                            type: 'success'
+                        });
+                    }else {
+                        this.$message.error(result.msg);
+                    }
+                })
+            },
+            submitsubjective(){
+                this.dialogFormVisible3=false;
+                let url=`${HOST}/subjective/add`;
+                this.$ajax.post(url,this.formsubjective).then((res)=>{
+                    let result = res.data;
+                    if(result.code===0){//课程添加成功
+                        this.$message({
+                            message:'已添加成功',
+                            type: 'success'
+                        });
+                    }else {
+                        this.$message.error(result.msg);
+                    }
+                })
             },
             resetForm() {
                 //重置表单 并清空缓存
