@@ -1,36 +1,30 @@
 <template>
     <div>
-        <el-button type="primary" plain icon="el-icon-plus" @click="handleCourseAdd">添加作业</el-button>
         <el-table
-                ref="singleTable"
+                v-loading="loading"
+                border
                 :data="pageInfo.list"
-                highlight-current-row
                 style="width: 100%"
-                @current-change="handleCurrentChange2"
-        >
+                class="content">
             <el-table-column
-                    property="id"
-                    label="编号"
-                    width="80">
-            </el-table-column>
-            <el-table-column
-                    property="name"
-                    label="作业名称"
-                    width="120">
-            </el-table-column>
-            <el-table-column
-                    property="startTime"
-                    label="开始时间"
-                    width="120">
-<!--                {{convertDate(pageInfo.list.startTime)}}-->
-            </el-table-column>
-            <el-table-column
-                    property="endTime"
-                    label="结束时间">
-<!--                {{convertDate(pageInfo.list.endTime)}}-->
 
+                    label="时间"
+                    width="250"
+                    prop="sendTime">
+            </el-table-column>
+            <el-table-column
+
+                    label="收信人"
+                    prop="addresserName"
+                    width="100">
+            </el-table-column>
+            <el-table-column
+                    label="消息内容"
+                    prop="informationContent"
+                    width="150">
             </el-table-column>
         </el-table>
+
         <el-pagination
                 background
                 layout="prev, pager, next"
@@ -41,19 +35,18 @@
         >
         </el-pagination>
     </div>
-
 </template>
 
 <script>
     import {HOST} from "../../common/js/config";
-    import {getCourse, getUser} from "../../common/js/cache";
+    import {getUser} from "../../common/js/cache";
     import {convertDate} from "../../common/js/dateformat";
 
     export default {
-        name: "TaskInfo",
+        name: "MessageSend",
         data(){
             return{
-                id:'',
+
                 path:'',
                 currPage:1,//当前页
                 loading:false,
@@ -61,28 +54,31 @@
 
                 },
                 user:{},
+                changeForm:{
+                    UserId:'',
+                    TargetId:''
+                },
+                userInfo:{}
             }
         },
         created() {
-                this.path=HOST,
+            this.path=HOST,
                 this.user=getUser(),
-                 this.course=getCourse(),
                 this.getRecords()
 
         },
         methods:{
             getRecords(){
-                let url = `${HOST}/coursetask/listTaskAll/${this.currPage}`;
+                console.log(this.user)
                 this.loading=true
-                this.$ajax.post(url,this.course).then((res)=> {
+                this.user=getUser()
+                let url=`${HOST}/information/querybysender/${this.currPage}`
+                this.$ajax.post(url,this.user).then((res)=>{
                     this.pageInfo=res.data
-                    console.log(this.pageInfo.list)
+                    console.log(this.pageInfo)
                     this.loading=false
                 })
-            },
-            handleCourseAdd(){
-                let id = this.$route.params.id;
-                this.$router.push('/courseManage/taskAdd/'+id)
+
             },
             handleCurrentChange(val){
                 this.currPage=val
@@ -91,10 +87,6 @@
             convertDate(time){
                 return convertDate(time)
             },
-            handleCurrentChange2(val){
-                this.$router.push('/courseManage/taskList/'+val.id)
-            },
-
         }
     }
 </script>

@@ -73,13 +73,13 @@ BY朱翔鹏-->
                 this.$router.push("/administrator/manageCourseOpen")
             },
             manageCourseStatistic(){
-                this.$router.push("/")
+                this.$router.push("/administrator/manageCourseStatistic")
             },
             manageDiscussionState(){
                 this.$router.push("/administrator/manageDiscussionProhibit")
             },
             manageDiscussionStatistic(){
-
+                this.$router.push("/administrator/manageDiscussionStatistic")
             }
         }
     }

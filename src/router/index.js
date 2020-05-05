@@ -20,6 +20,10 @@ import Login from "../components/login/Login";
 import Course from '../views/course/Course';
 import MessageCentre from "../components/messageCentre/MessageCentre";
 import MessageMenu from "../components/messageCentre/MessageMenu";
+import MessageSelf from "../components/messageCentre/MessageSelf";
+import MessageDiscussion from "../components/messageCentre/MessageDiscussion";
+import MessageSystem from "../components/messageCentre/MessageSystem";
+import MessageSend from "../components/messageCentre/MessageSend";
 import TeacherCourse from "../components/teacherPortal/TeacherCourse";
 import TaskAdd from "../components/courseTask/TaskAdd";
 import ExamAdd from "../components/courseExam/ExamAdd";
@@ -43,10 +47,11 @@ import CourseTeacher from "../components/courseManage/CourseTeacher";
 import CourseAssistant from "../components/courseManage/CourseAssistant";
 import UpdateDiscussion from "../components/courseDiscussion/UpdateDiscussion";
 import ManageUserStatistic from "../components/manageUserStatistic/ManageUserStatistic";
+import ManageCourseStatistic from "../components/manageCourseStatistic/ManageCourseStatistic";
+import ManageDiscussionStatistic from "../components/manageDiscussionStatistic/ManageDiscussionStatistic";
 import AssistantCourse from "../components/teacherPortal/AssistantCourse";
-import CourseWare from "../components/courseWare/CourseWare";
-import CourseWareAdd from "../components/courseWare/CourseWareAdd";
-
+import TaskList from "../components/courseTask/TaskList"
+import ExamList from "../components/courseExam/ExamList"
 //避免因重复路由引起的报错
 const originalPush = Router.prototype.push;
 Router.prototype.push = function push(location) {
@@ -95,7 +100,23 @@ const router = new Router({
                 {
                     path: 'messagemenu',
                     component: MessageMenu
-                }
+                },
+                {
+                    path: 'messageSelf',
+                    component: MessageSelf
+                },
+                {
+                    path: 'messageDiscussion',
+                    component: MessageDiscussion
+                },
+                {
+                    path: 'messageSystem',
+                    component: MessageSystem
+                },
+                {
+                    path: 'messageSend',
+                    component: MessageSend
+                },
             ]
 
         },
@@ -134,6 +155,14 @@ const router = new Router({
                 {
                     path: 'manageUserStatistic',
                     component: ManageUserStatistic
+                },
+                {
+                    path: 'manageCourseStatistic',
+                    component: ManageCourseStatistic
+                },
+                {
+                    path: 'manageDiscussionStatistic',
+                    component: ManageDiscussionStatistic
                 }
             ]
         },
@@ -192,14 +221,6 @@ const router = new Router({
                     component: ChapterManage
                 },
                 {
-                    path: 'courseWare/:id',
-                    component: CourseWare
-                },
-                {
-                    path: 'courseWareAdd/:id',
-                    component: CourseWareAdd
-                },
-                {
                     path: 'courseDiscussion/:id',
                     component: CourseDiscussion
                 },
@@ -234,6 +255,14 @@ const router = new Router({
                 {
                     path: 'courseAssistant/:id',
                     component: CourseAssistant
+                },
+                {
+                    path: 'taskList/:id',
+                    component: TaskList
+                },
+                {
+                    path: 'examList/:id',
+                    component: ExamList
                 },
             ]
         },
