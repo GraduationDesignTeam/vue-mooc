@@ -104,7 +104,7 @@
                 })
             },
             handleMessage(userId){
-                console.log(userId)
+                this.$router.push('/courseManage/personalChat/'+userId)
             },
             handleDelete(userId){
                 const _this = this;

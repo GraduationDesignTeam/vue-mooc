@@ -54,6 +54,7 @@ import TaskList from "../components/courseTask/TaskList"
 import ExamList from "../components/courseExam/ExamList"
 import CourseWareAdd from "../components/courseWare/CourseWareAdd";
 import CourseWare from "../components/courseWare/CourseWare";
+import PersonalChat from "../components/personalChat/PersonalChat";
 //避免因重复路由引起的报错
 const originalPush = Router.prototype.push;
 Router.prototype.push = function push(location) {
@@ -273,6 +274,10 @@ const router = new Router({
                 {
                     path: 'examList/:id',
                     component: ExamList
+                },
+                {
+                    path: 'personalChat/:id',
+                    component: PersonalChat
                 },
             ]
         },

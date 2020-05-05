@@ -5,7 +5,8 @@
                 border
                 :data="pageInfo.list"
                 style="width: 100%"
-                class="content">
+                class="content"
+                @current-change="handleCurrentChange2">
             <el-table-column
 
                     label="时间"
@@ -85,6 +86,9 @@
             },
             convertDate(time){
                 return convertDate(time)
+            },
+            handleCurrentChange2(val){
+                this.$router.push('/courseManage/personalChat/'+val.senderId)
             },
         }
 
