@@ -44,6 +44,8 @@ import CourseAssistant from "../components/courseManage/CourseAssistant";
 import UpdateDiscussion from "../components/courseDiscussion/UpdateDiscussion";
 import ManageUserStatistic from "../components/manageUserStatistic/ManageUserStatistic";
 import AssistantCourse from "../components/teacherPortal/AssistantCourse";
+import CourseWare from "../components/courseWare/CourseWare";
+import CourseWareAdd from "../components/courseWare/CourseWareAdd";
 
 //避免因重复路由引起的报错
 const originalPush = Router.prototype.push;
@@ -188,6 +190,14 @@ const router = new Router({
                 {
                     path: 'chapterManage/:id',
                     component: ChapterManage
+                },
+                {
+                    path: 'courseWare/:id',
+                    component: CourseWare
+                },
+                {
+                    path: 'courseWareAdd/:id',
+                    component: CourseWareAdd
                 },
                 {
                     path: 'courseDiscussion/:id',

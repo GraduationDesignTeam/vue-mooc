@@ -86,7 +86,7 @@
                 this.isTeacher = (getCourse().role === 1);
                 this.isEditable = this.isTeacher;
                 let url=`${HOST}/chapter/list/`+this.$route.params.id;
-                this.$ajax.get(url,this.formData).then((res)=>{
+                this.$ajax.get(url).then((res)=>{
                     this.chapterList = res.data;
                     this.isVisible = new Array(this.chapterList.length).fill(true);
                 });
