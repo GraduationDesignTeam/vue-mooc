@@ -43,6 +43,8 @@ import CourseTeacher from "../components/courseManage/CourseTeacher";
 import CourseAssistant from "../components/courseManage/CourseAssistant";
 import UpdateDiscussion from "../components/courseDiscussion/UpdateDiscussion";
 import ManageUserStatistic from "../components/manageUserStatistic/ManageUserStatistic";
+import ManageCourseStatistic from "../components/manageCourseStatistic/ManageCourseStatistic";
+import ManageDiscussionStatistic from "../components/manageDiscussionStatistic/ManageDiscussionStatistic";
 
 //避免因重复路由引起的报错
 const originalPush = Router.prototype.push;
@@ -131,6 +133,14 @@ const router = new Router({
                 {
                     path: 'manageUserStatistic',
                     component: ManageUserStatistic
+                },
+                {
+                    path: 'manageCourseStatistic',
+                    component: ManageCourseStatistic
+                },
+                {
+                    path: 'manageDiscussionStatistic',
+                    component: ManageDiscussionStatistic
                 }
             ]
         },

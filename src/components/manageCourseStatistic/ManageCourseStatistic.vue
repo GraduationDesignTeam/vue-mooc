@@ -3,7 +3,7 @@
         <div class="bread">
             <el-breadcrumb separator-class="el-icon-arrow-right">
                 <el-breadcrumb-item :to="{ path: '/administrator' }">管理员主页</el-breadcrumb-item>
-                <el-breadcrumb-item>用户管理</el-breadcrumb-item>
+                <el-breadcrumb-item>课程管理</el-breadcrumb-item>
                 <el-breadcrumb-item><span style="color: #2d8cf0">数据统计</span></el-breadcrumb-item>
             </el-breadcrumb>
         </div>
@@ -20,34 +20,33 @@
                             </el-dropdown-menu>
                         </el-dropdown>
                         <div class="bar" ref="myChart"></div>
-                            <span style="color: darkcyan;font-size: 14px;float: right;margin-bottom: 30px;margin-right: 20px">年度平均月增长 <strong style="color: red;font-size: 16px">{{this.increaseRate}} </strong> 人</span>
                     </el-card>
                 </div>
             </el-col>
             <el-col :span="5">
                 <div class="grid-content bg-purple">
                     <el-card class="box-card">
-                        <strong style="font-size: 16px;margin-left: 20px"><i class="el-icon-s-help"></i> 专业排行榜</strong>
+                        <strong style="font-size: 16px;margin-left: 20px"><i class="el-icon-s-help"></i> 课程热度榜</strong>
                         <p></p>
-                        <span style="margin-left: 30px;font-size: 14px;color: darkcyan"><i class="el-icon-trophy" style="color: gold;margin-right: 20px"></i>{{majors[0]}}</span>
+                        <span style="margin-left: 10px;font-size: 14px;color: darkcyan"><i class="el-icon-trophy" style="color: gold;margin-right: 20px"></i>{{courses[0]}}</span>
                         <p></p>
-                        <span style="margin-left: 30px;font-size: 14px;color: darkcyan"><i class="el-icon-trophy" style="color: silver;margin-right: 20px"></i>{{majors[1]}}</span>
+                        <span style="margin-left: 10px;font-size: 14px;color: darkcyan"><i class="el-icon-trophy" style="color: silver;margin-right: 20px"></i>{{courses[1]}}</span>
                         <p></p>
-                        <span style="margin-left: 30px;font-size: 14px;color: darkcyan"><i class="el-icon-trophy" style="color: #339933;margin-right: 20px"></i>{{majors[2]}}</span>
+                        <span style="margin-left: 10px;font-size: 14px;color: darkcyan"><i class="el-icon-trophy" style="color: #339933;margin-right: 20px"></i>{{courses[2]}}</span>
                         <p></p>
-                        <span style="margin-left: 30px;font-size: 14px;color: darkcyan;margin-left: 64px">{{majors[3]}}</span>
+                        <span style="margin-left: 44px;font-size: 14px;color: darkcyan">{{courses[3]}}</span>
                         <p></p>
-                        <span style="margin-left: 30px;font-size: 14px;color: darkcyan;margin-left: 64px">{{majors[4]}}</span>
+                        <span style="margin-left: 44px;font-size: 14px;color: darkcyan">{{courses[4]}}</span>
                         <p></p>
-                        <span style="margin-left: 30px;font-size: 14px;color: darkcyan;margin-left: 64px">{{majors[5]}}</span>
+                        <span style="margin-left: 44px;font-size: 14px;color: darkcyan">{{courses[5]}}</span>
                         <p></p>
-                        <span style="margin-left: 30px;font-size: 14px;color: darkcyan;margin-left: 64px">{{majors[6]}}</span>
+                        <span style="margin-left: 44px;font-size: 14px;color: darkcyan">{{courses[6]}}</span>
                         <p></p>
-                        <span style="margin-left: 30px;font-size: 14px;color: darkcyan;margin-left: 64px">{{majors[7]}}</span>
+                        <span style="margin-left: 44px;font-size: 14px;color: darkcyan">{{courses[7]}}</span>
                         <p></p>
-                        <span style="margin-left: 30px;font-size: 14px;color: darkcyan;margin-left: 64px">{{majors[8]}}</span>
+                        <span style="margin-left: 44px;font-size: 14px;color: darkcyan">{{courses[8]}}</span>
                         <p></p>
-                        <span style="margin-left: 30px;font-size: 14px;color: darkcyan;margin-left: 64px">{{majors[9]}}</span>
+                        <span style="margin-left: 44px;font-size: 14px;color: darkcyan">{{courses[9]}}</span>
                     </el-card>
                 </div>
             </el-col>
@@ -59,7 +58,7 @@
     import {HOST} from '../../common/js/config'
     import echarts from 'echarts'
     export default {
-        name: "ManageUserStatistic",
+        name: "ManageCourseStatistic",
         data(){
             return{
                 records: [],
@@ -68,29 +67,28 @@
                 increaseRate:'',
                 formInline:{
                     year: '2020',
-                    grade: '',
                     major: '',
                     month:'',
                 },
-                majorRank:[],
-                majors:[],
+                courseRank:[],
+                courses:[],
                 nums:[],
             }
         },
         mounted(){
             this.drawLine();
-            this.getMajorRank()
+            this.getCourseRank()
         },
         methods:{
-            getMajorRank(){
-                let url=`${HOST}/user/majorRank/${this.formInline.year}`
+            getCourseRank(){
+                let url=`${HOST}/course/courseRank/${this.formInline.year}`
                 this.$ajax.get(url).then((res)=>{
-                    this.majorRank=res.data
-                    this.majorRank.forEach((item)=>{
-                        this.majors.push(item.major)
-                        this.nums.push(item.num)
+                    this.courseRank=res.data
+                    this.courseRank.forEach((item)=>{
+                        this.courses.push(item.courseName)
+                        this.nums.push(item.popularity)
                     })
-                    //console.log(this.majorRank)
+                    console.log(this.courseRank)
                 })
             },
             drawLine(){
@@ -98,13 +96,12 @@
                 let myChart = echarts.init(this.$refs.myChart)
                 this.drawChart(myChart);
                 myChart.showLoading();// 加载动画
-                let path = `${HOST}/user/increaseRate/${this.formInline.year}`
+                let path = `${HOST}/course/majorRank/${this.formInline.year}`
                 this.$ajax.get(path).then((res)=>{
-                    this.records = res.data.list
-                    this.increaseRate=res.data.increaseRate
-                    console.log(this.increaseRate)
+                    this.records = res.data
+                    //console.log(this.records)
                     this.records.forEach((item)=>{
-                        this.months.push(item.month+'月') //构造x轴数据
+                        this.months.push(item.major) //构造x轴数据
                         this.fees.push(item.num) //构造y轴数据
                     })
                     myChart.hideLoading();
@@ -114,7 +111,7 @@
                             data: this.months
                         },
                         series: [{
-                            name: '用户人数',
+                            name: '课程数',
                             data: this.fees
                         }]
                     });
@@ -127,7 +124,7 @@
                 var option = {
                     //标题
                     title : {
-                        text : `${this.formInline.year}年用户增长`,
+                        text : `${this.formInline.year}年课程专业分布`,
                         left : 50,//距离左边的像素值
                         borderColor : '#ff4b2d',
                         borderWidth : 1
