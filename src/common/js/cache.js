@@ -6,6 +6,8 @@ const USER_KEY = '__user';
 const COURSE_DRAFT_KEY = '__course_draft';
 //定义存取课程草稿的KEY（用于新建课程时保存草稿）
 const COURSE_KEY = '__course';
+//定义存取课件的KEY（用于编辑课件）
+const COURSE_WARE_KEY = '__course_ware';
 
 /**
  * 存储用户信息
@@ -71,4 +73,19 @@ export function getCourse(){
  */
 export function clearCourse(){
     storage.set(COURSE_KEY,{})
+}
+
+/**
+ * 存课件
+ * @param obj
+ */
+export function saveCourseWare(obj){
+    storage.set(COURSE_WARE_KEY,obj)
+}
+
+/**
+ * 取课件
+ */
+export function getCourseWare(){
+    return storage.get(COURSE_WARE_KEY,{})
 }

@@ -35,7 +35,7 @@
                 </el-col>
             </el-form>
         </el-row>
-
+        <CourseWareUpdate :show.sync="showModal"></CourseWareUpdate>
         <el-table
                 v-loading="loading"
                 :data="courseWareList"
@@ -51,7 +51,7 @@
                     align="center"
                     prop="title"
                     label="标题"
-                    width="180">
+                    width="160">
             </el-table-column>
             <el-table-column
                     align="center"
@@ -69,7 +69,7 @@
                     align="center"
                     prop="scname"
                     label="所属小节"
-                    width="120">
+                    width="160">
             </el-table-column>
             <el-table-column
                     align="center"
@@ -102,7 +102,7 @@
                     align="center"
                     prop="downloadFlag"
                     label="允许下载"
-                    width="100">
+                    width="80">
                 <template slot-scope="scope">
                     <div v-if="scope.row.downloadFlag===1">是</div>
                     <div v-else>否</div>
@@ -112,8 +112,10 @@
                 <template slot-scope="scope">
                     <el-button size="mini" type="success" plain v-if="scope.row.state===0"
                                @click="handlePublish(scope.row)">发布</el-button>
+                    <el-button size="mini" type="success" plain
+                               @click="handleView(scope.row.id)">预览</el-button>
                     <el-button size="mini" type="success" plain :disabled="role!==1&&scope.row.userId!==userId"
-                               @click="handleEdit(scope.row.id)">编辑</el-button>
+                               @click="handleEdit(scope.row)">编辑</el-button>
                     <el-button size="mini" type="danger" plain :disabled="role!==1&&scope.row.userId!==userId"
                                @click="handleDelete(scope.row.id)">删除</el-button>
                 </template>
@@ -135,17 +137,20 @@
 
 <script>
     import {HOST} from '../../common/js/config'
-    import {getCourse, getUser} from "../../common/js/cache";
+    import {getCourse, getUser, saveCourseWare} from "../../common/js/cache";
     import {makeDate} from "../../common/js/dateformat";
+    import CourseWareUpdate from "./CourseWareUpdate";
     // import {makeSimpleDate} from '../../common/js/dateformat'
     export default {
         name: "CourseWare",
+        components: {CourseWareUpdate},
         data(){
             return{
                 path: '',
                 currPage: 1,    //当前页,
                 pageInfo: {},   //查询的数据,
                 loading: false, //正在加载,
+                showModal: false, //是否显示更新课件的弹窗
                 role: 0,
                 userId: 0,
                 formData: {
@@ -241,8 +246,12 @@
                     }
                 });
             },
-            handleEdit(id){
+            handleView(id){
                 console.log(id)
+            },
+            handleEdit(course_ware){
+                saveCourseWare(course_ware);
+                this.showModal = true;
             },
             handleDelete(id){
                 const _this = this;

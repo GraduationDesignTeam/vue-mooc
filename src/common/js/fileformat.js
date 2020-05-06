@@ -28,6 +28,11 @@ function isAudio(ext) {
     indexOf(ext.toLowerCase()) !== -1;
 }
 
+function isCompressedPackage(ext) {
+    return ['rar', 'zip'].
+    indexOf(ext.toLowerCase()) !== -1;
+}
+
 export function resolveFileType(fileName) {
     if(fileName.lastIndexOf('.') === -1)
         return '未知';
@@ -44,5 +49,7 @@ export function resolveFileType(fileName) {
         return 'Word文档';
     if(isExcelDoc(ext))
         return 'Excel表';
+    if(isCompressedPackage(ext))
+        return '压缩包';
     return '未知';
 }
