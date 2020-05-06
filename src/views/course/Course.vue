@@ -49,7 +49,8 @@
                 let courseId = this.$route.params.id;
                 let url = `${HOST}/course/sel/${courseId}`;
                 let param = new URLSearchParams();
-                param.append('userId', getUser().userId);
+                let userId = (getUser()===null)?0:getUser().userId;
+                param.append('userId', userId);
                 this.$ajax.post(url, param).then((res)=> {
                     this.course = res.data;
                 })
