@@ -5,7 +5,8 @@
                 border
                 :data="pageInfo.list"
                 style="width: 100%"
-                class="content">
+                class="content"
+                @current-change="handleCurrentChange2">
             <el-table-column
 
                     label="时间"
@@ -76,6 +77,9 @@
             handleCurrentChange(val){
                 this.currPage=val
                 this.getRecords()
+            },
+            handleCurrentChange2(val){
+                this.$router.push('/'+val)
             },
             convertDate(time){
                 return convertDate(time)
