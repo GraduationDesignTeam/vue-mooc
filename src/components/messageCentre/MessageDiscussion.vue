@@ -6,7 +6,7 @@
                 :data="pageInfo.list"
                 style="width: 100%"
                 class="content"
-                @current-change="handleCurrentChange2">
+                @current-change="handleCurrentChange">
             <el-table-column
                     label="讨论区"
                     prop="discussionId"
@@ -93,19 +93,12 @@
 
             },
             handleCurrentChange(val){
-                this.currPage=val
-                this.getRecords()
+                this.$router.push('/'+val)
+                //this.currPage=val
+                //this.getRecords()
             },
-<<<<<<< HEAD
             toDiscussion(id){
                 this.$router.push(`/discussionDetail/${id}`)
-=======
-            handleCurrentChange2(val){
-                this.$router.push('/'+val)
-            },
-            convertDate(time){
-                return convertDate(time)
->>>>>>> 56bd5f93248b83fe465f8b92e048379ae7c6b756
             },
             //日期格式化
             dateFormatter(row, column, cellValue){
