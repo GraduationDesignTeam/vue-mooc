@@ -51,16 +51,29 @@
                         <el-button type="primary" @click="submitChoice">确 定</el-button>
                     </div>
                 </el-dialog>
-                    <el-button type="text" @click="dialogFormVisible4 = true">删除选择题</el-button>
+                    <el-button type="text" @click="removechoicelist">删除选择题</el-button>
                     <el-dialog :span="20" title="删除选择题" :visible.sync="dialogFormVisible4">
-                        <el-form :model="formremove">
-                            <el-form-item label="题目内容" :label-width="formLabelWidth">
-                                <el-input v-model="formremove.name" autocomplete="off" clearable ></el-input>
-                            </el-form-item>
-                        </el-form>
+                        <el-table
+                                border
+                                :data="choiceData"
+                                style="width: 100%"
+                                class="content">
+                            <el-table-column
+                                    label="题目"
+                                    prop="content"
+                                    width="400">
+                            </el-table-column>
+                            <el-table-column
+                                    label="删除"
+                                    width="150"
+                            >
+                                <template scope="scope">
+                                    <el-button type="small" @click="removechoice(scope.row)">删除</el-button>
+                                </template>
+                            </el-table-column>
+                        </el-table>
                         <div slot="footer" class="dialog-footer">
-                            <el-button @click="dialogFormVisible4 = false">取 消</el-button>
-                            <el-button type="primary" @click="dialogFormVisible4 = false">删 除</el-button>
+                            <el-button @click="dialogFormVisible4 = false">结 束</el-button>
                         </div>
                     </el-dialog>
                 </el-col>
@@ -100,16 +113,29 @@
                         </div>
                     </el-dialog>
 
-                    <el-button type="text" @click="dialogFormVisible5 = true">删除判断题</el-button>
+                    <el-button type="text" @click="removejudgelist">删除判断题</el-button>
                     <el-dialog :span="20" title="删除判断题" :visible.sync="dialogFormVisible5">
-                        <el-form :model="formremove">
-                            <el-form-item label="题目内容" :label-width="formLabelWidth">
-                                <el-input v-model="formremove.name" autocomplete="off" clearable ></el-input>
-                            </el-form-item>
-                        </el-form>
+                        <el-table
+                                border
+                                :data="judgeData"
+                                style="width: 100%"
+                                class="content">
+                            <el-table-column
+                                    label="题目"
+                                    prop="content"
+                                    width="400">
+                            </el-table-column>
+                            <el-table-column
+                                    label="删除"
+                                    width="150"
+                            >
+                                <template scope="scope">
+                                    <el-button type="small" @click="removejudge(scope.row)">删除</el-button>
+                                </template>
+                            </el-table-column>
+                        </el-table>
                         <div slot="footer" class="dialog-footer">
-                            <el-button @click="dialogFormVisible5 = false">取 消</el-button>
-                            <el-button type="primary" @click="dialogFormVisible5 = false">删 除</el-button>
+                            <el-button @click="dialogFormVisible5 = false">结 束</el-button>
                         </div>
                     </el-dialog>
                 </el-col>
@@ -144,16 +170,29 @@
                         </div>
                     </el-dialog>
 
-                    <el-button type="text" @click="dialogFormVisible6 = true">删除主观题</el-button>
+                    <el-button type="text" @click="removesubjectivelist">删除主观题</el-button>
                     <el-dialog :span="20" title="删除主观题" :visible.sync="dialogFormVisible6">
-                        <el-form :model="formremove">
-                            <el-form-item label="题目内容" :label-width="formLabelWidth">
-                                <el-input v-model="formremove.name" autocomplete="off" clearable ></el-input>
-                            </el-form-item>
-                        </el-form>
+                        <el-table
+                                border
+                                :data="subData"
+                                style="width: 100%"
+                                class="content">
+                            <el-table-column
+                                    label="题目"
+                                    prop="content"
+                                    width="400">
+                            </el-table-column>
+                            <el-table-column
+                                    label="删除"
+                                    width="150"
+                            >
+                                <template scope="scope">
+                                    <el-button type="small" @click="removesubjective(scope.row)">删除</el-button>
+                                </template>
+                            </el-table-column>
+                        </el-table>
                         <div slot="footer" class="dialog-footer">
-                            <el-button @click="dialogFormVisible6 = false">取 消</el-button>
-                            <el-button type="primary" @click="dialogFormVisible6 = false">删 除</el-button>
+                            <el-button @click="dialogFormVisible6 = false">结 束</el-button>
                         </div>
                     </el-dialog>
                 </el-col>
@@ -251,6 +290,24 @@
                     answer:''
                 },
                 formLabelWidth: '120px',
+                choiceanswer:{
+                    content:'',
+                    op1:'',
+                    op2:'',
+                    op3:'',
+                    op4:'',
+                    resolution:''
+                },
+                judgeanswer:{
+                    content:'',
+                    answer:'',
+                    resolution:''
+                },
+                subjectiveanswer:{
+                    content:'',
+                    answer:'',
+                    resolution:''
+                },
                 rules: {
                     name: [{
                         required: true,
@@ -386,6 +443,55 @@
                 })
             },
             listsubjective(){
+                let url=`${HOST}/subjective/listdraft`;
+                this.$ajax.post(url,this.formData).then((res)=>{
+                    this.subData = res.data;
+                })
+            },
+            removechoice(id){
+                let url=`${HOST}/choice/delete`;
+                console.log(id)
+                this.$ajax.post(url,id).then((res)=>{
+                    console.log(res.data) ;
+                })
+                this.removechoicelist()
+                this.reload()
+            },
+            removechoicelist(){
+                this.dialogFormVisible4 = true
+                let url=`${HOST}/choice/listdraft`;
+                this.$ajax.post(url,this.formData).then((res)=>{
+                    this.choiceData = res.data;
+                })
+            },
+            removejudge(id){
+                let url=`${HOST}/judge/delete`;
+                console.log(id)
+                this.$ajax.post(url,id).then((res)=>{
+                    console.log(res.data) ;
+                })
+
+                this.removejudgelist();
+                this.reload()
+            },
+            removejudgelist(){
+                this.dialogFormVisible5 = true
+                let url=`${HOST}/judge/listdraft`;
+                this.$ajax.post(url,this.formData).then((res)=>{
+                    this.judgeData = res.data;
+                })
+            },
+            removesubjective(id){
+                let url=`${HOST}/subjective/delete`;
+                console.log(id)
+                this.$ajax.post(url,id).then((res)=>{
+                    console.log(res.data) ;
+                })
+                this.removesubjectivelist()
+                this.reload()
+            },
+            removesubjectivelist(){
+                this.dialogFormVisible6 = true
                 let url=`${HOST}/subjective/listdraft`;
                 this.$ajax.post(url,this.formData).then((res)=>{
                     this.subData = res.data;
