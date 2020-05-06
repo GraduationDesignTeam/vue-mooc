@@ -136,16 +136,18 @@ BY朱翔鹏-->
                         align="center"
                         prop="prohibitState"
                         label="是否封禁"
-                        width="80">
+                        width="160">
                     <template slot-scope="scope">
-                        <el-switch v-model="scope.row.prohibitState"
+                        <span v-if="scope.row.prohibitState==1"><el-button type="success" @click="handleSwitch(scope.row)">解封</el-button></span>
+                        <span v-if="scope.row.prohibitState==0"><el-button type="danger" @click="handleSwitch(scope.row)">封禁</el-button></span>
+                        <!--<el-switch v-model="scope.row.prohibitState"
                                    active-color="#13ce66"
                                    inactive-color="#999"
-                                   active-value="1"
-                                   inactive-value="0"
+                                   active-value=1
+                                   inactive-value=0
                                    @change="handleSwitch(scope.row)"
                         >
-                        </el-switch>
+                        </el-switch>-->
                     </template>
                 </el-table-column>
                 <el-table-column
@@ -241,6 +243,11 @@ BY朱翔鹏-->
                 return makeSimpleDate(cellValue)
             },*/
             handleSwitch(row){
+                if(row.prohibitState==0){
+                    row.prohibitState=1
+                }else if(row.prohibitState==1){
+                    row.prohibitState=0
+                }
                 let url=`${HOST}/user/update`
                 this.$ajax.post(url,row).then((res)=>{
                     if(res.data.code===0){

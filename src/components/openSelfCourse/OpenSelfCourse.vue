@@ -102,7 +102,7 @@
                 this.getData()
             },
             handleDetail(id){
-                console.log(id)
+                this.$router.push(`/course/${id}`)
                 //this.$router.push(`/bookDetail/${id}`)
             }
         }/*,
@@ -125,7 +125,8 @@
     }
 
     .image {
-        height: 200px;
+        height: 190px;
+        width: 200px;
         display: block;
         float: left;
     }

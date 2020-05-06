@@ -104,16 +104,10 @@
                         align="center"
                         prop="checkState"
                         label="是否封禁"
-                        width="80">
+                        width="100">
                     <template slot-scope="scope">
-                        <el-switch v-model="scope.row.checkState"
-                                   active-color="#13ce66"
-                                   inactive-color="#999"
-                                   active-value="1"
-                                   inactive-value="0"
-                                   @change="handleSwitch(scope.row)"
-                        >
-                        </el-switch>
+                        <span v-if="scope.row.checkState==0"><el-button type="success" @click="handleSwitch(scope.row)">解封</el-button></span>
+                        <span v-if="scope.row.checkState==1"><el-button type="danger" @click="handleSwitch(scope.row)">封禁</el-button></span>
                     </template>
                 </el-table-column>
                 <el-table-column
@@ -199,6 +193,11 @@
                 return makeSimpleDate(cellValue)
             },*/
             handleSwitch(row){
+                if(row.checkState==0){
+                    row.checkState=1
+                }else if(row.checkState==1){
+                    row.checkState=0
+                }
                 let url=`${HOST}/course/update`
                 this.$ajax.post(url,row).then((res)=>{
                     if(res.data.code===0){

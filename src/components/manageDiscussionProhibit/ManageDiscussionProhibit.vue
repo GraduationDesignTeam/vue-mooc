@@ -103,16 +103,6 @@
                 </el-table-column>
                 <el-table-column
                         align="center"
-                        prop="discussionState"
-                        label="讨论状态"
-                        width="140">
-                    <template scope="scope">
-                        <span v-if="scope.row.discussionState==='1'" style="color: green">开设</span>
-                        <span v-else style="color: red">关闭</span>
-                    </template>
-                </el-table-column>
-                <el-table-column
-                        align="center"
                         prop="discussionDescription"
                         label="讨论区描述"
                         width="200">
@@ -131,16 +121,10 @@
                         align="center"
                         prop="discussionState"
                         label="讨论状态"
-                        width="80">
+                        width="100">
                     <template slot-scope="scope">
-                        <el-switch v-model="scope.row.discussionState"
-                                   active-color="#13ce66"
-                                   inactive-color="#999"
-                                   active-value="1"
-                                   inactive-value="0"
-                                   @change="handleSwitch(scope.row)"
-                        >
-                        </el-switch>
+                        <span v-if="scope.row.discussionState==0"><el-button type="success" @click="handleSwitch(scope.row)">解封</el-button></span>
+                        <span v-if="scope.row.discussionState==1"><el-button type="danger" @click="handleSwitch(scope.row)">封禁</el-button></span>
                     </template>
                 </el-table-column>
                 <el-table-column label="操作" width="80px">
@@ -200,7 +184,7 @@
                 let url=`${HOST}/discussion/searchNew/${this.currPage}`
                 this.$ajax.post(url,this.discussionDetail).then((res)=>{
                     this.pageInfo=res.data
-                    console.log(this.pageInfo)
+                    //console.log(this.pageInfo)
                     this.loading=false
                 })
             },
@@ -214,20 +198,23 @@
                 return makeSimpleDate(cellValue)
             },*/
             handleSwitch(row){
-                console.log(row)
-                /*let url=`${HOST}/course/update`
+                if(row.discussionState==0){
+                    row.discussionState=1
+                }else if(row.discussionState==1){
+                    row.discussionState=0
+                }
+                let url=`${HOST}/discussion/update`
                 this.$ajax.post(url,row).then((res)=>{
-                    if(res.data.code===0){
+                    if(res.data!==null){
                         this.$message({
                             message: '操作成功',
                             type: 'success'
                         })
                     }
-                })*/
+                })
             },
             handleDelete(id){
-                console.log(id)
-                /*let url=`${HOST}/course/delete/${id}`
+                let url=`${HOST}/discussion/delete/${id}`
                 this.$ajax.get(url).then((res)=>{
                     if(res.data.code===0){
                         this.currPage=1
@@ -237,7 +224,7 @@
                             type: 'success'
                         })
                     }
-                })*/
+                })
             },
             //日期格式化
             dateFormatter(row, column, cellValue){

@@ -108,7 +108,7 @@
                     if(valid){
                         let url=`${HOST}/discussion/update`
                         this.$ajax.post(url,this.form).then((res)=>{
-                            if(res.data.code===0){
+                            if(res.data!==null){
                                 this.$message({
                                     message: '修改成功',
                                     type: 'success'

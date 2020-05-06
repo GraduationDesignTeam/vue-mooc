@@ -7,15 +7,33 @@
                 style="width: 100%"
                 class="content">
             <el-table-column
-
-                    label="时间"
-                    width="250"
-                    prop="sendTime">
+                    label="讨论区"
+                    prop="discussionId"
+                    width="150"
+                    >
             </el-table-column>
             <el-table-column
-                    label="讨论内容内容"
-                    prop="informationContent"
+                    label="回复人"
+                    prop="senderName"
                     width="150">
+            </el-table-column>
+            <el-table-column
+                    label="讨论回复内容"
+                    prop="informationContent"
+                    width="350">
+            </el-table-column>
+            <el-table-column
+                    label="时间"
+                    width="250"
+                    prop="sendTime"
+                    :formatter="dateFormatter">
+            </el-table-column>
+            <el-table-column
+                    width="118"
+                    >
+                <template scope="scope">
+                    <el-button type="small" @click="toDiscussion(scope.row.discussionId)">进入讨论区</el-button>
+                </template>
             </el-table-column>
         </el-table>
 
@@ -34,7 +52,7 @@
 <script>
     import {HOST} from "../../common/js/config";
     import {getUser} from "../../common/js/cache";
-    import {convertDate} from "../../common/js/dateformat";
+    import {makeDate} from "../../common/js/dateformat";
 
     export default {
         data(){
@@ -68,7 +86,7 @@
                 let url=`${HOST}/information/querydiscussion/${this.currPage}`
                 this.$ajax.post(url,this.user).then((res)=>{
                     this.pageInfo=res.data
-                    console.log(this.pageInfo)
+                    //console.log(this.pageInfo)
                     this.loading=false
                 })
 
@@ -77,9 +95,13 @@
                 this.currPage=val
                 this.getRecords()
             },
-            convertDate(time){
-                return convertDate(time)
+            toDiscussion(id){
+                this.$router.push(`/discussionDetail/${id}`)
             },
+            //日期格式化
+            dateFormatter(row, column, cellValue){
+                return makeDate(cellValue)
+            }
         }
     }
 </script>

@@ -256,7 +256,7 @@
                 this.$router.push(`/courseManage/updateDiscussion/${id}`)
             },
             toCourse(){
-                this.$router.push(`/courseManage/courseInfo/${this.discussionDetail.courseId}`)
+                this.$router.push(`/course/${this.discussionDetail.courseId}`)
             },
             toCourseDiscussion(){
                 this.$router.push(`/courseManage/courseDiscussion/${this.discussionDetail.discussionId}`)

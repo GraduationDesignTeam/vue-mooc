@@ -11,7 +11,8 @@
 
                     label="时间"
                     width="250"
-                    prop="sendTime">
+                    prop="sendTime"
+                    :formatter="dateFormatter">
             </el-table-column>
             <el-table-column
 
@@ -41,7 +42,7 @@
 <script>
     import {HOST} from "../../common/js/config";
     import {getUser} from "../../common/js/cache";
-    import {convertDate} from "../../common/js/dateformat";
+    import {convertDate, makeDate} from "../../common/js/dateformat";
 
     export default {
         name: "MessageSend",
@@ -91,6 +92,10 @@
             handleCurrentChange2(val){
                 this.$router.push('/courseManage/personalChat/'+val.addresserId)
             },
+            //日期格式化
+            dateFormatter(row, column, cellValue){
+                return makeDate(cellValue)
+            }
         }
     }
 </script>
