@@ -13,7 +13,7 @@
                     <el-col :span="6">
                     </el-col>
                     <el-col :span="6" style="float: right">
-                        <i class="el-icon-s-management" style="color: #ff7a3e;margin-top: 10px"></i> <span style="font-size: 16px" @click="openCourse">{{discussionDetail.courseInfo.name}}</span> <el-divider direction="vertical"></el-divider> <i class="el-icon-school" style="color: #2d8cf0;margin-top: 10px"></i> <span style="font-size: 16px">{{discussionDetail.courseInfo.school}}</span>
+                        <i class="el-icon-s-management" style="color: #ff7a3e;margin-top: 10px"></i> <span style="font-size: 16px" @click="toCourse">{{discussionDetail.courseInfo.name}}</span> <el-divider direction="vertical"></el-divider> <i class="el-icon-school" style="color: #2d8cf0;margin-top: 10px"></i> <span style="font-size: 16px">{{discussionDetail.courseInfo.school}}</span>
                     </el-col>
                     <!--#9199a1-->
                 </el-row>
@@ -21,17 +21,15 @@
         </div>
         <div>
             <el-row :gutter="20">
-                <el-col :span="4"><div>
-                        <img v-if="discussionDetail.courseInfo.photo" :src="`${path}/${discussionDetail.courseInfo.photo}`" class="image" @click="openCourse">
-                        <img v-else :src="img" class="image" @click="openCourse">
-                    <el-card class="box-card3" style="height: 190px;width: 160px;margin-left: 32px;background-color: gainsboro">
+                <el-col :span="4"><div style="margin-top: 5px">
+                        <img v-if="discussionDetail.courseInfo.photo" :src="`${path}/${discussionDetail.courseInfo.photo}`" class="image" @click="toCourse">
+                        <img v-else :src="img" class="image" @click="toCourse">
+                    <el-card class="box-card3" style="height: 140px;width: 167px;margin-left: 24px;background-color: gainsboro;margin-top: 10px">
                         <span style="margin-left: 30px;font-size: 14px;color: darkcyan" @click="toCourse">课程首页</span>
                         <el-divider></el-divider>
-                        <span style="margin-left: 30px;font-size: 14px;color: darkcyan" @click="toCourseDiscussion">课程讨论</span>
+                        <span style="margin-left: 30px;font-size: 14px;color: darkcyan" @click="toDiscussionHomepage">讨论区首页</span>
                         <el-divider></el-divider>
-                        <span style="margin-left: 30px;font-size: 14px;color: darkcyan">课程作业</span>
-                        <el-divider></el-divider>
-                        <span style="margin-left: 30px;font-size: 14px;color: darkcyan" @click="toCourseChapter">课程章节</span>
+                        <span style="margin-left: 30px;font-size: 14px;color: darkcyan" @click="toPersonalHomepage">个人主页</span>
                     </el-card>
                 </div></el-col>
                 <el-col :span="18"><div>
@@ -166,9 +164,6 @@
                 this.currPageObject.currPage = page
                 this.getData()
             },
-            openCourse(){
-                //跳转到讨论所属课程页面
-            },
             //日期格式化
             convertDate(time){
                 return convertDate(time)
@@ -258,14 +253,11 @@
             toCourse(){
                 this.$router.push(`/course/${this.discussionDetail.courseId}`)
             },
-            toCourseDiscussion(){
-                this.$router.push(`/courseManage/courseDiscussion/${this.discussionDetail.discussionId}`)
+            toDiscussionHomepage(){
+                this.$router.push("/discussionHomePage")
             },
-            toCourseChapter(){
-                this.$router.push(`/courseManage/chapterManage/${this.discussionDetail.discussionId}`)
-            },
-            toCourseTask(){
-                this.$router.push(`/courseManage/courseTask/${this.discussionDetail.discussionId}`)
+            toPersonalHomepage(){
+                this.$router.push("/personalHomepage")
             }
         }
     }
@@ -289,9 +281,10 @@
     }
     .image {
         height: 150px;
-        width: 100%;
+        width: 90%;
         display: block;
-        margin-left: 10px;
+        margin-left: 20px;
+        border-radius: 5px;
     }
     .el-divider--horizontal{
         margin: 12px 0;

@@ -76,6 +76,51 @@
                             <!--尚未完成-->
 
                         </el-tab-pane>
+                        <el-tab-pane label="课程讨论区" name="third">
+                            <div class="discussion-all">
+                                <div class="choose">
+                                    <a @click="handleNew" class="choose1">最新</a>
+                                    <a @click="handleHot" class="choose2">最热</a>
+                                    <!--<a @click="handleJoin" class="choose3">参与</a>-->
+                                </div>
+                                <el-row style="margin-top: 10px">
+                                    <el-col :span="6" v-for="(item,index) in pageInfo.list" :key="index" :offset="1" class="content">
+                                        <el-card :body-style="{ padding: '0px' }" class="discussionCard">
+                                            <img v-if="item.courseInfo.photo" :src="`${path}/${item.courseInfo.photo}`" class="image" @click="handleDetail(item.discussionId)">
+                                            <img v-else :src="img" class="image" @click="handleDetail(item.discussionId)">
+
+                                            <div class="remark">
+                                                <h2 class="title" @click="handleDetail(item.discussionId)"> <i class="el-icon-s-opportunity" style="color: chartreuse;margin-top: 10px"></i> {{item.discussionName}}</h2>
+                                                <div class="">
+                                                    <span class="price"  @click="handleDetail(item.discussionId)"> <i class="el-icon-s-management" style="color: #ff7a3e;margin-top: 10px"></i> {{item.courseInfo.name}}</span>
+                                                </div>
+                                                <div class="" style="margin-top: 6px">
+                                                    <el-row :gutter="4">
+                                                        <el-col :span="12"><div class="grid-content bg-purple">
+                                                            <span class="price" style="color: #9199a1"> <i class="el-icon-school" style="color: #2d8cf0;margin-top: 10px"></i> {{item.courseInfo.school}}</span>
+                                                        </div></el-col>
+                                                        <el-col :span="12"><div class="grid-content bg-purple">
+                                                            <span class="price" style="color: aquamarine;float: right">{{item.courseInfo.type}}</span>
+                                                        </div></el-col>
+                                                    </el-row>
+                                                </div>
+                                            </div>
+                                        </el-card>
+                                    </el-col>
+                                </el-row>
+                                <el-pagination
+                                        v-loading="loading"
+                                        background
+                                        layout="prev, pager, next"
+                                        @current-change="handleCurrentChange"
+                                        :current-page="currPage"
+                                        :page-size="pageInfo.pageSize"
+                                        :total="pageInfo.total"
+                                        class="pagination"
+                                >
+                                </el-pagination>
+                            </div>
+                        </el-tab-pane>
                     </el-tabs>
                 </div>
             </div>
@@ -114,11 +159,23 @@
             return {
                 path: '',
                 no_img: require("@/assets/no.png"),
-                activeName:'first'
+                activeName:'first',
+                discussionDetail:{
+                    courseInfo:{
+                        id:''
+                    }
+                },
+                img: require('./no.png'),
+                activeIndex: '1',
+                currPage: 1,
+                pageInfo: {},   //查询的数据,
+                loading: false, //正在加载,
             }
         },
         mounted() {
+            this.discussionDetail.courseInfo.id=this.$route.params.id
             this.path=HOST;
+            this.getNewData()
         },
         methods: {
             editCourseInfo(){
@@ -132,7 +189,43 @@
             },
             convertDate(date){
                 return convertDate(date);
-            }
+            },
+            handleNew(){
+                this.getNewData()
+            },
+            handleHot(){
+                this.getHotData()
+            },
+            getNewData(){
+                //最新
+                this.pageInfo={}
+                this.loading = true;
+                let url=`${HOST}/discussion/searchNew/${this.currPage}`
+                this.$ajax.post(url,this.discussionDetail).then(res=>{
+                    this.pageInfo = res.data
+                    //console.log(res.data)
+                    this.loading = false;
+                })
+            },
+            getHotData(){
+                //最热
+                this.pageInfo={}
+                this.loading = true;
+                let url=`${HOST}/discussion/searchHot/${this.currPage}`
+                this.$ajax.post(url,this.discussionDetail).then(res=>{
+                    this.pageInfo = res.data
+                    //console.log(res.data)
+                    this.loading = false;
+                })
+            },
+            //分页跳转
+            handleCurrentChange(page){
+                this.currPage = page
+                this.getHotData()
+            },
+            handleDetail(id){
+                this.$router.push(`/discussionDetail/${id}`)
+            },
         }
     }
 
@@ -301,5 +394,61 @@
     .t-grade{
         color: #999;
         margin: 0 0;
+    }
+    .choose{
+        margin-left: 20px;
+        margin-top: 20px;
+    }
+    .choose a{
+        margin-left: 20px;
+        font-size: 14px;
+        color: #FFFFFF;
+        padding: 4px 12px;
+        line-height: 16px;
+        border-radius: 12px;
+        cursor: pointer;
+    }
+    .choose1{
+        background: #2d8cf0;
+    }
+    .choose2{
+        background: chocolate;
+    }
+    .choose3{
+        background: #9199a1;
+    }
+    .content {
+        margin-top: 10px;
+    }
+
+    .image {
+        height: 160px;
+        width: 100%;
+        display: block;
+    }
+
+    .remark {
+        padding: 14px;
+    }
+    .remark .title {
+        font-weight: bold;
+        font-size: 18px;
+        color: #666;
+        white-space: nowrap;/* 不换行*/
+        overflow: hidden;/* 超出不显示*/
+        text-overflow:ellipsis;/* 加省略号显示*/
+    }
+
+    .remark .price {
+        font-size: 14px;
+        color: #9199a1;
+    }
+
+    .pagination {
+        margin: 20px 0;
+        text-align: center;
+    }
+    .discussionCard{
+        border-radius: 8px;
     }
 </style>
