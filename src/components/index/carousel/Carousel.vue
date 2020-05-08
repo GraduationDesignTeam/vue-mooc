@@ -4,7 +4,8 @@
             <div class="left-panel">
                 <el-carousel :interval="5000" indicator-position="none" @change="carouselChange" height="360px" ref="carousel">
                     <el-carousel-item v-for="(item,index) in carouselList" :key="index">
-                        <img style="cursor: pointer" @click="courseDetailHandle(item.id)" v-bind:src="item.imgUrl">
+                        <img v-if="item.photo" class="img" @click="courseDetailHandle(item.id)" :src="`${path}/${item.photo}`">
+                        <img v-else class="img" @click="courseDetailHandle(item.id)" :src="no_img">
                     </el-carousel-item>
                 </el-carousel>
             </div>
@@ -23,12 +24,17 @@
 </template>
 
 <script>
+    import {HOST} from "../../../common/js/config";
+
     export default {
         name: "Carousel",
         props: ['carouselList'],
         data(){
             return{
                 activeIndex:0,
+                path: HOST,
+                no_img: require("@/assets/no.png"),
+                imgUrl: require("@/assets/course/course1.jpg")
             }
         },
         methods: {
@@ -62,7 +68,7 @@
     }
 
     .left-panel{
-        width: 776px;
+        width: 638px;
         height: 360px;
     }
 
@@ -75,7 +81,7 @@
 
     .list-div{
         position: relative;
-        left: 8px;
+        /*left: 8px;*/
     }
 
     .right-panel ul{
@@ -86,6 +92,11 @@
         color: rgb(184, 184, 184);
         cursor: pointer;
         margin: 1em 0;
+    }
+
+    .img{
+        cursor: pointer;
+        height: 360px;
     }
 
     .selected{

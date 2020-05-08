@@ -8,6 +8,8 @@ const COURSE_DRAFT_KEY = '__course_draft';
 const COURSE_KEY = '__course';
 //定义存取课件的KEY（用于编辑课件）
 const COURSE_WARE_KEY = '__course_ware';
+//定义存取章节目录的KEY（用于编辑课件）
+const CHAPTER_LIST_KEY = '__course_chapter_list';
 
 /**
  * 存储用户信息
@@ -88,4 +90,20 @@ export function saveCourseWare(obj){
  */
 export function getCourseWare(){
     return storage.get(COURSE_WARE_KEY,{})
+}
+
+/**
+ * 存章节
+ * @param obj
+ */
+export function saveChapterList(obj) {
+    return storage.set(CHAPTER_LIST_KEY, obj)
+}
+
+/**
+ * 取章节
+ * @param obj
+ */
+export function getChapterList() {
+    return storage.get(CHAPTER_LIST_KEY, {})
 }

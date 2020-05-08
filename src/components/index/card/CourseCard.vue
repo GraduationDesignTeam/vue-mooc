@@ -4,9 +4,10 @@
             <el-col :span="4" v-for="(item, index) in cardList" :offset="(index%4===0)?1:2" :key="index">
                 <el-card :body-style="{ padding: '0px' }" class="card">
                     <div @click="courseDetailHandle(item.id)">
-                        <div v-if="item.imgUrl" style="display:table; width: 100%">
+                        <div style="display:table; width: 100%">
                             <div>
-                                <img class="card-image" :src="item.imgUrl">
+                                <img v-if="item.photo" class="card-image" :src="`${path}/${item.photo}`">
+                                <img v-else style="height: 150px;" :src="no_img">
                             </div>
                         </div>
                         <div style="margin-left: 16px">
@@ -21,21 +22,17 @@
 </template>
 
 <script>
+    import {HOST} from "../../../common/js/config";
+
     export default {
         name: "CourseCard",
         props: ['cardList'],
-        /*
         data(){
             return{
-                cardList:[
-                    {id:1, name: '计算机二级训练营', college: 'MOOC考培', imgUrl: require("@/assets/course/course1.jpg"), },
-                    {id:2, name: '创新与创业管理', college: '南京邮电大学', imgUrl:require('@/assets/course/course2.jpg')},
-                    {id:3, name: '计算机网络', college: '哈尔滨工业大学', imgUrl:require('@/assets/course/course3.jpg')},
-                    {id:4, name: '会计学原理', college: '江西财经大学', imgUrl:require('@/assets/course/course4.jpg')},
-                ]
+                path: HOST,
+                no_img: require("@/assets/no.png")
             }
-        }
-        */
+        },
         methods:{
             courseDetailHandle(id){
                 //跳转到课程详情页面                //跳转到课程详情页面
