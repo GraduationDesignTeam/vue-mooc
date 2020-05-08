@@ -35,7 +35,7 @@
                     <el-col :span="8">
                         <el-form-item label="关联章节" prop="chapterId">
                             <el-select v-model="formData.chapterId" placeholder="请选择所属章节" @change="changeChapter">
-                                <el-option v-for="(item, index) in chapterList" :key="index"
+                                <el-option v-for="(item, index) in chapterList" :key="index" :disabled="item.disabled"
                                            :label="item.name" :value="item.id" ></el-option>
                             </el-select>
                         </el-form-item>
@@ -72,7 +72,7 @@
 
 <script>
     import {HOST} from "../../common/js/config";
-    import {getCourse, getUser} from "../../common/js/cache";
+    import {getChapterList, getCourse, getUser} from "../../common/js/cache";
     import {resolveFileType} from "../../common/js/fileformat";
 
     export default {
@@ -118,14 +118,30 @@
             getData(){
                 this.formData.courseId = getCourse().id;
                 this.formData.userId = getUser().userId;
-                let url=`${HOST}/chapter/list/`+this.$route.params.id;
-                this.$ajax.get(url).then((res)=>{
-                    this.chapterList.push(...res.data);
-                });
+                let temp_list = getChapterList();
+                this.chapterList.push(...temp_list);
+                // let url=`${HOST}/chapter/list/`+this.$route.params.id;
+                // this.$ajax.get(url).then((res)=>{
+                //     let temp_list = res.data;
+                //     temp_list.forEach((item)=>{
+                //         if(item.sectionList.length === 0)
+                //             item.disabled = true;
+                //     });
+                //     this.chapterList.push(...temp_list);
+                // });
             },
-            changeChapter(){
-                this.sectionList = this.chapterList[this.formData.chapterId].sectionList;
-                this.formData.sectionId = (this.formData.chapterId === 0)?null:this.sectionList[0].id;
+            changeChapter(chapterId){
+                if(chapterId > 0){
+                    this.chapterList.forEach((item)=>{
+                        if(item.id === chapterId){
+                            this.sectionList = item.sectionList;
+                            this.formData.sectionId = this.sectionList[0].id;
+                        }
+                    });
+                }else{
+                    this.sectionList = null;
+                    this.formData.sectionId = null;
+                }
             },
             submitForm() {
                 this.$refs['elForm'].validate(valid => {

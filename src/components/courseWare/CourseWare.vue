@@ -15,7 +15,7 @@
                 <el-col :span="8">
                     <el-form-item  label-width="0" prop="chapterId">
                         <el-select v-model="formData.chapterId" placeholder="请选择所属章节" :style="{width: '80%'}" @change="changeChapter">
-                            <el-option v-for="(item, index) in chapterList" :key="index"
+                            <el-option v-for="(item, index) in chapterList" :key="index" :disabled="item.disabled"
                                        :label="item.name" :value="item.id" ></el-option>
                         </el-select>
                     </el-form-item>
@@ -113,7 +113,7 @@
                     <el-button size="mini" type="success" plain v-if="scope.row.state===0"
                                @click="handlePublish(scope.row)">发布</el-button>
                     <el-button size="mini" type="success" plain
-                               @click="handleView(scope.row.id)">预览</el-button>
+                               @click="handleView(scope.row)">预览</el-button>
                     <el-button size="mini" type="success" plain :disabled="role!==1&&scope.row.userId!==userId"
                                @click="handleEdit(scope.row)">编辑</el-button>
                     <el-button size="mini" type="danger" plain :disabled="role!==1&&scope.row.userId!==userId"
@@ -137,7 +137,7 @@
 
 <script>
     import {HOST} from '../../common/js/config'
-    import {getCourse, getUser, saveCourseWare} from "../../common/js/cache";
+    import {getCourse, getUser, saveChapterList, saveCourseWare} from "../../common/js/cache";
     import {makeDate} from "../../common/js/dateformat";
     import CourseWareUpdate from "./CourseWareUpdate";
     // import {makeSimpleDate} from '../../common/js/dateformat'
@@ -175,7 +175,13 @@
                 this.userId = getUser().userId;
                 let url=`${HOST}/chapter/list/`+this.$route.params.id;
                 this.$ajax.get(url).then((res)=>{
-                    this.chapterList.push(...res.data);
+                    let temp_list = res.data;
+                    temp_list.forEach((item)=>{
+                        if(item.sectionList.length === 0)
+                            item.disabled = true;
+                    });
+                    saveChapterList(temp_list);
+                    this.chapterList.push(...temp_list);
                     this.chapterList.push({"name": "未关联章节的课件", "id": -1});
                 });
             },
@@ -213,10 +219,14 @@
             convertDate(date){
                 return makeDate(date);
             },
-            changeChapter(index){
-                if(this.formData.chapterId > 0){
-                    this.sectionList = this.chapterList[index].sectionList;
-                    this.formData.sectionId = this.sectionList[0].id;
+            changeChapter(chapterId){
+                if(chapterId > 0){
+                    this.chapterList.forEach((item)=>{
+                        if(item.id === chapterId){
+                            this.sectionList = item.sectionList;
+                            this.formData.sectionId = this.sectionList[0].id;
+                        }
+                    });
                 }else{
                     this.sectionList = null;
                     this.formData.sectionId = null;
@@ -246,8 +256,9 @@
                     }
                 });
             },
-            handleView(id){
-                console.log(id)
+            handleView(course_ware){
+                saveCourseWare(course_ware);
+                this.$router.push('/courseManage/courseWarePreview');
             },
             handleEdit(course_ware){
                 saveCourseWare(course_ware);
