@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-// import Index from '../views/index/Index'
 import NotFound from '../views/404.vue'
 import PersonalHomepage from "../components/personalHomepage/PersonalHomepage";
 import Administrator from "../components/administrator/Administrator";
@@ -14,7 +13,7 @@ import ManageCourseProhibit from "../components/manageCourseprohibit/ManageCours
 import ManageCourseOpen from "../components/manageCourseOpen/ManageCourseOpen";
 import ManageDiscussionProhibit from "../components/manageDiscussionProhibit/ManageDiscussionProhibit";
 import test from "../views/index/test";
-import Multi from "../views/Multi";
+// import Multi from "../views/Multi";
 import Index from "../views/index/Index";
 import Login from "../components/login/Login";
 import Course from '../views/course/Course';
@@ -55,6 +54,8 @@ import ExamList from "../components/courseExam/ExamList"
 import CourseWareAdd from "../components/courseWare/CourseWareAdd";
 import CourseWare from "../components/courseWare/CourseWare";
 import PersonalChat from "../components/personalChat/PersonalChat";
+import CourseWarePreview from "../components/courseWare/CourseWarePreview";
+import Search from "../views/index/Search";
 //避免因重复路由引起的报错
 const originalPush = Router.prototype.push;
 Router.prototype.push = function push(location) {
@@ -71,12 +72,12 @@ const router = new Router({
             component: test
         },
         {
-            path: '/m',
-            component: Multi
-        },
-        {
             path: '/tempIndex',
             component: Index
+        },
+        {
+            path: '/search',
+            component: Search
         },
         {
             path: '/404',
@@ -230,6 +231,10 @@ const router = new Router({
                 {
                     path: 'courseWareAdd/:id',
                     component: CourseWareAdd
+                },
+                {
+                    path: 'courseWarePreview/:id',
+                    component: CourseWarePreview
                 },
                 {
                     path: 'courseDiscussion/:id',

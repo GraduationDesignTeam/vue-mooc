@@ -108,7 +108,7 @@
                     <div v-else>否</div>
                 </template>
             </el-table-column>
-            <el-table-column label="操作" align="center">
+            <el-table-column label="操作" align="center" :render-header="renderHeader">
                 <template slot-scope="scope">
                     <el-button size="mini" type="success" plain v-if="scope.row.state===0"
                                @click="handlePublish(scope.row)">发布</el-button>
@@ -237,6 +237,18 @@
                 this.currPage = page;
                 this.getData();
             },
+            renderHeader (h,{column}) { // h即为createElement的简写，具体可看vue官方文档
+                return h(
+                    'div',[
+                        h('span', column.label),
+                        h('el-tooltip',{props:{
+                                    effect:'dark',
+                                    content:'在预览页面可以下载当前课件',
+                                    placement:'top'},},
+                            [h('i', {class:'el-icon-question', style:'color:#409eff;margin-left:5px;cursor:pointer;'})]
+                        )
+                ]);
+            },
             addCourseWare(){
                 this.$router.push('/courseManage/courseWareAdd/' + this.$route.params.id)
             },
@@ -258,7 +270,7 @@
             },
             handleView(course_ware){
                 saveCourseWare(course_ware);
-                this.$router.push('/courseManage/courseWarePreview');
+                this.$router.push(`/courseManage/courseWarePreview/${this.$route.params.id}`);
             },
             handleEdit(course_ware){
                 saveCourseWare(course_ware);

@@ -11,12 +11,15 @@ import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.bubble.css'
 import 'default-passive-events'
 /*import * as Quill from 'quill'; // 富文本基于quill*/
+import VueVideoPlayer from 'vue-video-player'
+import 'video.js/dist/video-js.css'
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 Vue.use(ElementUI);
-Vue.use(VueQuillEditor)
+Vue.use(VueQuillEditor);
+Vue.use(VueVideoPlayer);
 //Vue对象添加原型:属性名是$ajax
-Vue.prototype.$ajax = axios
+Vue.prototype.$ajax = axios;
 
 new Vue({
   router,
