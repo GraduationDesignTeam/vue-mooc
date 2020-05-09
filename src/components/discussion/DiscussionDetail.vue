@@ -186,7 +186,7 @@
                     //当前用户编辑自己发的某贴
                     let url=`${HOST}/discussRecord/updateRecord`
                     this.$ajax.post(url,this.replyContent).then(res=>{
-                        if(res.data.code===0){
+                        if(res.data!==null){
                             this.replyContent={}
                             this.replyContent.discussRecordId=''
                             this.getData()
@@ -204,7 +204,7 @@
                     this.replyContent.storeyId=this.discussionDetail.recordNum+1
                     let url=`${HOST}/discussRecord/addRecord`
                     this.$ajax.post(url,this.replyContent).then(res=>{
-                        if(res.data.code===0){
+                        if(res.data!==null){
                             this.replyContent={}
                             this.replyContent.discussRecordId=''
                             this.getData()
@@ -231,7 +231,7 @@
                 }).then(() => {
                     let url=`${HOST}/discussRecord/deleteRecord/${id}`
                     this.$ajax.get(url).then((res)=>{
-                        if(res.data.code===0){
+                        if(res.data!==null){
                             this.$message({
                                 message: '删帖成功,该帖内容已清空',
                                 type: 'success'
