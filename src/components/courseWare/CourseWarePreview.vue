@@ -60,9 +60,9 @@
             download(){
                 // 下载课件， 在新弹出的标签页右键保存！
                 this.$message({type:'success', message:'如有新的标签页弹出，请右键保存资源！'});
-                // let newName = this.ext!==''?(this.title+'.'+this.ext):this.title;
-                // window.open(`${HOST}/course_ware/download/${this.name}?newName=${newName}`);
-                window.open(`${HOST}/CourseWare/${this.name}`);
+                let newName = this.ext!==''?(this.title+'.'+this.ext):this.title;
+                window.open(`${HOST}/course_ware/download/${this.name}?newName=${newName}`);
+                // window.open(`${HOST}/CourseWare/${this.name}`);
                 // let a = document.createElement("a");
                 // a.href = `${HOST}/CourseWare/${this.name}`;
                 // a.download = `${this.title}.${this.ext}`;
