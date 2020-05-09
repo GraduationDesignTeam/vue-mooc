@@ -13,6 +13,11 @@ function isPowerPoint(ext) {
     indexOf(ext.toLowerCase()) !== -1;
 }
 
+function isPDF(ext) {
+    return ['pdf'].
+    indexOf(ext.toLowerCase()) !== -1;
+}
+
 function isWordDoc(ext) {
     return ['doc', 'docx'].
     indexOf(ext.toLowerCase()) !== -1;
@@ -47,6 +52,8 @@ export function resolveFileType(fileName) {
         return '幻灯片';
     if(isWordDoc(ext))
         return 'Word文档';
+    if(isPDF(ext))
+        return 'PDF文件';
     if(isExcelDoc(ext))
         return 'Excel表';
     if(isCompressedPackage(ext))

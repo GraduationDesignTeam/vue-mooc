@@ -12,7 +12,7 @@
                         </div>
                         <div style="margin-left: 16px">
                             <h3 class="card-title">{{item.name}}</h3>
-                            <p class="card-college">{{item.college}}</p>
+                            <p class="card-college">{{item.school}}</p>
                         </div>
                     </div>
                 </el-card>

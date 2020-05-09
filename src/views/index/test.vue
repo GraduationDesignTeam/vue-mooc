@@ -1,5 +1,4 @@
 <template>
-    <!--临时首页-->
     <div class="app">
         <div class="nav">
             <NavMenu menuIndex='0'></NavMenu>

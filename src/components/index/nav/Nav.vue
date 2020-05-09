@@ -39,7 +39,7 @@
                 </el-menu-item>
                 <li class="right-menu-item" style="padding: 0 1em;">
                     <el-input placeholder="请输入课程名称" v-model="queryString" style="width: 180px;"></el-input>
-                    <el-button icon="el-icon-search" size="medium" circle @click="toPage('search='+queryString)"></el-button>
+                    <el-button icon="el-icon-search" size="medium" circle @click="toPage('search?query='+queryString)"></el-button>
                 </li>
             </el-menu>
         </div>
@@ -60,22 +60,7 @@
         },
         methods: {
             toPage(url) {
-                console.log(url)
                 this.$router.push(({path: url}));
-                // // 检测到动作为登出
-                // if(url.indexOf("logout") !== -1){
-                //     localStorage.clear();
-                //     // 刷新当前页面
-                //     this.$router.go(0);
-                // }
-                // else{
-                //     this.$router.push(({path: url}));
-                //     if(url.indexOf("#ancher-") !== -1) {
-                //         let target = url.substring(url.indexOf("#ancher-") + 8);
-                //         let anchor = document.getElementById(target);
-                //         document.documentElement.scrollTop = anchor.offsetTop;
-                //     }
-                // }
             },
             isCollapsed() {
                 return parseInt(document.documentElement.clientWidth/800)>0 ? 0:1;

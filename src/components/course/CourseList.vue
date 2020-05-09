@@ -12,9 +12,9 @@
                 <div style="margin-left: 280px">
                     <h3 class="card-title">{{item.name}}</h3>
                     <p class="card-info">
-                        <span style="margin-right: 28px">{{item.college}}</span>
+                        <span style="margin-right: 28px">{{item.school}}</span>
                         <span v-for="(teacher,index) in item.teacherList" :key="index">
-                            {{teacher}}
+                            {{teacher.name}}
                             <span v-if="index!==item.teacherList.length-1">、</span>
                             &nbsp;
                         </span>

@@ -27,12 +27,12 @@
                     },
                     {
                         optionName: '课程总览',
-                        url: '/a'
+                        url: '/search'
                     },
-                    {
-                        optionName: '合作院校',
-                        url: '/b'
-                    },
+                    // {
+                    //     optionName: '合作院校',
+                    //     url: '/b'
+                    // },
                 ],
                 rightMenuItemList1:[
                 {
