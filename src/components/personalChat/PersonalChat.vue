@@ -117,6 +117,7 @@
                     console.log(res.data)
                     this.loading = false
                     this.download()
+                    this.input=''
                 })
 
             },

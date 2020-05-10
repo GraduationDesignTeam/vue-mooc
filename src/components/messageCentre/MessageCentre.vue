@@ -23,7 +23,8 @@
         name: "MessageCentre" ,
         components:{
             Top,
-            MessageMenu
+            MessageMenu,
+
 
         },
     }
