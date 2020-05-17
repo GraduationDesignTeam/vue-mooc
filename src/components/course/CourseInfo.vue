@@ -72,9 +72,13 @@
                                 <span v-if="!course.reference||course.reference.trim().length===0">无</span>
                             </div>
                         </el-tab-pane>
-                        <el-tab-pane label="章节目录" name="second">
-                            <!--尚未完成-->
-
+                        <el-tab-pane v-if="chapterList.length>0" label="章节目录" name="second">
+                            <div v-for="(chapter, index) in chapterList" :key="index">
+                                <p style="font-size: 18px; color: #333333">{{chapter.number}}. {{chapter.name}}</p>
+                                <p style="color: #666666" v-for="section in chapter.sectionList" :key="section.id">
+                                    {{chapter.number}}.{{section.number}} {{section.name}}
+                                </p>
+                            </div>
                         </el-tab-pane>
                         <el-tab-pane label="课程讨论区" name="third">
                             <div class="discussion-all">
@@ -170,12 +174,14 @@
                 currPage: 1,
                 pageInfo: {},   //查询的数据,
                 loading: false, //正在加载,
+                chapterList: []
             }
         },
         mounted() {
-            this.discussionDetail.courseInfo.id=this.$route.params.id
+            this.discussionDetail.courseInfo.id=this.$route.params.id;
             this.path=HOST;
-            this.getNewData()
+            this.getChapterData();
+            this.getNewData();
         },
         methods: {
             editCourseInfo(){
@@ -226,6 +232,12 @@
             handleDetail(id){
                 this.$router.push(`/discussionDetail/${id}`)
             },
+            getChapterData(){
+                let url=`${HOST}/chapter/list/`+this.$route.params.id;
+                this.$ajax.get(url).then((res)=>{
+                    this.chapterList = res.data;
+                });
+            }
         }
     }
 
