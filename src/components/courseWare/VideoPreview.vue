@@ -11,7 +11,7 @@
 
 <script>
     import {getCourseWare} from "../../common/js/cache";
-    import {HOST} from "../../common/js/config";
+    import {COURSE_WARE_HOST} from "../../common/js/config";
 
     export default {
         name: "VideoPreview",
@@ -31,7 +31,7 @@
                     sources: [
                         // {
                         //     type: "video/mp4", // 这里的种类支持很多种：基本视频格式、直播、流媒体等，具体可以参看git网址项目
-                        //     src: `${HOST}/CourseWare/e4831879-10d3-41c9-a23b-5a5f01b5e7d7.mp4` // url地址
+                        //     src: `${COURSE_WARE_HOST}/CourseWare/e4831879-10d3-41c9-a23b-5a5f01b5e7d7.mp4` // url地址
                         // }
                     ],
                     poster: require('@/assets/logo_white.png'), // 视频封面地址
@@ -50,7 +50,7 @@
             let course_ware_name = getCourseWare().name;
             let ext = course_ware_name.lastIndexOf('.')!==-1?course_ware_name.substring(course_ware_name.lastIndexOf('.')+1):'mp4';
             this.playerOptions.poster = require('@/assets/logo.png');
-            this.playerOptions.sources.push({type:`video/${ext}`, src:`${HOST}/CourseWare/${course_ware_name}`});
+            this.playerOptions.sources.push({type:`video/${ext}`, src:`${COURSE_WARE_HOST}/${course_ware_name}`});
         }
     }
 </script>

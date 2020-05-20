@@ -136,7 +136,7 @@
 </template>
 
 <script>
-    import {HOST} from '../../common/js/config'
+    import {HOST, COURSE_WARE_HOST} from '../../common/js/config'
     import {getCourse, getUser, saveChapterList, saveCourseWare} from "../../common/js/cache";
     import {makeDate} from "../../common/js/dateformat";
     import CourseWareUpdate from "./CourseWareUpdate";
@@ -192,21 +192,21 @@
                 param.append('courseId', courseId);
                 let url;
                 if(this.formData.chapterId === 0){
-                    url = `${HOST}/course_ware/selectByCourseId/${this.currPage}`;
+                    url = `${COURSE_WARE_HOST}/course_ware/selectByCourseId/${this.currPage}`;
                     this.$ajax.post(url, param, {headers: {'Content-Type': 'application/x-www-form-urlencoded'}}).then((res)=> {
                         this.pageInfo = res.data;
                         this.courseWareList = res.data.list;
                         this.loading = false;
                     })
                 }else if(this.formData.chapterId === -1){
-                    url = `${HOST}/course_ware/selectUnassociatedByCourseId/${this.currPage}`;
+                    url = `${COURSE_WARE_HOST}/course_ware/selectUnassociatedByCourseId/${this.currPage}`;
                     this.$ajax.post(url, param, {headers: {'Content-Type': 'application/x-www-form-urlencoded'}}).then((res)=> {
                         this.pageInfo = res.data;
                         this.courseWareList = res.data.list;
                         this.loading = false;
                     })
                 }else{
-                    url = `${HOST}/course_ware/selectBySectionId/${this.currPage}`;
+                    url = `${COURSE_WARE_HOST}/course_ware/selectBySectionId/${this.currPage}`;
                     param.append('sectionId', this.formData.sectionId);
                     this.$ajax.post(url, param, {headers: {'Content-Type': 'application/x-www-form-urlencoded'}}).then((res)=> {
                         this.pageInfo = res.data;
@@ -254,7 +254,7 @@
             },
             handlePublish(course_ware){
                 course_ware.state = 1;
-                let url=`${HOST}/course_ware/update`;
+                let url=`${COURSE_WARE_HOST}/course_ware/update`;
                 this.$ajax.post(url, course_ware).then((res)=>{
                     let result = res.data;
                     if(result.code===0){
@@ -283,7 +283,7 @@
                     cancelButtonText: '取消',
                     type: 'warning'
                 }).then(() => {
-                    let url=`${HOST}/course_ware/del/${id}`;
+                    let url=`${COURSE_WARE_HOST}/course_ware/del/${id}`;
                     _this.$ajax.get(url).then((res)=>{
                         let result = res.data;
                         if(result.code===0){

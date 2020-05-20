@@ -34,7 +34,7 @@
 </template>
 <script>
     import {getChapterList, getCourseWare} from "../../common/js/cache";
-    import {HOST} from "../../common/js/config";
+    import {COURSE_WARE_HOST} from "../../common/js/config";
 
     export default {
         name:"CourseWareUpdate",
@@ -105,7 +105,7 @@
                 this.$refs['elForm'].validate(valid => {
                     if (!valid) return;
                     if(valid){
-                        let url=`${HOST}/course_ware/update`;
+                        let url=`${COURSE_WARE_HOST}/course_ware/update`;
                         this.$ajax.post(url, this.formData).then((res)=>{
                             let result = res.data;
                             if(result.code===0){

@@ -28,7 +28,7 @@
 </template>
 
 <script>
-    import {HOST} from "../../common/js/config";
+    import {COURSE_WARE_HOST} from "../../common/js/config";
     import {getCourseWare} from "../../common/js/cache";
     import VideoPreview from "./VideoPreview";
     export default {
@@ -45,12 +45,12 @@
             }
         },
         mounted() {
-            // this.path = HOST;
+            // this.path = COURSE_WARE_HOST;
             this.title = getCourseWare().title;
             this.name = getCourseWare().name;
             this.type = getCourseWare().type;
             this.ext = this.name.lastIndexOf('.')!==-1?this.name.substring(this.name.lastIndexOf('.')+1):'';
-            this.src = `${HOST}/CourseWare/${this.name}`;
+            this.src = `${COURSE_WARE_HOST}/${this.name}`;
         },
         methods:{
             goBack(){
@@ -61,10 +61,10 @@
                 // 下载课件， 在新弹出的标签页右键保存！
                 this.$message({type:'success', message:'如有新的标签页弹出，请右键保存资源！'});
                 let newName = this.ext!==''?(this.title+'.'+this.ext):this.title;
-                window.open(`${HOST}/course_ware/download/${this.name}?newName=${newName}`);
-                // window.open(`${HOST}/CourseWare/${this.name}`);
+                window.open(`${COURSE_WARE_HOST}/course_ware/download/${this.name}?newName=${newName}`);
+                // window.open(`${COURSE_WARE_HOST}/CourseWare/${this.name}`);
                 // let a = document.createElement("a");
-                // a.href = `${HOST}/CourseWare/${this.name}`;
+                // a.href = `${COURSE_WARE_HOST}/CourseWare/${this.name}`;
                 // a.download = `${this.title}.${this.ext}`;
                 // a.click();
             }

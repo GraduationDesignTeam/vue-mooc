@@ -71,7 +71,7 @@
 </template>
 
 <script>
-    import {HOST} from "../../common/js/config";
+    import {COURSE_WARE_HOST} from "../../common/js/config";
     import {getChapterList, getCourse, getUser} from "../../common/js/cache";
     import {resolveFileType} from "../../common/js/fileformat";
 
@@ -111,7 +111,7 @@
         computed: {},
         watch: {},
         created() {
-            this.path = HOST;
+            this.path = COURSE_WARE_HOST;
             this.getData();
         },
         methods: {
@@ -120,7 +120,7 @@
                 this.formData.userId = getUser().userId;
                 let temp_list = getChapterList();
                 this.chapterList.push(...temp_list);
-                // let url=`${HOST}/chapter/list/`+this.$route.params.id;
+                // let url=`${COURSE_WARE_HOST}/chapter/list/`+this.$route.params.id;
                 // this.$ajax.get(url).then((res)=>{
                 //     let temp_list = res.data;
                 //     temp_list.forEach((item)=>{
@@ -146,7 +146,7 @@
             submitForm() {
                 this.$refs['elForm'].validate(valid => {
                     if (valid) {
-                        let url=`${HOST}/course_ware/add`;
+                        let url=`${COURSE_WARE_HOST}/course_ware/add`;
                         this.$ajax.post(url, this.formData).then((res)=>{
                             let result = res.data;
                             if(result.code===0){
@@ -205,7 +205,7 @@
             handleRemove(){
                 // 删除已经上传到服务器上的文件
                 if(this.formData.name !== ''){
-                    let url=`${HOST}/course_ware/remove/`+this.formData.name;
+                    let url=`${COURSE_WARE_HOST}/course_ware/remove/`+this.formData.name;
                     this.$ajax.post(url).then(()=>{});
                 }
             },
