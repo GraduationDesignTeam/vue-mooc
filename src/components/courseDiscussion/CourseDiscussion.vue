@@ -69,7 +69,7 @@
 </template>
 
 <script>
-    import {HOST} from '../../common/js/config'
+    import {HOST,Discussion_HOST} from '../../common/js/config'
     import {getUser} from "../../common/js/cache";
     //import DiscussionCategory from "./DiscussionCategory";
     export default {
@@ -132,7 +132,7 @@
                 //最新
                 this.pageInfo={}
                 this.loading = true;
-                let url=`${HOST}/discussion/searchNew/${this.currPage}`
+                let url=`${Discussion_HOST}/discussion/searchNew/${this.currPage}`
                 this.$ajax.post(url,this.discussionDetail).then(res=>{
                     this.pageInfo = res.data
                     console.log(res.data)
@@ -144,7 +144,7 @@
                 //最热
                 this.pageInfo={}
                 this.loading = true;
-                let url=`${HOST}/discussion/searchHot/${this.currPage}`
+                let url=`${Discussion_HOST}/discussion/searchHot/${this.currPage}`
                 this.$ajax.post(url,this.discussionDetail).then(res=>{
                     this.pageInfo = res.data
                     console.log(res.data)

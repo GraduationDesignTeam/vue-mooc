@@ -2,7 +2,7 @@
     <div class="wrap">
         <div class="bread">
             <el-breadcrumb separator-class="el-icon-arrow-right">
-                <el-breadcrumb-item :to="{ path: '/administrator' }">管理员主页</el-breadcrumb-item>
+                <el-breadcrumb-item :to="{ path: '/administrator/manageUserProhibit' }">管理员主页</el-breadcrumb-item>
                 <el-breadcrumb-item>用户管理</el-breadcrumb-item>
                 <el-breadcrumb-item><span style="color: #2d8cf0">数据统计</span></el-breadcrumb-item>
             </el-breadcrumb>

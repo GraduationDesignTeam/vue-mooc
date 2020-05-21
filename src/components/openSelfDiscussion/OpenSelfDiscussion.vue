@@ -2,7 +2,7 @@
     <div>
         <div class="bread">
             <el-breadcrumb separator-class="el-icon-arrow-right">
-                <el-breadcrumb-item :to="{ path: '/personalHomepage' }">个人主页</el-breadcrumb-item>
+                <el-breadcrumb-item :to="{ path: '/personalHomepage/openSelfCourse' }">个人主页</el-breadcrumb-item>
                 <el-breadcrumb-item><span style="color: #2d8cf0">讨论</span></el-breadcrumb-item>
             </el-breadcrumb>
         </div>
@@ -46,7 +46,7 @@
 </template>
 
 <script>
-    import {HOST} from '../../common/js/config'
+    import {HOST,Discussion_HOST} from '../../common/js/config'
     import {getUser} from "../../common/js/cache";
 
     export default {
@@ -70,7 +70,7 @@
         methods:{
             getData(){
                 this.loading = true;
-                let url = `${HOST}/discussion/searchSelf/${this.currPage}`
+                let url = `${Discussion_HOST}/discussion/searchSelf/${this.currPage}`
                 this.$ajax.post(url,this.user).then(res=>{
                     this.pageInfo = res.data
                     console.log(this.pageInfo)

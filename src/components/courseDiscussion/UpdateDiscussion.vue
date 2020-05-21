@@ -54,7 +54,7 @@
 </template>
 
 <script>
-    import {HOST} from '../../common/js/config'
+    import {HOST,Discussion_HOST} from '../../common/js/config'
     import {getUser} from "../../common/js/cache";
 
     export default {
@@ -97,7 +97,7 @@
         },
         methods:{
             getDiscussion(){
-                let url = `${HOST}/discussion/openOne/${this.form.discussionId}`;
+                let url = `${Discussion_HOST}/discussion/openOne/${this.form.discussionId}`;
                 this.$ajax.get(url).then((res)=> {
                     this.form= res.data;
                     console.log(this.form)
@@ -106,7 +106,7 @@
             submitForm(formName){
                 this.$refs[formName].validate((valid) => {
                     if(valid){
-                        let url=`${HOST}/discussion/update`
+                        let url=`${Discussion_HOST}/discussion/update`
                         this.$ajax.post(url,this.form).then((res)=>{
                             if(res.data!==null){
                                 this.$message({

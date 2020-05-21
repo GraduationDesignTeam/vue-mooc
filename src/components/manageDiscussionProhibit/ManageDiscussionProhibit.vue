@@ -2,7 +2,7 @@
     <div class="wrap">
         <div class="bread">
             <el-breadcrumb separator-class="el-icon-arrow-right">
-                <el-breadcrumb-item :to="{ path: '/administrator' }">管理员主页</el-breadcrumb-item>
+                <el-breadcrumb-item :to="{ path: '/administrator/manageUserProhibit' }">管理员主页</el-breadcrumb-item>
                 <el-breadcrumb-item>讨论管理</el-breadcrumb-item>
                 <el-breadcrumb-item><span style="color: #2d8cf0">封禁管理</span></el-breadcrumb-item>
             </el-breadcrumb>
@@ -150,7 +150,7 @@
 </template>
 
 <script>
-    import {HOST} from '../../common/js/config'
+    import {Discussion_HOST} from '../../common/js/config'
     import {makeDate} from '../../common/js/dateformat'
     //import ElOption from "element-ui/packages/select/src/option";
     export default {
@@ -181,7 +181,7 @@
             },
             getAllDiscussion(){
                 this.loading=true
-                let url=`${HOST}/discussion/searchNew/${this.currPage}`
+                let url=`${Discussion_HOST}/discussion/searchNew/${this.currPage}`
                 this.$ajax.post(url,this.discussionDetail).then((res)=>{
                     this.pageInfo=res.data
                     //console.log(this.pageInfo)
@@ -203,7 +203,7 @@
                 }else if(row.discussionState==1){
                     row.discussionState=0
                 }
-                let url=`${HOST}/discussion/update`
+                let url=`${Discussion_HOST}/discussion/update`
                 this.$ajax.post(url,row).then((res)=>{
                     if(res.data!==null){
                         this.$message({
@@ -214,7 +214,7 @@
                 })
             },
             handleDelete(id){
-                let url=`${HOST}/discussion/delete/${id}`
+                let url=`${Discussion_HOST}/discussion/delete/${id}`
                 this.$ajax.get(url).then((res)=>{
                     if(res.data.code===0){
                         this.currPage=1

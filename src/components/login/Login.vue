@@ -50,10 +50,10 @@
         },
         methods:{
             personHomepage(){
-                this.$router.push("/personalHomepage")
+                this.$router.push("/personalHomepage/openSelfCourse")
             },
             administrator(){
-                this.$router.push("/administrator")
+                this.$router.push("/administrator/manageUserProhibit")
             },
             onSubmit(){
                 let url=`${HOST}/user/timelyLogin`

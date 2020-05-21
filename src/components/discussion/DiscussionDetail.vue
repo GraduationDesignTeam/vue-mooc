@@ -101,7 +101,7 @@
 
 <script>
     import Top from "../personalTop/Top";
-    import {HOST} from "../../common/js/config";
+    import {HOST,Discussion_HOST} from "../../common/js/config";
     import {convertDate} from "../../common/js/dateformat";
     import {getUser} from "../../common/js/cache";
 
@@ -150,7 +150,7 @@
             getData(){
                 this.loading = true;
                 this.pageInfo={}
-                let url=`${HOST}/discussion/open/${this.discussionDetail.discussionId}`
+                let url=`${Discussion_HOST}/discussion/open/${this.discussionDetail.discussionId}`
                 this.$ajax.post(url,this.currPageObject).then(res=>{
                     this.discussionDetail = res.data
                     this.pageInfo=res.data.recordList
@@ -184,7 +184,7 @@
                 //console.log(this.replyContent)
                 if(this.replyContent.discussRecordId!==null&&this.replyContent.discussRecordId!==''){
                     //当前用户编辑自己发的某贴
-                    let url=`${HOST}/discussRecord/updateRecord`
+                    let url=`${Discussion_HOST}/discussRecord/updateRecord`
                     this.$ajax.post(url,this.replyContent).then(res=>{
                         if(res.data!==null){
                             this.replyContent={}
@@ -202,7 +202,7 @@
                     this.replyContent.discussionId=this.discussionDetail.discussionId
                     this.replyContent.userName=this.user.userName
                     this.replyContent.storeyId=this.discussionDetail.recordNum+1
-                    let url=`${HOST}/discussRecord/addRecord`
+                    let url=`${Discussion_HOST}/discussRecord/addRecord`
                     this.$ajax.post(url,this.replyContent).then(res=>{
                         if(res.data!==null){
                             this.replyContent={}
@@ -229,7 +229,7 @@
                     cancelButtonText: '取消',
                     type: 'warning'
                 }).then(() => {
-                    let url=`${HOST}/discussRecord/deleteRecord/${id}`
+                    let url=`${Discussion_HOST}/discussRecord/deleteRecord/${id}`
                     this.$ajax.get(url).then((res)=>{
                         if(res.data!==null){
                             this.$message({
@@ -257,7 +257,7 @@
                 this.$router.push("/discussionHomePage")
             },
             toPersonalHomepage(){
-                this.$router.push("/personalHomepage")
+                this.$router.push("/personalHomepage/openSelfCourse")
             }
         }
     }

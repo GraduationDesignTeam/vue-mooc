@@ -2,7 +2,7 @@
     <div>
         <div class="bread">
             <el-breadcrumb separator-class="el-icon-arrow-right">
-                <el-breadcrumb-item :to="{ path: '/personalHomepage' }">个人主页</el-breadcrumb-item>
+                <el-breadcrumb-item :to="{ path: '/personalHomepage/openSelfCourse' }">个人主页</el-breadcrumb-item>
                 <el-breadcrumb-item><span style="color: #2d8cf0">个人设置</span></el-breadcrumb-item>
             </el-breadcrumb>
         </div>

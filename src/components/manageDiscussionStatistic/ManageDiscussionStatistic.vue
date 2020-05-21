@@ -2,7 +2,7 @@
     <div class="wrap">
         <div class="bread">
             <el-breadcrumb separator-class="el-icon-arrow-right">
-                <el-breadcrumb-item :to="{ path: '/administrator' }">管理员主页</el-breadcrumb-item>
+                <el-breadcrumb-item :to="{ path: '/administrator/manageUserProhibit' }">管理员主页</el-breadcrumb-item>
                 <el-breadcrumb-item>讨论管理</el-breadcrumb-item>
                 <el-breadcrumb-item><span style="color: #2d8cf0">数据统计</span></el-breadcrumb-item>
             </el-breadcrumb>
@@ -55,7 +55,7 @@
 </template>
 
 <script>
-    import {HOST} from '../../common/js/config'
+    import {Discussion_HOST} from '../../common/js/config'
     import echarts from 'echarts'
     export default {
         name: "ManageCourseStatistic",
@@ -81,7 +81,7 @@
         },
         methods:{
             getCourseRank(){
-                let url=`${HOST}/discussion/discussionRank/${this.formInline.year}`
+                let url=`${Discussion_HOST}/discussion/discussionRank/${this.formInline.year}`
                 this.$ajax.get(url).then((res)=>{
                     this.courseRank=res.data
                     this.courseRank.forEach((item)=>{
@@ -96,7 +96,7 @@
                 let myChart = echarts.init(this.$refs.myChart)
                 this.drawChart(myChart);
                 myChart.showLoading();// 加载动画
-                let path = `${HOST}/discussion/majorRank/${this.formInline.year}`
+                let path = `${Discussion_HOST}/discussion/majorRank/${this.formInline.year}`
                 this.$ajax.get(path).then((res)=>{
                     this.records = res.data
                     //console.log(this.records)
