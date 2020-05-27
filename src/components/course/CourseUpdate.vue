@@ -76,12 +76,18 @@
                         <el-button @click="goBack">返回</el-button>
                     </el-form-item>
                 </el-col>
+                <el-col :span="12">
+                    <el-form-item size="large">
+                        <el-button title="课程状态将变为已结束，之后无法修改课程信息。" type="danger" plain @click="closeCourse">关闭课程</el-button>
+                        <el-button title="处于进行中状态的课程无法删除！" type="danger" @click="deleteCourse" :disabled="formData.courseState === 1">删除课程</el-button>
+                    </el-form-item>
+                </el-col>
             </el-form>
         </el-row>
     </div>
 </template>
 <script>
-    import {getUser} from "../../common/js/cache";
+    import {getCourse, getUser, saveCourse} from "../../common/js/cache";
     import {HOST} from "../../common/js/config";
 
     export default {
@@ -149,6 +155,7 @@
                 param.append('userId', getUser().userId);
                 this.$ajax.post(url, param).then((res)=> {
                     this.formData = res.data;
+                    saveCourse(res.data);
                 })
             },
             /**
@@ -188,6 +195,51 @@
             },
             goBack(){
                 this.$router.push(`/courseManage/courseInfo/${this.formData.id}`);
+            },
+            deleteCourse(){
+                this.$confirm('确定要删除当前课程？注意：本课程相关的一切信息都会被删除！', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                        let url=`${HOST}/course/delete/${this.formData.id}`;
+                        this.$ajax.post(url).then((res)=> {
+                            let result = res.data;
+                            if(result.code===0){//成功
+                                this.$message({
+                                    message:'成功删除！',
+                                    type: 'success'
+                                });
+                                this.$router.push('/personalHomepage/teacherCourse');
+                            }else {
+                                this.$message.error(result.msg);
+                            }
+                        })
+                })
+            },
+            closeCourse(){
+                this.$confirm('确定要关闭当前课程？关闭课程后，将无法再编辑课程信息！', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    let url=`${HOST}/course/update`;
+                    let course = getCourse();
+                    course.courseState = 2;
+                    this.$ajax.post(url, course).then((res)=> {
+                        let result = res.data;
+                        if(result.code===0){//成功
+                            this.$message({
+                                message:'操作成功！',
+                                type: 'success'
+                            });
+                            saveCourse(course);
+                            this.$router.push(`/courseManage/courseInfo/${this.formData.id}`);
+                        }else {
+                            this.$message.error(result.msg);
+                        }
+                    })
+                })
             }
         }
     }
