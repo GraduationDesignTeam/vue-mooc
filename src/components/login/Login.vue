@@ -52,6 +52,9 @@
             personHomepage(){
                 this.$router.push("/personalHomepage/openSelfCourse")
             },
+            teacherHomepage(){
+                this.$router.push("/personalHomepage/teacherCourse")
+            },
             administrator(){
                 this.$router.push("/administrator/manageUserProhibit")
             },
@@ -64,7 +67,9 @@
                         saveUser(this.user)
                         if(this.user.userStatus==="000"){
                             this.administrator()
-                        }else{
+                        }else if(this.user.teacherState===1){
+                            this.teacherHomepage()
+                        }else {
                             this.personHomepage()
                         }
                     } else{//失败
