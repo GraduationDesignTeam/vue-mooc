@@ -83,7 +83,7 @@
         },
         methods:{
             loadData(){
-                this.isTeacher = (getCourse().role === 1);
+                this.isTeacher = (getCourse().role === 1 && getCourse().courseState!==2);
                 this.isEditable = this.isTeacher;
                 let url=`${HOST}/chapter/list/`+this.$route.params.id;
                 this.$ajax.get(url).then((res)=>{

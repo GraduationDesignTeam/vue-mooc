@@ -67,13 +67,17 @@
             }
         },
         created() {
-            this.user=getUser()
+            this.user=getUser();
             if(this.user!=null && this.user.userId!==undefined){
                 if(this.user.userStatus==="000"){
                     this.isLogin=2
                 }else{
                     this.isLogin=1
                 }
+                if(this.user.teacherState === 1)
+                    this.rightMenuItemList2[0].url='/personalHomepage/teacherCourse';
+                else
+                    this.rightMenuItemList2[0].url='/personalHomepage/openSelfCourse';
             }
         },
         methods: {

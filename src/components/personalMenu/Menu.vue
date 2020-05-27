@@ -5,7 +5,7 @@ BY朱翔鹏-->
         <el-row class="tac">
             <el-col :span="4">
                 <el-menu
-                        default-active="1"
+                        :default-active=activeIndex
                         class="el-menu-vertical-demo">
                     <el-menu-item index="1" @click="openSelfCourse">
                         <i class="el-icon-s-management"></i>
@@ -43,6 +43,14 @@ BY朱翔鹏-->
 <script>
     export default {
         name: "menu",
+        data(){
+            return{
+                activeIndex: "1"
+            }
+        },
+        created() {
+            this.loadData();
+        },
         methods : {
             openSelfCourse() {
                 this.$router.push("/personalHomepage/openSelfCourse")
@@ -58,6 +66,30 @@ BY朱翔鹏-->
             },
             openSelfAssistCourse(){
                 this.$router.push("/personalHomepage/assistantCourse")
+            },
+            loadData(){
+                let path = this.$route.path;
+                let prefixIndex = path.lastIndexOf('/');
+                let lastPart = path.substring(prefixIndex+1);
+                switch (lastPart) {
+                    case 'openSelfCourse':
+                        this.activeIndex='1';
+                        break;
+                    case 'OpenSelfTask':
+                        this.activeIndex='2';
+                        break;
+                    case 'openSelfDiscussion':
+                        this.activeIndex='3';
+                        break;
+                    case 'teacherCourse':
+                        this.activeIndex='4';
+                        break;
+                    case 'assistantCourse':
+                        this.activeIndex='5';
+                        break;
+                    default:
+                        this.activeIndex='1';
+                }
             }
         }
     }

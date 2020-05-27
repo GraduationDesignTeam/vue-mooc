@@ -1,5 +1,6 @@
 <template>
     <div class="edit_container">
+        <br>
         <quill-editor
                 v-model="content"
                 ref="myQuillEditor"
