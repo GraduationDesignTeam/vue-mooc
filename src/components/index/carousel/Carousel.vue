@@ -33,8 +33,7 @@
             return{
                 activeIndex:0,
                 path: HOST,
-                no_img: require("@/assets/no.png"),
-                imgUrl: require("@/assets/course/course1.jpg")
+                no_img: require("@/assets/no.png")
             }
         },
         methods: {

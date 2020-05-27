@@ -10,10 +10,12 @@
             <el-col :span="22" v-for="(item,index) in pageInfo.list" :key="index" :offset="1" class="content">
                 <el-card :body-style="{ padding: '5px' }" style="background-color: #eeeeee;height: 200px">
                     <el-row :gutter="20">
-                        <el-col :span="5"><div>
-                            <img v-if="item.photo" :src="`${path}/${item.photo}`" class="image" @click="handleDetail(item.id)">
-                            <img v-else :src="img" class="image" @click="handleDetail(item.id)">
-                        </div></el-col>
+                        <el-col :span="5">
+                            <div class="image-container">
+                                <img v-if="item.photo" :src="`${path}/${item.photo}`" class="image" @click="handleDetail(item.id)">
+                                <img v-else :src="img" class="image" @click="handleDetail(item.id)">
+                            </div>
+                        </el-col>
                         <el-col :span="19"><div>
                             <div class="remark">
                                 <h2 class="title" @click="handleDetail(item.id)">{{item.name}}</h2>
@@ -124,11 +126,19 @@
         margin-top: 10px;
     }
 
+    .image-container{
+        width: 240px;
+        height: 200px;
+        display: flex;
+        display: -webkit-flex;
+        align-items:center;
+        justify-content:center;
+    }
+
     .image {
-        height: 190px;
-        width: 200px;
+        height: 128px;
+        width: 220px;
         display: block;
-        float: left;
     }
 
     .remark {
