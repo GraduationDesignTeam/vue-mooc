@@ -5,7 +5,7 @@
         </div>
         <div class="back1">
             <div class="wrap">
-                <el-row :gutter="24">
+                <el-row>
                     <el-col :span="8"><div class="grid-content bg-purple"></div></el-col>
                     <el-col :span="8"><div class="grid-content bg-purple">
                         <el-form ref="form" :model="form" label-width="80px" style="text-align: center;width: 350px;margin-top: 50px">
@@ -13,7 +13,7 @@
                                 <el-input v-model="form.userName"></el-input>
                             </el-form-item>
                             <el-form-item label="密码">
-                                <el-input v-model="form.userPassword"></el-input>
+                                <el-input v-model="form.userPassword" show-password></el-input>
                             </el-form-item>
                             <el-form-item>
                                 <el-button type="warning" plain @click="onSubmit" style="border-color: #eeeeee">登录</el-button>
@@ -98,9 +98,6 @@
     }
     .el-row {
         margin-bottom: 20px;
-    &:last-child {
-         margin-bottom: 0;
-     }
     }
     .el-col {
         border-radius: 4px;
