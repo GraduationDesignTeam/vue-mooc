@@ -9,9 +9,9 @@
                     <div class="msg">
                         <div class="panel-body">
                             <ul>
-                                <li v-for="(item,index) in contents" :key="index">
+                                <li v-for="(item,index) in contents" :key="index" >
 
-                                      <span> {{item.msgPostname}} {{item.msgTime}}</span>
+                                      <span> {{item.msgPostname}} {{dateFormatter(item.msgTime)}}</span>
                                         <div>
                                             <span>{{item.msgContent}}</span>
                                         </div>
@@ -39,6 +39,7 @@
 <script>
     import {HOST} from "../../common/js/config";
     import {getCourse, getUser} from "../../common/js/cache";
+    import {makeDate} from "../../common/js/dateformat";
     // import {makeDate} from "../../common/js/dateformat";
 
     export default {
@@ -137,6 +138,10 @@
                     this.handle(this.contents.msgPost)
                     this.loading = false
                 })
+            },
+            //日期格式化
+            dateFormatter(date){
+                return makeDate(date)
             },
             handle(id){
                 let url = `${HOST}/message/getUser/`;

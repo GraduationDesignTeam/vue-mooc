@@ -16,17 +16,20 @@
             <el-table-column
                     property="name"
                     label="考试名称"
-                    width="120">
+                    width="150">
             </el-table-column>
             <el-table-column
                     property="startTime"
                     label="开始时间"
-                    width="120">
+                    width="200"
+                    :formatter="dateFormatter">
                 <!--                {{convertDate(pageInfo.list.startTime)}}-->
             </el-table-column>
             <el-table-column
                     property="endTime"
-                    label="结束时间">
+                    label="结束时间"
+                    width="200"
+                    :formatter="dateFormatter">
                 <!--                {{convertDate(pageInfo.list.endTime)}}-->
 
             </el-table-column>
@@ -47,7 +50,7 @@
 <script>
     import {HOST} from "../../common/js/config";
     import {getCourse, getUser} from "../../common/js/cache";
-    import {convertDate} from "../../common/js/dateformat";
+    import {convertDate, makeDate} from "../../common/js/dateformat";
 
     export default {
         name: "TaskInfo",
@@ -90,6 +93,10 @@
             },
             convertDate(time){
                 return convertDate(time)
+            },
+            //日期格式化
+            dateFormatter(row, column, cellValue){
+                return makeDate(cellValue)
             },
             handleCurrentChange2(val){
                 this.$router.push('/courseManage/examList/'+val.id)
